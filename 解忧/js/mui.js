@@ -1179,7 +1179,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	 * @returns {Number}
 	 */
 	var getDistance = function(p1, p2, props) {
-		if (!props) {
+		if(!props) {
 			props = ['x', 'y'];
 		}
 		var x = p2[props[0]] - p1[props[0]];
@@ -1192,7 +1192,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	 * @param {Object} moves
 	 */
 	var getScale = function(starts, moves) {
-		if (starts.length >= 2 && moves.length >= 2) {
+		if(starts.length >= 2 && moves.length >= 2) {
 			var props = ['pageX', 'pageY'];
 			return getDistance(moves[1], moves[0], props) / getDistance(starts[1], starts[0], props);
 		}
@@ -1205,7 +1205,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	 * @returns {Number}
 	 */
 	var getAngle = function(p1, p2, props) {
-		if (!props) {
+		if(!props) {
 			props = ['x', 'y'];
 		}
 		var x = p2[props[0]] - p1[props[0]];
@@ -1218,10 +1218,10 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	 * @param {Object} y
 	 */
 	var getDirection = function(x, y) {
-		if (x === y) {
+		if(x === y) {
 			return '';
 		}
-		if (abs(x) >= abs(y)) {
+		if(abs(x) >= abs(y)) {
 			return x > 0 ? 'left' : 'right';
 		}
 		return y > 0 ? 'up' : 'down';
@@ -1254,12 +1254,12 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	 * @returns {undefined}
 	 */
 	var detect = function(event, touch) {
-		if ($.gestures.stoped) {
+		if($.gestures.stoped) {
 			return;
 		}
 		$.doAction('gestures', function(index, gesture) {
-			if (!$.gestures.stoped) {
-				if ($.options.gestureConfig[gesture.name] !== false) {
+			if(!$.gestures.stoped) {
+				if($.options.gestureConfig[gesture.name] !== false) {
 					gesture.handle(event, touch);
 				}
 			}
@@ -1271,8 +1271,8 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	 * @param {Object} parent
 	 */
 	var hasParent = function(node, parent) {
-		while (node) {
-			if (node == parent) {
+		while(node) {
+			if(node == parent) {
 				return true;
 			}
 			node = node.parentNode;
@@ -1285,17 +1285,17 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		var values = [];
 		var i = 0;
 
-		while (i < src.length) {
+		while(i < src.length) {
 			var val = key ? src[i][key] : src[i];
-			if (values.indexOf(val) < 0) {
+			if(values.indexOf(val) < 0) {
 				results.push(src[i]);
 			}
 			values[i] = val;
 			i++;
 		}
 
-		if (sort) {
-			if (!key) {
+		if(sort) {
+			if(!key) {
 				results = results.sort();
 			} else {
 				results = results.sort(function sortUniqueArray(a, b) {
@@ -1308,7 +1308,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	};
 	var getMultiCenter = function(touches) {
 		var touchesLength = touches.length;
-		if (touchesLength === 1) {
+		if(touchesLength === 1) {
 			return {
 				x: round(touches[0].pageX),
 				y: round(touches[0].pageY)
@@ -1318,7 +1318,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		var x = 0;
 		var y = 0;
 		var i = 0;
-		while (i < touchesLength) {
+		while(i < touchesLength) {
 			x += touches[i].pageX;
 			y += touches[i].pageY;
 			i++;
@@ -1335,7 +1335,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	var copySimpleTouchData = function(touch) {
 		var touches = [];
 		var i = 0;
-		while (i < touch.touches.length) {
+		while(i < touch.touches.length) {
 			touches[i] = {
 				pageX: round(touch.touches[i].pageX),
 				pageY: round(touch.touches[i].pageY)
@@ -1359,7 +1359,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		var prevDelta = session.prevDelta || {};
 		var prevTouch = session.prevTouch || {};
 
-		if (touch.gesture.type === $.EVENT_START || touch.gesture.type === $.EVENT_END) {
+		if(touch.gesture.type === $.EVENT_START || touch.gesture.type === $.EVENT_END) {
 			prevDelta = session.prevDelta = {
 				x: prevTouch.deltaX || 0,
 				y: prevTouch.deltaY || 0
@@ -1378,13 +1378,13 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		var touches = touch.touches;
 		var touchesLength = touches.length;
 
-		if (!session.firstTouch) {
+		if(!session.firstTouch) {
 			session.firstTouch = copySimpleTouchData(touch);
 		}
 
-		if (multiTouch() && touchesLength > 1 && !session.firstMultiTouch) {
+		if(multiTouch() && touchesLength > 1 && !session.firstMultiTouch) {
 			session.firstMultiTouch = copySimpleTouchData(touch);
-		} else if (touchesLength === 1) {
+		} else if(touchesLength === 1) {
 			session.firstMultiTouch = false;
 		}
 
@@ -1419,7 +1419,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		var velocityY;
 		var direction;
 
-		if (touch.gesture.type != $.EVENT_CANCEL && (deltaTime > CAL_INTERVAL || last.velocity === undefined)) {
+		if(touch.gesture.type != $.EVENT_CANCEL && (deltaTime > CAL_INTERVAL || last.velocity === undefined)) {
 			var deltaX = last.deltaX - touch.deltaX;
 			var deltaY = last.deltaY - touch.deltaY;
 
@@ -1444,7 +1444,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 	};
 	var targetIds = {};
 	var convertTouches = function(touches) {
-		for (var i = 0; i < touches.length; i++) {
+		for(var i = 0; i < touches.length; i++) {
 			!touches['identifier'] && (touches['identifier'] = 0);
 		}
 		return touches;
@@ -1458,7 +1458,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		var changedTargetTouches = [];
 
 		//当touchstart或touchmove且touches长度为1，直接获得all和changed
-		if ((type === $.EVENT_START || type === $.EVENT_MOVE) && allTouches.length === 1) {
+		if((type === $.EVENT_START || type === $.EVENT_MOVE) && allTouches.length === 1) {
 			targetIds[allTouches[0].identifier] = true;
 			targetTouches = allTouches;
 			changedTargetTouches = allTouches;
@@ -1475,33 +1475,33 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 				return hasParent(touch.target, sessionTarget);
 			});
 
-			if (type === $.EVENT_START) {
+			if(type === $.EVENT_START) {
 				i = 0;
-				while (i < targetTouches.length) {
+				while(i < targetTouches.length) {
 					targetIds[targetTouches[i].identifier] = true;
 					i++;
 				}
 			}
 
 			i = 0;
-			while (i < changedTouches.length) {
-				if (targetIds[changedTouches[i].identifier]) {
+			while(i < changedTouches.length) {
+				if(targetIds[changedTouches[i].identifier]) {
 					changedTargetTouches.push(changedTouches[i]);
 				}
-				if (type === $.EVENT_END || type === $.EVENT_CANCEL) {
+				if(type === $.EVENT_END || type === $.EVENT_CANCEL) {
 					delete targetIds[changedTouches[i].identifier];
 				}
 				i++;
 			}
 
-			if (!changedTargetTouches.length) {
+			if(!changedTargetTouches.length) {
 				return false;
 			}
 		}
 		targetTouches = uniqueArray(targetTouches.concat(changedTargetTouches), 'identifier', true);
 		var touchesLength = targetTouches.length;
 		var changedTouchesLength = changedTargetTouches.length;
-		if (type === $.EVENT_START && touchesLength - changedTouchesLength === 0) { //first
+		if(type === $.EVENT_START && touchesLength - changedTouchesLength === 0) { //first
 			touch.isFirst = true;
 			$.gestures.touch = $.gestures.session = {
 				target: event.target
@@ -1519,28 +1519,44 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 			gesture: event
 		};
 		var touches = getTouches(event, touch);
-		if (!touches) {
+		if(!touches) {
 			return;
 		}
 		calTouchData(touch);
 		detect(event, touch);
 		$.gestures.session.prevTouch = touch;
-		if (event.type === $.EVENT_END && !$.isTouchable) {
+		if(event.type === $.EVENT_END && !$.isTouchable) {
 			$.gestures.touch = $.gestures.session = {};
 		}
 	};
+	var supportsPassive = (function checkPassiveListener() {
+		var supportsPassive = false;
+		try {
+			var opts = Object.defineProperty({}, 'passive', {
+				get: function get() {
+					supportsPassive = true;
+				},
+			});
+			window.addEventListener('testPassiveListener', null, opts);
+		} catch(e) {
+			// No support
+		}
+		return supportsPassive;
+	}())
 	window.addEventListener($.EVENT_START, handleTouchEvent);
-	window.addEventListener($.EVENT_MOVE, handleTouchEvent);
+	window.addEventListener($.EVENT_MOVE, handleTouchEvent, supportsPassive ? {
+		passive: false,
+		capture: false
+	} : false);
 	window.addEventListener($.EVENT_END, handleTouchEvent);
 	window.addEventListener($.EVENT_CANCEL, handleTouchEvent);
 	//fixed hashchange(android)
 	window.addEventListener($.EVENT_CLICK, function(e) {
 		//TODO 应该判断当前target是不是在targets.popover内部，而不是非要相等
-		if (($.os.android || $.os.ios) && (($.targets.popover && e.target === $.targets.popover) || ($.targets.tab) || $.targets.offcanvas || $.targets.modal)) {
+		if(($.os.android || $.os.ios) && (($.targets.popover && e.target === $.targets.popover) || ($.targets.tab) || $.targets.offcanvas || $.targets.modal)) {
 			e.preventDefault();
 		}
 	}, true);
-
 
 	//增加原生滚动识别
 	$.isScrolling = false;
@@ -5196,21 +5212,21 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
             _initPulldownRefreshEvent: function() {
                 var self = this;
                 $.plusReady(function() {
-                		if(self.options.down.style == "circle"){
-	                		//单webview、原生转圈
-	                		self.options.webview = plus.webview.currentWebview();
-						self.options.webview.setPullToRefresh({
-							support: true,
-							color:self.options.down.color || '#2BD009',
-							height: self.options.down.height || '50px',
-							range: self.options.down.range || '100px',
-							style: 'circle',
-							offset: self.options.down.offset || '0px'
-						}, function() {
-							self.options.down.callback();
-						});
-	               }else if (self.topPocket && self.options.webviewId) {
-                        var webview = plus.webview.getWebviewById(self.options.webviewId);//子窗口
+                    if (self.options.down.style == "circle") {
+                        //单webview、原生转圈
+                        self.options.webview = plus.webview.currentWebview();
+                        self.options.webview.setPullToRefresh({
+                            support: true,
+                            color: self.options.down.color || '#2BD009',
+                            height: self.options.down.height || '50px',
+                            range: self.options.down.range || '100px',
+                            style: 'circle',
+                            offset: self.options.down.offset || '0px'
+                        }, function() {
+                            self.options.down.callback();
+                        });
+                    } else if (self.topPocket && self.options.webviewId) {
+                        var webview = plus.webview.getWebviewById(self.options.webviewId); //子窗口
                         if (!webview) {
                             return;
                         }
@@ -5243,7 +5259,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
                                     break;
                             }
                         }, false);
-                        
+
                         webview.setBounce({
                             position: {
                                 top: height * 2 + 'px'
@@ -5252,8 +5268,8 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
                                 top: height + 'px'
                             }
                         });
-                    
-	                }
+
+                    }
                 });
             },
             handleEvent: function(e) {
@@ -5272,77 +5288,63 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
         }).extend($.extend({
             setStopped: function(stopped) { //该方法是子页面调用的
                 this.stopped = !!stopped;
-                //TODO 此处需要设置当前webview的bounce为none,目前5+有BUG
-                var webview = plus.webview.currentWebview();
+                // TODO 此处需要设置当前webview的bounce为none,目前5+有BUG
                 if (this.stopped) {
-                    webview.setStyle({
-                        bounce: 'none'
-                    });
-                    webview.setBounce({
-                        position: {
-                            top: 'none'
-                        }
-                    });
+                    this.disablePullupToRefresh();
+                    this.disablePulldownToRefresh();
                 } else {
-                    var height = this.options.down.height;
-                    webview.setStyle({
-                        bounce: 'vertical'
-                    });
-                    webview.setBounce({
-                        position: {
-                            top: height * 2 + 'px'
-                        },
-                        changeoffset: {
-                            top: height + 'px'
-                        }
-                    });
+                    this.enablePullupToRefresh();
+                    this.enablePulldownToRefresh();
                 }
             },
-            beginPulldown:function() { 
-            		var self = this;
+            beginPulldown: function() {
+                var self = this;
                 $.plusReady(function() {
-                		//这里延时的目的是为了保证下拉刷新组件初始化完成，后续应该做成有状态的
-                		setTimeout(function () {
-                			if(self.options.down.style == "circle"){//单webview下拉刷新
-	                			plus.webview.currentWebview().beginPullToRefresh();
-	                		}else{//双webview模式
-                				plus.webview.currentWebview().setBounce({
-		                        offset: {
-		                            top: self.options.down.height + "px"
-		                        }
-		                    });
-	                		}
-                		},15);
+                    //这里延时的目的是为了保证下拉刷新组件初始化完成，后续应该做成有状态的
+                    setTimeout(function() {
+                        if (self.options.down.style == "circle") { //单webview下拉刷新
+                            plus.webview.currentWebview().beginPullToRefresh();
+                        } else { //双webview模式
+                            var webview = self.options.webview;
+                            if (webview) {
+                                webview.setBounce({
+                                    offset: {
+                                        top: self.options.down.height + "px"
+                                    }
+                                });
+                            }
+                        }
+                    }, 15);
                 }.bind(this));
             },
-            pulldownLoading: function () {//该方法是子页面调用的，兼容老的历史API
-            		this.beginPulldown();
+            pulldownLoading: function() { //该方法是子页面调用的，兼容老的历史API
+                this.beginPulldown();
             },
             _pulldownLoading: function() { //该方法是父页面调用的
                 var self = this;
                 $.plusReady(function() {
                     var childWebview = plus.webview.getWebviewById(self.options.webviewId);
-                   	childWebview && childWebview.setBounce({
+                    childWebview && childWebview.setBounce({
                         offset: {
                             top: self.options.down.height + "px"
                         }
                     });
                 });
             },
-            endPulldown:function(){
-            		var _wv = plus.webview.currentWebview();
+            endPulldown: function() {
+                var _wv = plus.webview.currentWebview();
                 //双webview的下拉刷新，需要修改父窗口提示信息
-                if(_wv.parent() && this.options.down.style !== "circle"){
-	                	_wv.parent().evalJS("mui&&mui(document.querySelector('.mui-content')).pullRefresh('" + JSON.stringify({
-	                    webviewId: _wv.id
-	                }) + "')._endPulldownToRefresh()");
-                }else{
-                		_wv.endPullToRefresh();
+                if (_wv.parent() && this.options.down.style !== "circle") {
+                    _wv.parent().evalJS("mui&&mui(document.querySelector('.mui-content')).pullRefresh('" + JSON.stringify({
+                        webviewId: _wv.id
+                    }) + "')._endPulldownToRefresh()");
+                } else {
+                    _wv.endPullToRefresh();
                 }
             },
-            endPulldownToRefresh: function () {//该方法是子页面调用的，兼容老的历史API
-           	 	this.endPulldown();
-            }, 
+            endPulldownToRefresh: function() { //该方法是子页面调用的，兼容老的历史API
+                this.endPulldown();
+            },
             _endPulldownToRefresh: function() { //该方法是父页面调用的
                 var self = this;
                 if (self.topPocket && self.options.webview) {
@@ -5354,7 +5356,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
                     }, 350);
                 }
             },
-            beginPullup:function(callback) {//开始上拉加载
+            beginPullup: function(callback) { //开始上拉加载
                 var self = this;
                 if (self.isLoading) return;
                 self.isLoading = true;
@@ -5373,10 +5375,10 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
                     callback && callback.call(self);
                 }, 300);
             },
-            pullupLoading:function (callback) {//兼容老的API
-            		this.beginPullup(callback);
+            pullupLoading: function(callback) { //兼容老的API
+                this.beginPullup(callback);
             },
-            endPullup:function(finished) {//上拉加载结束
+            endPullup: function(finished) { //上拉加载结束
                 var self = this;
                 if (self.pullLoading) {
                     self.pullLoading.classList.remove(CLASS_VISIBILITY);
@@ -5395,8 +5397,53 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
                     }
                 }
             },
-            endPullupToRefresh: function (finished) {//上拉加载结束，兼容老的API
-            		this.endPullup(finished);
+            endPullupToRefresh: function(finished) { //上拉加载结束，兼容老的API
+                this.endPullup(finished);
+            },
+            disablePulldownToRefresh: function() {
+                var webview = plus.webview.currentWebview();
+                if (this.options.down.style && this.options.down.style == 'circle') { // 单webview模式禁止原生下拉刷新
+                    this.options.webview.setPullToRefresh({
+                        support: false,
+                        style: 'circle'
+                    });
+                } else { // 双webview模式禁止下拉刷新
+                    webview.setStyle({
+                        bounce: 'none'
+                    });
+                    webview.setBounce({
+                        position: {
+                            top: 'none'
+                        }
+                    });
+                }
+            },
+            enablePulldownToRefresh: function() {
+                var self = this,
+                    webview = plus.webview.currentWebview(),
+                    height = this.options.down.height;
+                // 单webview模式禁止原生下拉刷新
+                if (this.options.down.style && this.options.down.style == 'circle') {
+                    webview.setPullToRefresh({
+                        support: true,
+                        height: height || '50px',
+                        range: self.options.down.range || '100px',
+                        style: 'circle',
+                        offset: self.options.down.offset || '0px'
+                    });
+                } else { // 重新初始化双webview模式下拉刷新
+                    webview.setStyle({
+                        bounce: 'vertical'
+                    });
+                    webview.setBounce({
+                        position: {
+                            top: height * 2 + 'px'
+                        },
+                        changeoffset: {
+                            top: height + 'px'
+                        }
+                    });
+                }
             },
             disablePullupToRefresh: function() {
                 this._initPullupRefresh();

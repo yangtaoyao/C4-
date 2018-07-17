@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>解忧APP</name>
+	<name>解忧</name>
 	<comment>Create By HBuilder</comment>
 	<projects>
 	</projects>
@@ -22,7 +22,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1531578749116</id>
+			<id>1531731401472</id>
 			<name></name>
 			<type>10</type>
 			<matcher>

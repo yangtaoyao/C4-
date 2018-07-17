@@ -738,9 +738,6 @@ p
     z-index: 1;
 
     width: 100%;
-
-    -webkit-transform: translateZ(0);
-            transform: translateZ(0);
 }
 
 .mui-scrollbar
@@ -1621,7 +1618,7 @@ input[type='submit']:enabled:active, input[type='submit'].mui-active:enabled,
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    color: #BFBFBF;
+    color: #929292;
 }
 .mui-bar-tab .mui-tab-item.mui-active
 {

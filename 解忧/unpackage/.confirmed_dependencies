@@ -1,0 +1,19 @@
+{
+	"index.html": {
+		"resources": [
+			"index-subpage-home.html"
+		],
+		"refer": [
+			"index-subpage-xiaoxi.html",
+			"index-subpage-shequ.html",
+			"index-subpage-tianjia.html",
+			"index-subpage-home.html",
+			"index-subpage-wode.html"
+		]
+	},
+	"index-subpage-home.html": {
+		"refer": [
+			"index-subpage-xiaoxi.html"
+		]
+	}
+}

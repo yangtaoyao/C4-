@@ -1,0 +1,82 @@
+/*首页顶部3按钮*/
+.home-top-btn{
+	top: 0;
+	display: table;
+	width: 100%;
+	height: 75px;
+	padding: 0;
+	table-layout: fixed;
+	border-top: 0;
+	border-bottom: 0;
+	-webkit-touch-callout: none;
+	background: #FFFFFF;
+}
+
+.home-top-btn .home-top-btn-item {
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	height: 65px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #BFBFBF
+}
+.home-top-btn .home-top-btn-item .home-icon {
+	top: 3px;
+	width: 100%;
+	height: 50px;
+	font-size: 60px;
+	padding-top: 0;
+	padding-bottom: 0;
+	color: #666666;
+}
+.home-top-btn .home-top-btn-item .home-icon~.home-top-btn-label {
+	margin-top: 5px;
+	font-size: 11px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #666666;
+}
+.home-top-btn .home-top-btn-item .home-icon:active {
+	background: 0 0
+}
+
+/*订单卡片*/
+.home-card{
+	padding: 16px;
+	height: 150px;
+	/*idth: 100%;*/
+	display: block;
+}
+.home-card-left{
+	height: 150px;
+	padding: 16px;
+	float: left;
+	width: 80px;
+	border-radius: 5% 0 0 5%;
+	background: #FFFFFF;
+}
+.home-card-left img{
+	height: 50px;
+	widows: 50px;
+}
+.home-card-left p{
+	font-size: 14px;
+	width: 100%;
+	text-align: center;
+}
+.home-card-right{
+	margin-left: 16px;
+	height: 150px;
+	padding: 16px;
+	background: #FFFFFF;
+	border-radius: 0 5% 5% 0;
+}
+.home-card-right p{
+	width: 100%;
+	padding: 1px;
+	margin: 0;
+}
