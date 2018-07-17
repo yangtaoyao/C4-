@@ -1801,7 +1801,7 @@ input[type=submit]:enabled:active {
 	background-color: #c8c7cc
 }
 
-.mui-table-view:before {
+/*.mui-table-view:before {
 	position: absolute;
 	right: 0;
 	left: 0;
@@ -1811,7 +1811,7 @@ input[type=submit]:enabled:active {
 	transform: scaleY(.5);
 	background-color: #c8c7cc;
 	top: -1px
-}
+}*/
 
 .mui-table-view-icon .mui-table-view-cell .mui-navigate-right .mui-icon {
 	font-size: 20px;
