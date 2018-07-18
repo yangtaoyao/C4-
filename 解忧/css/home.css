@@ -48,16 +48,16 @@
 .home-card{
 	padding-left: 16px;
 	padding-right: 16px;
-	height: 140px;
+	height: 120px;
 	display: block;
 	margin-bottom: 8px;
 }
 .home-card-left{
-	height: 140px;
+	height: 120px;
 	padding: 16px;
 	float: left;
 	width: 80px;
-	border-radius: 5px 0 0 5px;
+	border-radius: 10px 0 0 10px;
 	background: #FFFFFF;
 	position: relative;
 }
@@ -92,19 +92,25 @@
 }
 .home-card-right{
 	margin-left: 16px;
-	height: 140px;
+	height: 120px;
 	padding: 16px;
 	margin-right: 0px;
 	background: #FFFFFF;
-	border-radius:  5px;
+	border-radius:  10px;
 	line-height: normal;
 }
 .home-card-right span{
-	
+	font-size: 18px;
+	padding-bottom: 6px;
 }
 .home-card-right p{
 	width: 100%;
 	padding: 1px;
+	margin: 0;
+	margin-bottom: 4px;
+}
+.home-card-right p span{
+	font-size: 14px;
 	margin: 0;
 }
 /*加载列表*/

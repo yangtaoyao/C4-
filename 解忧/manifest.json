@@ -143,7 +143,21 @@
 			"index-subpage-home.html": {
 				"resources": [],
 				"refer": [
-					"index-subpage-xiaoxi.html"
+					"index-subpage-xiaoxi.html",
+					"index-subpage-home-detail.html",
+					"index-subpage-home-searching.html",
+					"index-subpage-home-ranking.html",
+					"index-subpage-home-assortment.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-home-ranking.html": {
+				"resources": [
+					"index-subpage-home-ranking-1.html"
+				],
+				"refer": [
+					"index-subpage-home-ranking-3.html",
+					"index-subpage-home-ranking-2.html"
 				],
 				"priority": 0
 			}

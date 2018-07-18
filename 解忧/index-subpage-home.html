@@ -16,15 +16,15 @@
 			<div class="mui-scroll">
 				<!--数据列表-->
 				<nav class="home-top-btn">
-					<a class="home-top-btn-item" href="#">
+					<a id="ranking" class="home-top-btn-item" href="#">
 						<span class=" iconfont icon-paixing home-icon"></span>
 						<span class="home-top-btn-label">排行</span>
 					</a>
-					<a class="home-top-btn-item" href="#">
-						<span class="home-icon iconfont icon-leimupinleifenleileibie"></span>
+					<a id="assortment" class="home-top-btn-item" href="#">
+						<span class="home-icon iconfont icon-leimupinleifenleileibie1"></span>
 						<span class="home-top-btn-label">分类</span>
 					</a>
-					<a class="home-top-btn-item" href="#">
+					<a id="searching" class="home-top-btn-item" href="#">
 						<span class="home-icon iconfont icon-sousuo"></span>
 						<span class="home-top-btn-label">搜索</span>
 					</a>
@@ -226,7 +226,25 @@
 						contentrefresh: '正在加载...',
 						callback: pullupRefresh
 					}
-				}
+				},
+//				preloadPages: [{
+//						id: 'detail.html',
+//						url: 'index-subpage-home-detail.html'
+//					},
+//					{
+//						id: 'assortment.html',
+//						url: 'index-subpage-home-assortment.html'
+//					},
+//					{
+//						id: 'searching.html',
+//						url: 'index-subpage-home-searching.html'
+//					},
+//					{
+//						id: 'ranking.html',
+//						url: 'index-subpage-home-ranking.html'
+//					}
+//
+//				]
 			});
 
 			var count = 0;
@@ -312,9 +330,64 @@
 				setTimeout(function() {
 					addData();
 					mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-					mui.toast("为你推荐了5篇文章 ");
+					mui.toast("为你更新了5个最新任务 ");
 				}, 1500);
 			}
+
+			/**
+			 * 点击进入新窗口
+			 */
+			mui.plusReady(function() {
+
+				var detailPage = null;
+				//添加列表项的点击事件
+				mui('.mui-content').on('tap', '.home-card', function(e) {
+					var id = this.getAttribute('id');
+					//获得详情页面
+					if(!detailPage) {
+						detailPage = plus.webview.getWebviewById('index-subpage-home-detail.html');
+					}
+					//触发详情页面的newsId事件
+					mui.fire(detailPage, 'newsId', {
+						id: id
+					});
+					//打开详情页面          
+					mui.openWindow({
+						id: 'detail.html',
+						url: 'index-subpage-home-detail.html'
+					});
+					
+				});
+
+				var ranking_btn = document.getElementById("ranking");
+				var assortment_btn = document.getElementById("assortment");
+				var searching_btn = document.getElementById("searching");
+				//监听点击事件
+				ranking_btn.addEventListener("tap", function() {
+					
+					mui.openWindow({
+						id: 'detail.html',
+						url: 'index-subpage-home-ranking.html'
+					});
+				});
+
+				assortment_btn.addEventListener("tap", function() {
+					
+					mui.openWindow({
+						id: 'detail.html',
+						url: 'index-subpage-home-assortment.html'
+					});
+				});
+
+				searching_btn.addEventListener("tap", function() {
+					
+					mui.openWindow({
+						id: 'detail.html',
+						url: 'index-subpage-home-searching.html'
+					});
+				});
+
+			})
 		</script>
 	</body>
 
