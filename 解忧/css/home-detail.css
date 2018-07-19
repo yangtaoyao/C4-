@@ -1,0 +1,75 @@
+.mui-bar .mui-tab-item{
+	color: #007aff;
+}
+#scroll{
+	padding-top: 60px;
+	
+	bottom: 50px;
+}
+#scroll .mui-scroll{
+	padding: 16px;
+	position: initial;
+	width:100%;
+	right:16px;
+	left: 16px;
+}
+#scroll .mui-scroll .detail-box{
+	position: relative;
+	background: #FFFFFF;
+	padding: 16px;
+	border-radius: 10px;
+	margin-bottom: 16px;
+}
+#typeicon{
+	display: block;
+	width: 50px;
+}
+#doingspan{
+	position: absolute;
+	right: 0px;
+	top: 16px;
+	font-size: 12px;
+	height:25px;
+	line-height: 25px;
+	padding-left: 10px;
+	vertical-align: middle;
+	border-radius: 10px 0 0 10px ;
+	width: 70px;
+	background: #0099CC;
+	color: #FFFFFF;
+}
+
+.detail-box-top{
+	width: 100%;
+	margin-top: 16px;
+}
+
+.detail-box-top img{
+	width: 50px;
+	vertical-align: middle;
+}
+.detail-box-top div{
+	display: inline-block;
+	vertical-align: middle;
+}
+.detail-box-top div p:nth-child(1){
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
+	line-height: normal;
+}
+.detail-box-top div p:nth-child(2){
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+	line-height: normal;
+}
+.detail-box-top h4{
+	display: inline-block;
+	text-align: right;
+	float: right;
+}
+  
+/**{
+				touch-action: none;
+}*/
