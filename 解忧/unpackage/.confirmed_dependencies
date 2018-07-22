@@ -1,7 +1,8 @@
 {
 	"index.html": {
 		"resources": [
-			"index-subpage-home.html"
+			"index-subpage-home.html",
+			"css/mui.min.css"
 		],
 		"refer": [
 			"index-subpage-xiaoxi.html",
@@ -18,6 +19,10 @@
 			"index-subpage-home-searching.html",
 			"index-subpage-home-ranking.html",
 			"index-subpage-home-assortment.html"
+		],
+		"resources": [
+			"images/xunwuicon.png",
+			"css/mui.min.css"
 		]
 	},
 	"index-subpage-home-ranking.html": {

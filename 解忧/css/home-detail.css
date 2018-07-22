@@ -2,8 +2,7 @@
 	color: #007aff;
 }
 #scroll{
-	padding-top: 60px;
-	
+	padding-top: 40px;
 	bottom: 50px;
 }
 #scroll .mui-scroll{
@@ -13,21 +12,24 @@
 	right:16px;
 	left: 16px;
 }
-#scroll .mui-scroll .detail-box{
+#scroll .mui-scroll .detail_box{
 	position: relative;
 	background: #FFFFFF;
 	padding: 16px;
-	border-radius: 10px;
+	border-radius: 5px;
 	margin-bottom: 16px;
 }
 #typeicon{
 	display: block;
-	width: 50px;
+	width: 40px;
+	position: absolute;
+	top: 36px;
+	right: 16px;
 }
 #doingspan{
 	position: absolute;
 	right: 0px;
-	top: 16px;
+	top: 10px;
 	font-size: 12px;
 	height:25px;
 	line-height: 25px;
@@ -39,37 +41,79 @@
 	color: #FFFFFF;
 }
 
-.detail-box-top{
+.detail_box_top{
 	width: 100%;
-	margin-top: 16px;
+	margin-top: 8px;
+	margin-bottom: 8px;
 }
 
-.detail-box-top img{
+.detail_box_top img{
 	width: 50px;
 	vertical-align: middle;
 }
-.detail-box-top div{
+.detail_box_top div{
 	display: inline-block;
 	vertical-align: middle;
 }
-.detail-box-top div p:nth-child(1){
+.detail_box_top div p:nth-child(1){
 	font-size: 16px;
 	padding: 0;
 	margin: 0;
 	line-height: normal;
 }
-.detail-box-top div p:nth-child(2){
+.detail_box_top div p:nth-child(2){
 	font-size: 12px;
 	padding: 0;
 	margin: 0;
 	line-height: normal;
 }
-.detail-box-top h4{
-	display: inline-block;
-	text-align: right;
-	float: right;
+.detail_box h4{
+	line-height: 26px;
+	font-size: 16px;
+	color: #333333;
+	font-weight: normal;
+	margin-bottom: 8px;
+	margin-top: 16px;
 }
-  
+
+#conent_img_list li img{
+	width: 100%;
+}
+.mui-table-view:after{
+	height: 0;
+}
+
+.detail_box_p1,.detail_box_p2,.detail_box_p3{
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 0;
+}
+.detail_box_p1 span{
+	font-size: 12px;
+}
+.detail_box_p2 span{
+	color: #666666;
+}
+.detail_box_p3 span{
+	color: #666666;
+}
+#reward{
+	font-size: 16px;
+	color: red;
+}
+.participants_icon{
+	margin-left: 40px;
+}
+.participants_icon li{
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+.participants_icon li img{
+	width: 30px;
+}
+
 /**{
 				touch-action: none;
 }*/
+/**/

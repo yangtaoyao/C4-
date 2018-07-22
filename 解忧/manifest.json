@@ -130,18 +130,23 @@
 		"pages": {
 			"index.html": {
 				"resources": [
-					"index-subpage-home.html"
+					"index-subpage-home.html",
+					"css/mui.min.css"
 				],
 				"refer": [
 					"index-subpage-xiaoxi.html",
 					"index-subpage-shequ.html",
 					"index-subpage-tianjia.html",
-					"index-subpage-wode.html"
+					"index-subpage-wode.html",
+					null
 				],
 				"priority": 0
 			},
 			"index-subpage-home.html": {
-				"resources": [],
+				"resources": [
+					"images/xunwuicon.png",
+					"css/mui.min.css"
+				],
 				"refer": [
 					"index-subpage-xiaoxi.html",
 					"index-subpage-home-detail.html",
@@ -166,7 +171,6 @@
 			"resources": [
 				"js/mui.min.js",
 				"fonts/mui.ttf",
-				"css/mui.min.css",
 				"js/mui.js",
 				"css/mui.css"
 			]

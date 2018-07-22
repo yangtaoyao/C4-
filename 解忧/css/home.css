@@ -1,3 +1,4 @@
+
 /*首页顶部3按钮*/
 .home-top-btn{
 	top: 0;
@@ -43,23 +44,30 @@
 .home-top-btn .home-top-btn-item .home-icon:active {
 	background: 0 0
 }
+/*轮播图*/
+.mui-slider .mui-slider-group .mui-slider-item img {
+    width: 50px;
+}
+.mui-slider .mui-slider-group .mui-slider-item>a:not(.mui-control-item){
+	display: flex;
+}
 
 /*订单卡片*/
 .home-card{
-	padding-left: 16px;
-	padding-right: 16px;
-	height: 120px;
-	display: block;
+	height: 110px;
+	 display: flex; 
+	 
 	margin-bottom: 8px;
+	background: #FFFFFF;
+	margin-left: 16px;
+	margin-right: 16px;
+	border-radius:  5px;
+	overflow: hidden;
 }
 .home-card-left{
-	height: 120px;
-	padding: 16px;
-	float: left;
+	height: auto;
 	width: 80px;
-	border-radius: 10px 0 0 10px;
-	background: #FFFFFF;
-	position: relative;
+	position: absolute;
 }
 .home-card-left span{
 	position: absolute;
@@ -76,9 +84,9 @@
 	color: #FFFFFF;
 }
 .home-card-left img{
-	/*height: 50px;*/
 	margin-top:16px;
-	width: 100%;
+	margin-left: 16px;
+	width: 50px;
 	display: block;
 }
 .home-card-left p{
@@ -91,26 +99,38 @@
 	display: block;
 }
 .home-card-right{
-	margin-left: 16px;
-	height: 120px;
-	padding: 16px;
-	margin-right: 0px;
-	background: #FFFFFF;
-	border-radius:  10px;
+	width: 100%;
+	height: auto;
+	padding: 8px;
+	padding-left: 80px;
+	padding-right: 16px;
+	margin-top: auto;
+	margin-bottom: auto;
 	line-height: normal;
+	
 }
-.home-card-right span{
-	font-size: 18px;
-	padding-bottom: 6px;
+.home-card-right h5{
+	color:#333333;
+	/*height: 44px;*/
+	width: 100%;
+	line-height: 22px;
+	font-size: 16px;
+	margin-bottom: 4px;
 }
 .home-card-right p{
 	width: 100%;
 	padding: 1px;
 	margin: 0;
-	margin-bottom: 4px;
+	margin-bottom: 0px;
 }
 .home-card-right p span{
-	font-size: 14px;
-	margin: 0;
+	font-size: 13px;
+	color: #666666;
 }
+.home-card-right p .reward{
+	color: red;
+	font-size: 16px;
+	margin-right: 30px;
+}
+
 /*加载列表*/

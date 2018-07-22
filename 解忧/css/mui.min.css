@@ -2416,7 +2416,7 @@ input,
 select,
 textarea {
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
-	font-size: 17px;
+	font-size: 16px;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-tap-highlight-color: transparent
 }
