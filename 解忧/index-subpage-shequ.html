@@ -5,18 +5,492 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="./css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+		<link href="./css/app.css" rel="stylesheet" />
+		<style>
+			.mui-control-content {
+				background-color: white;
+				min-height: 539px;
+			}
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+			.mui-slider-group .mui-card .mui-card-header>img:first-child{
+				font-size: 0;
+				line-height: 0;
+				float: left;
+				width: 34px;
+				height: 34px;
+				border-radius: 20px;
+			}
+			.mui-slider-group .mui-card .mui-card-content{
+				font-size: 12px;
+				overflow: hidden;
+				width: 100%;
+			}
+			.mui-slider-group .mui-card .mui-card-content .textbox p{
+				width: 100%;
+				margin: 0;
+				height: ;
+				font-size: 15px;
+				font-family: "微软雅黑";
+				color: black;
+			}
+			.mui-slider-group .mui-card .mui-card-content .imgboxbox{
+				margin-top: 10px;
+				overflow: hidden;
+			}
+			.mui-slider-group .mui-card .mui-card-content .imgbox{
+				width:115px ;
+				height:115px ;
+				margin-top: 5px;
+			}
+			.mui-slider-group .mui-card .mui-card-content .imgbox:nth-of-type(3),.mui-slider-group .mui-card .mui-card-content .imgbox:nth-of-type(2),.mui-slider-group .mui-card .mui-card-content .imgbox:nth-of-type(1){
+				margin-top: 0;
+			}
+			.mui-slider-group .mui-card .mui-card-content .imgbox:nth-of-type(1),.imgbox:nth-of-type(2),.imgbox:nth-of-type(4),.imgbox:nth-of-type(5),.imgbox:nth-of-type(7),.imgbox:nth-of-type(8){
+				float:left;
+				margin-right:5px;
+			}
+			.mui-slider-group .mui-card .mui-card-content .imgbox:nth-of-type(3),.imgbox:nth-of-type(6),.imgbox:nth-of-type(9){
+				float: right;
+			}
+			.mui-slider-group .mui-card .mui-card-content .imgbox img{
+				width: 100%;
+				height: 100%;
+				object-fit: cover; 
+			}
+			.mui-card-footer{
+				padding: 0;
+				min-height: 30px;
+				height: 30px;
+			}
+			.mui-card-footer .mui-card-link{
+				margin: 0;
+				width:33%;
+				line-height: 30px;
+				height: 100%;
+				display: block;
+				text-align: center;
+				font-size: 15px;
+				color: black;
+			}
+			.mui-card-footer a span{
+				font-size: 15px;
+			}
+		</style>
+		
 	</head>
 
 	<body>
-		<div class="mui-content">
-			<div>
-				社区
-			</div>
-		</div>
-		<script src="js/mui.min.js"></script>
+		
+	<header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+	    <a class="mui-action-back mui-icon mui-icon-plusempty mui-pull-right mui-a-color"></a>
+	    <h1 class="mui-title">社区</h1>
+	</header>
+	<div class="mui-content">
+	    <div class="mui-slider">
+	        <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+	            <a class="mui-control-item" href="#item1">动态</a>
+	            <a class="mui-control-item" href="#item2">表白墙</a>
+	            <a class="mui-control-item" href="#item3">失物招领</a>
+	        </div>
+	        <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+	        <div class="mui-slider-group">
+	            <div id="item1" class="mui-slider-item mui-control-content mui-active">
+	            	<div class="mui-scroll-wrapper" id="pullrefresh">
+	            	    <div class="mui-scroll">
+	            	        <ul class="mui-table-view">
+	            	    	<div class="mui-card">
+								<!--页眉，放置标题-->
+								<div class="mui-card-header mui-card-media">
+									<img src="./images/logo.png" />
+									<div class="mui-media-body">
+										小M
+										<p>发表于 2016-06-30 15:30</p>
+									</div>
+								</div>
+								<!--内容区-->
+								<div class="mui-card-content">
+									<div class="textbox">
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										
+									</div>
+									<div class="imgboxbox">
+										<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									</div>
+									
+									
+								</div>
+								<!--页脚，放置补充信息或支持的操作-->
+								<div class="mui-card-footer">
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-xihuan"></span>(25)</a>
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-pinglun"></span>(5)</a>
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-zhuanfa"></span>(6)</a>
+								</div>
+							</div> 
+							<div class="mui-card">
+								<!--页眉，放置标题-->
+								<div class="mui-card-header mui-card-media">
+									<img src="./images/logo.png" />
+									<div class="mui-media-body">
+										小M
+										<p>发表于 2016-06-30 15:30</p>
+									</div>
+								</div>
+								<!--内容区-->
+								<div class="mui-card-content">
+									<div class="textbox">
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										
+									</div>
+									<div class="imgboxbox">
+										<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									</div>
+									
+									
+								</div>
+								<!--页脚，放置补充信息或支持的操作-->
+								<div class="mui-card-footer">
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-xihuan"></span>(25)</a>
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-pinglun"></span>(5)</a>
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-zhuanfa"></span>(6)</a>
+								</div>
+							</div> 
+							<div class="mui-card">
+								<!--页眉，放置标题-->
+								<div class="mui-card-header mui-card-media">
+									<img src="./images/logo.png" />
+									<div class="mui-media-body">
+										小M
+										<p>发表于 2016-06-30 15:30</p>
+									</div>
+								</div>
+								<!--内容区-->
+								<div class="mui-card-content">
+									<div class="textbox">
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										<p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p>
+										
+									</div>
+									<div class="imgboxbox">
+										<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									<div class="imgbox">
+										<img src="./images/yuantiao.jpg" alt="" >
+										
+									</div>
+									</div>
+									
+									
+								</div>
+								<!--页脚，放置补充信息或支持的操作-->
+								<div class="mui-card-footer">
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-xihuan"></span>(25)</a>
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-pinglun"></span>(5)</a>
+									<a class="mui-card-link"><span class="mui-icon iconfont icon-zhuanfa"></span>(6)</a>
+								</div>
+							</div> 
+							
+	            	    </ul>
+	            	    </div>
+	            	</div>
+	            	
+	            	        
+	            	        
+	           
+	                
+	            </div>
+	            <div id="item2" class="mui-slider-item mui-control-content">
+	                <ul class="mui-table-view">
+	                    <li class="mui-table-view-cell">第2个选项卡子项</li>
+	                    <li class="mui-table-view-cell">第2个选项卡子项</li>
+	                </ul>
+	            </div>
+	            <div id="item3" class="mui-slider-item mui-control-content">
+	                <ul class="mui-table-view">
+	                    <li class="mui-table-view-cell">第3个选项卡子项</li>
+	                    <li class="mui-table-view-cell">第2个选项卡子项</li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<nav class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="index-subpage-home.html">
+				<span class="mui-icon iconfont icon-shouye1"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="index-subpage-shequ.html">
+				<span class="mui-icon iconfont icon-sheququan"></span>
+				<span class="mui-tab-label">社区</span>
+			</a>
+			<a class="mui-tab-item tianjia" href="index-subpage-tianjia.html">
+				<span class="iconfont icon-tianjia1"></span>
+				<span class="mui-tab-label"></span>
+			</a>
+			<a class="mui-tab-item" href="index-subpage-xiaoxi.html">
+				<span class="mui-icon iconfont icon-xiaoxi"></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="index-subpage-wode.html">
+				<span class="mui-icon iconfont icon-wode"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<script src="./js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				swipeBack: false
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+				
+				
+			})(mui);
+		</script>
+		<script type="text/javascript">
+			showImageview('.mui-slider-group .mui-card .mui-card-content .imgboxbox','.mui-slider-group .mui-card .mui-card-content .imgboxbox img');
+				/*点击图片预览*/
+				function showImageview(fatherId,classStr) {
+					var images = [].slice.call(document.querySelectorAll(classStr));
+					var father=mui(farherId);
+					var farther.urls = [];
+					images.forEach(function(item) {
+						farther.urls.push(item.src);
+					});
+					father.on('tap', classStr, function() {
+						var index = images.indexOf(this);
+						plus.nativeUI.previewImage(urls, {
+							current: index,
+							loop: false,
+							indicator: 'number'
+						});
+					});
+				}
+		</script>
+		<script type="text/javascript">
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view');
+				
+					for (var i = 0, len = 5; i < len; i++) {
+						var li = document.createElement('div');
+						li.className='mui-card'
+						li.innerHTML = '<div class="mui-card-header mui-card-media"><img src="./images/logo.png" /><div class="mui-media-body">小M<p>发表于 2016-06-30 15:30</p></div></div><!--内容区--><div class="mui-card-content"><div class="textbox"><p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p><p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p><p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p></div><div class="imgboxbox"><div class="imgbox"><img src="./images/yuantiao.jpg" alt="" ></div></div></div><div class="mui-card-footer"><a class="mui-card-link"><span class="mui-icon iconfont icon-xihuan"></span>(25)</a><a class="mui-card-link"><span class="mui-icon iconfont icon-pinglun"></span>(5)</a><a class="mui-card-link"><span class="mui-icon iconfont icon-zhuanfa"></span>(6)</a></div>';
+						
+						//下拉刷新，新纪录插到最前面；
+						table.insertBefore(li, table.firstChild);
+					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var table = document.body.querySelector('.mui-table-view');
+					for (var i = 0, len = 5; i < len; i++) {
+						var li = document.createElement('div');
+						li.className='mui-card'
+						li.innerHTML = '<div class="mui-card-header mui-card-media"><img src="./images/logo.png" /><div class="mui-media-body">小M<p>发表于 2016-06-30 15:30</p></div></div><!--内容区--><div class="mui-card-content"><div class="textbox"><p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p><p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p><p>我拍的风景照我拍的风景照我拍的风景照我拍的风景照我拍的风景照</p></div><div class="imgboxbox"><div class="imgbox"><img src="./images/yuantiao.jpg" alt="" ></div></div></div><div class="mui-card-footer"><a class="mui-card-link"><span class="mui-icon iconfont icon-xihuan"></span>(25)</a><a class="mui-card-link"><span class="mui-icon iconfont icon-pinglun"></span>(5)</a><a class="mui-card-link"><span class="mui-icon iconfont icon-zhuanfa"></span>(6)</a></div>';
+						table.appendChild(li);
+					}
+				}, 1500);
+			}
+		</script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function() {
+				var subpages = ['index-subpage-home.html', 'index-subpage-shequ.html', 'index-subpage-tianjia.html', 'index-subpage-xiaoxi.html', 'index-subpage-wode.html'];
+				var subpage_style = {
+					top: '45px',
+					bottom: '51px'
+				};
+
+				var aniShow = {};
+
+				//创建子页面，首个选项卡页面显示，其它均隐藏；
+				mui.plusReady(function() {
+					var self = plus.webview.currentWebview();
+					for(var i = 0; i < 5; i++) {
+						var temp = {};
+						var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+						if(i > 0) {
+							sub.hide();
+						} else {
+							temp[subpages[i]] = "true";
+							mui.extend(aniShow, temp);
+						}
+						self.append(sub);
+					}
+				});
+				//当前激活选项
+				var activeTab = subpages[0];
+				var title = document.getElementById("title");
+				//选项卡点击事件
+				mui('.mui-bar-tab').on('tap', 'a', function(e) {
+					var targetTab = this.getAttribute('href');
+					if(targetTab == activeTab) {
+						return;
+					}
+					//更换标题
+					title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+					//显示目标选项卡
+					//若为iOS平台或非首次显示，则直接显示
+					if(mui.os.ios || aniShow[targetTab]) {
+						plus.webview.show(targetTab);
+					} else {
+						//否则，使用fade-in动画，且保存变量
+						var temp = {};
+						temp[targetTab] = "true";
+						mui.extend(aniShow, temp);
+						plus.webview.show(targetTab, "fade-in", 300);
+					}
+					//隐藏当前;
+					plus.webview.hide(activeTab);
+					//更改当前活跃的选项卡
+					activeTab = targetTab;
+				});
+				//自定义事件，模拟点击“首页选项卡”
+				document.addEventListener('gohome', function() {
+					var defaultTab = document.getElementById("defaultTab");
+					//模拟首页点击
+					mui.trigger(defaultTab, 'tap');
+					//切换选项卡高亮
+					var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+					if(defaultTab !== current) {
+						current.classList.remove('mui-active');
+						defaultTab.classList.add('mui-active');
+					}
+				});
+			})
 		</script>
 	</body>
 
