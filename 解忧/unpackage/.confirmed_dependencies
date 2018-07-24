@@ -9,7 +9,8 @@
 			"index-subpage-shequ.html",
 			"index-subpage-tianjia.html",
 			"index-subpage-home.html",
-			"index-subpage-wode.html"
+			"index-subpage-wode.html",
+			"index-subpage-wode-setting.html"
 		]
 	},
 	"index-subpage-home.html": {
@@ -33,6 +34,13 @@
 			"index-subpage-home-ranking-3.html",
 			"index-subpage-home-ranking-2.html",
 			"index-subpage-home-ranking-1.html"
+		]
+	},
+	"index-subpage-wode.html": {
+		"refer": [
+			"index-subpage-wode-personalPage.html",
+			"index-subpage-wode-assigment.html",
+			"index-subpage-wode-purse.html"
 		]
 	}
 }

@@ -6,17 +6,101 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/wode.css" rel="stylesheet" />
 	</head>
 
 	<body>
-		<div class="mui-content">
-			<div>
-				我的
+		<div id="scroll" class="mui-content mui-scroll-wrapper detail-content">
+			<div class="mui-scroll">
+				<div class="top_box">
+					<img src="images/u445.png" />
+					<span>小明</span>
+				</div>
+				<div class="account">
+					<div>
+						<h5>信誉积分</h5>
+						<h5>100</h5>
+					</div>
+					<div style="border-left: 1px #EEE solid;border-right: 1px #EEE solid;">
+						<h5>获赞数</h5>
+						<h5>666</h5>
+					</div>
+					<div>
+						<h5>公益金额</h5>
+						<h5>99</h5>
+					</div>
+				</div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a id="goto_assigment" class="mui-navigate-right">
+							<i class="mui-icon mui-icon-star iconleft"></i>
+							<span class="mui-badge mui-badge-danger">15</span> 我的任务
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="goto_purse" class="mui-navigate-right">
+							<i class="mui-icon mui-icon-star iconleft"></i>
+							<span class="mui-badge mui-badge-purple">5</span> 我的钱包
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right">
+							<i class="mui-icon mui-icon-star iconleft"></i>
+							<span class="mui-badge mui-badge-warning">5</span> 公益账单
+						</a>
+					</li>
+					
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" style="margin-top: 8px;">
+						<a class="mui-navigate-right">
+							<i class="mui-icon mui-icon-star iconleft"></i>
+							<span class="mui-badge mui-badge-purple">5</span> 我的评论
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right">
+							<i class="mui-icon mui-icon-star iconleft"></i>
+							<span class="mui-badge mui-badge-warning">5</span> 我的收藏
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
+
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			//初始化scroll区域
+			(function($) {
+				$(".mui-scroll-wrapper").scroll({
+					indicators: false, //是否显示滚动条,默认是true
+				});
+			})(mui);
+			mui.plusReady(function() {
+
+			})
+			var top_box = document.getElementsByClassName('top_box')[0];
+			var goto_assigment = document.getElementById('goto_assigment');
+			var goto_purse = document.getElementById('goto_purse');
+			goto_assigment.addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index-subpage-wode-assigment.html',
+					url: 'index-subpage-wode-assigment.html'
+				});
+			})
+			goto_purse.addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index-subpage-wode-purse.html',
+					url: 'index-subpage-wode-purse.html'
+				});
+			})
+			top_box.addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index-subpage-wode-personalPage.html',
+					url: 'index-subpage-wode-personalPage.html'
+				});
+			})
 		</script>
 	</body>
 

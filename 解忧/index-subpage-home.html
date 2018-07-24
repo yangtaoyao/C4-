@@ -194,8 +194,8 @@
 					</div>
 					<div class="home-card-right ">
 						<h5>日新楼帮忙</h5>
-						<p class="deadline"><span>截止 </span><span >2018.01.01</span></p>
-						<p ><span class="reward">¥8.00</span><span class="participants">3人</span></p>
+						<p class="deadline"><span>截止 </span><span>2018.01.01</span></p>
+						<p><span class="reward">¥8.00</span><span class="participants">3人</span></p>
 					</div>
 				</a>
 				<ul class="mui-table-view mui-table-view-chevron " style="background:transparent;">
@@ -225,24 +225,7 @@
 						callback: pullupRefresh
 					}
 				},
-				//				preloadPages: [{
-				//						id: 'detail.html',
-				//						url: 'index-subpage-home-detail.html'
-				//					},
-				//					{
-				//						id: 'assortment.html',
-				//						url: 'index-subpage-home-assortment.html'
-				//					},
-				//					{
-				//						id: 'searching.html',
-				//						url: 'index-subpage-home-searching.html'
-				//					},
-				//					{
-				//						id: 'ranking.html',
-				//						url: 'index-subpage-home-ranking.html'
-				//					}
-				//
-				//				]
+
 			});
 
 			var count = 0;
@@ -257,34 +240,20 @@
 					for(var i = cells.length, len = i + newCount; i < len; i++) {
 						var li = document.createElement('li');
 						li.className = 'home-table-view-cell';
-						//						li.innerHTML = '<a class="mui-navigate-right ">Item ' + (i + 1) + '</a>';
-//						li.innerHTML = '<a href="# " class="home-card ">' +
-//							'<div class="home-card-left ">' +
-//							'<span>最新</span>' +
-//							'<img src="images/xuexi.png " />' +
-//							'<p>学习</p>' +
-//							'</div>' +
-//							'<div class="home-card-right ">' +
-//							'<span>日新楼帮忙去快递</span>' +
-//							'<p><span>截止时间:</span><span>' + new Date() + '</span></p>' +
-//							'<p><span>赏金:</span><span>' + Math.ceil(10 * Math.random()) + ' ¥</span></p>' +
-//							'<p><span>正在竞标：</span><span>' + Math.ceil(10 * Math.random()) + '人</span></p>' +
-//							'</div>' +
-//							'</a>';
 						li.innerHTML =
-							'<a href="#" class="home-card ">'+
-							'<div class="home-card-left ">'+
-							'<span>最急</span>'+
-							'<img src="images/kuaidiicon.png" />'+
-							'<p>学习</p>'+
-							'</div>'+
-							'<div class="home-card-right ">'+
-							'<h5>帮帮单'+Math.ceil(10 * Math.random())+'</h5>'+
-							'<p class="deadline"><span>截止 </span><span >'+ new Date()+'</span></p>'+
-							'<p ><span class="reward">¥8.00</span><span class="participants">'+Math.ceil(10 * Math.random())+'人</span></p>'+
-							'</div>'+
+							'<a href="#" class="home-card ">' +
+							'<div class="home-card-left ">' +
+							'<span>最急</span>' +
+							'<img src="images/kuaidiicon.png" />' +
+							'<p>学习</p>' +
+							'</div>' +
+							'<div class="home-card-right ">' +
+							'<h5>帮帮单' + Math.ceil(10 * Math.random()) + '</h5>' +
+							'<p class="deadline"><span>截止 </span><span >' + new Date() + '</span></p>' +
+							'<p ><span class="reward">¥8.00</span><span class="participants">' + Math.ceil(10 * Math.random()) + '人</span></p>' +
+							'</div>' +
 							'</a>';
-							
+
 						var a = li.getElementsByTagName('a')[0];
 						var span = (a.children[0]).getElementsByTagName('span')[0];
 						var img = (a.children[0]).getElementsByTagName('img')[0];
@@ -350,6 +319,17 @@
 			 */
 			mui.plusReady(function() {
 
+				webview_detail = mui.preload({
+					url: 'index-subpage-home-detail.html',
+					id: 'detail',
+					styles: {
+						"render": "always",
+						"popGesture": "hide",
+						"bounce": "vertical",
+						"bounceBackground": "#efeff4",
+					}
+				});
+
 				var detailPage = null;
 				//添加列表项的点击事件
 				mui('.mui-content').on('tap', '.home-card', function(e) {
@@ -399,6 +379,24 @@
 				});
 
 			})
+
+			/*mui.ajax('', {
+				data: {
+					username: 'username',
+					password: 'password'
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					...
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});*/
 		</script>
 	</body>
 

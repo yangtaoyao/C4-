@@ -13,18 +13,17 @@
 		<header class="mui-bar mui-bar-nav" style="">
 			<h1 id="title" class="mui-title-main">首页</h1>
 		</header>
-		
+
 		<nav class="mui-bar mui-bar-tab">
 			<a id="defaultTab" class="mui-tab-item mui-active" href="index-subpage-home.html">
 				<span class="mui-icon iconfont icon-shouye1"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a class="mui-tab-item" href="index-subpage-shequ.html">
+			<a id="goto_shequ" class="mui-tab-item" href="index-subpage-shequ.html">
 				<span class="mui-icon iconfont icon-sheququan"></span>
 				<span class="mui-tab-label">社区</span>
 			</a>
-			<a id="add_page" class="tianjia" href="index-subpage-tianjia.html" 
-				style="display: table-cell;
+			<a id="goto_add" class="tianjia" href="index-subpage-tianjia.html" style="display: table-cell;
 	overflow: hidden;
 	width: 1%;
 	height: 50px;
@@ -33,20 +32,19 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	color: #BFBFBF">
-	<span class="iconfont icon-tianjia1"]></span>
+				<span class="iconfont icon-tianjia1" ]></span>
 				<span class="mui-tab-label"></span>
 			</a>
 			<a class="mui-tab-item" href="index-subpage-xiaoxi.html">
 				<span class="mui-icon iconfont icon-xiaoxi"></span>
 				<span class="mui-tab-label">消息</span>
 			</a>
-			<a class="mui-tab-item" href="index-subpage-wode.html">
+			<a id="goto_wode" class="mui-tab-item" href="index-subpage-wode.html">
 				<span class="mui-icon iconfont icon-wode"></span>
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
-		
-		
+
 		<div class="mui-content"></div>
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
@@ -78,17 +76,51 @@
 				//当前激活选项
 				var activeTab = subpages[0];
 				var title = document.getElementById("title");
+				var header = title.parentNode;
+				//社区右上角添加按钮
+				var shequ_righticon = document.createElement('a');
+				shequ_righticon.className = 'mui-icon mui-pull-right mui-icon-compose';
+				//我的 右上角设置按钮
+				var wode_righticon = document.createElement('a');
+				wode_righticon.className = 'mui-icon mui-pull-right mui-icon-gear-filled';
+				wode_righticon.addEventListener('tap',function(){
+					mui.openWindow({
+							id: 'iindex-subpage-wode-setting.html',
+							url: 'index-subpage-wode-setting.html'
+					});
+				})
 				//选项卡点击事件
 				mui('.mui-bar-tab').on('tap', 'a', function(e) {
 					
 					//打开添加页面
-					if(this.getAttribute('id') == 'add_page') {
+					if(this.getAttribute('id') == 'goto_add') {
 						//打开添加页面          
 						mui.openWindow({
 							id: 'index-subpage-tianjia.html',
 							url: 'index-subpage-tianjia.html'
 						});
 						return;
+					}
+					
+					//'我的'--header添加右边设置按钮
+					if(this.getAttribute('id') == 'goto_shequ') {
+						var elem = header.querySelector('.mui-pull-right');
+						if(elem) {
+							header.removeChild(elem);
+						}
+						
+						header.appendChild(shequ_righticon);
+					} else if(this.getAttribute('id') == 'goto_wode'){
+						var elem = header.querySelector('.mui-pull-right');
+						if(elem) {
+							header.removeChild(elem);
+						}
+						header.appendChild(wode_righticon);
+					}else{
+						var elem = header.querySelector('.mui-pull-right');
+						if(elem) {
+							header.removeChild(elem);
+						}
 					}
 					
 					//打开非添加页面
@@ -109,11 +141,12 @@
 						mui.extend(aniShow, temp);
 						plus.webview.show(targetTab, "fade-in", 300);
 					}
-					//隐藏当前;
+					//隐藏当前
 					plus.webview.hide(activeTab);
 					//更改当前活跃的选项卡
 					activeTab = targetTab;
 				});
+				
 				//自定义事件，模拟点击“首页选项卡”
 				document.addEventListener('gohome', function() {
 					var defaultTab = document.getElementById("defaultTab");

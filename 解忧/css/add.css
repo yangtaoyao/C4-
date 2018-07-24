@@ -43,7 +43,7 @@
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 	line-height: 1.1;
 	font-size: 14px;
-	margin-top: 10px;
+	margin-top: 12px;
 	float: left;
 	width: auto;
 	padding:0 0;
@@ -56,6 +56,9 @@
 	float: left;
 	width: auto;
 	padding: 11px 0px;
+}
+.mui-radio input[type=radio]:checked:before{
+	content: '\e442';
 }
 .type_radio .mui-radio label{
 	vertical-align: middle;
