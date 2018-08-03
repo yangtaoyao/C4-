@@ -131,14 +131,16 @@
 			"index.html": {
 				"resources": [
 					"index-subpage-home.html",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"fonts/mui.ttf"
 				],
 				"refer": [
 					"index-subpage-xiaoxi.html",
 					"index-subpage-shequ.html",
 					"index-subpage-tianjia.html",
 					"index-subpage-wode.html",
-					null
+					null,
+					"index-subpage-wode-setting.html"
 				],
 				"priority": 0
 			},
@@ -165,12 +167,56 @@
 					"index-subpage-home-ranking-2.html"
 				],
 				"priority": 0
+			},
+			"index-subpage-wode.html": {
+				"resources": [],
+				"refer": [
+					"index-subpage-wode-assigment.html",
+					"index-subpage-wode-purse.html",
+					"index-subpage-wode-personalPage.html",
+					"perData.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-shequ.html": {
+				"resources": [
+					"index-subpage-home.html",
+					"shequ1.html"
+				],
+				"refer": [
+					"index-subpage-wode.html",
+					"index-subpage-xiaoxi.html",
+					"index-subpage-tianjia.html",
+					"shequ2.html",
+					"shequ3.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-wode-personalPage.html": {
+				"resources": [],
+				"refer": [
+					"perData.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-wode-setting.html": {
+				"resources": [],
+				"refer": [
+					"perData.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-xiaoxi.html": {
+				"resources": [],
+				"refer": [
+					"chat.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
 			"resources": [
 				"js/mui.min.js",
-				"fonts/mui.ttf",
 				"js/mui.js",
 				"css/mui.css"
 			]

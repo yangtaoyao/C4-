@@ -1,0 +1,18 @@
+.mui-table-view{
+	margin-bottom: 20px;
+	/*box-shadow: 0 1px 2px rgba(0, 0, 0, .3);*/
+}
+
+
+/*退出登录*/
+.logout{
+	width: 100%;
+	text-align: center;
+	margin-top: 48px;
+}
+.logout button{
+	padding: 8px;
+	width: 120px;
+	border-radius: 20px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+}

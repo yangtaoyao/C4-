@@ -11,6 +11,14 @@
 	font-size: 16px;
 	
 }
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+	color: #999999;	
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	font-weight: bold;
+}
+
 .top3{
 	width: 100%;
 	height: 160px;

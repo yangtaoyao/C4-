@@ -6,62 +6,78 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
 		<link href="css/wode.css" rel="stylesheet" />
 	</head>
 
 	<body>
 		<div id="scroll" class="mui-content mui-scroll-wrapper detail-content">
 			<div class="mui-scroll">
-				<div class="top_box">
+				<ul class="mui-table-view mui-table-view-chevron top_box">
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right">
+							<img id="head-img" class="mui-media-object mui-pull-left 
+										head-img"  src="images/u445.png">
+							<div class="mui-media-body">
+								<h4>
+									<span>hello解忧</span>
+									<span id="goto_perData" class="mui-icon mui-icon-compose"></span>
+								</h4>
+								<p class='mui-ellipsis'>账号:hello解忧</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<!--<div class="top_box">
 					<img src="images/u445.png" />
 					<span>小明</span>
-				</div>
+				</div>-->
 				<div class="account">
 					<div>
 						<h5>信誉积分</h5>
-						<h5>100</h5>
+						<h4>100</h4>
 					</div>
 					<div style="border-left: 1px #EEE solid;border-right: 1px #EEE solid;">
 						<h5>获赞数</h5>
-						<h5>666</h5>
+						<h4>666</h4>
 					</div>
 					<div>
 						<h5>公益金额</h5>
-						<h5>99</h5>
+						<h4>99</h4>
 					</div>
 				</div>
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell">
 						<a id="goto_assigment" class="mui-navigate-right">
-							<i class="mui-icon mui-icon-star iconleft"></i>
-							<span class="mui-badge mui-badge-danger">15</span> 我的任务
+							<i class="iconfont icon-renwu1 iconleft" style="color: #797979;"></i>
+							<span class="mui-badge mui-badge-purple">5</span> 我的任务
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
 						<a id="goto_purse" class="mui-navigate-right">
-							<i class="mui-icon mui-icon-star iconleft"></i>
-							<span class="mui-badge mui-badge-purple">5</span> 我的钱包
+							<i class="iconfont icon-qianbao iconleft" style="color: #797979;"></i>
+							我的钱包
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
 						<a class="mui-navigate-right">
-							<i class="mui-icon mui-icon-star iconleft"></i>
-							<span class="mui-badge mui-badge-warning">5</span> 公益账单
+							<i class="iconfont icon-zhangdan iconleft" style="color: #797979;"></i>
+							公益账单
 						</a>
 					</li>
-					
+
 				</ul>
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell" style="margin-top: 8px;">
 						<a class="mui-navigate-right">
-							<i class="mui-icon mui-icon-star iconleft"></i>
-							<span class="mui-badge mui-badge-purple">5</span> 我的评论
+							<i class="iconfont icon-pinglun1 iconleft" style="color: #797979;"></i>
+							我的评论
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
 						<a class="mui-navigate-right">
-							<i class="mui-icon mui-icon-star iconleft"></i>
-							<span class="mui-badge mui-badge-warning">5</span> 我的收藏
+							<i class="iconfont icon-shoucang iconleft" style="color: #797979;"></i>
+							<span class="mui-badge mui-badge-purple">5</span> 我的收藏
 						</a>
 					</li>
 				</ul>
@@ -83,6 +99,7 @@
 			var top_box = document.getElementsByClassName('top_box')[0];
 			var goto_assigment = document.getElementById('goto_assigment');
 			var goto_purse = document.getElementById('goto_purse');
+			var goto_perData=document.getElementById('goto_perData');
 			goto_assigment.addEventListener('tap', function() {
 				mui.openWindow({
 					id: 'index-subpage-wode-assigment.html',
@@ -95,10 +112,32 @@
 					url: 'index-subpage-wode-purse.html'
 				});
 			})
+
+			//个人主页原生渐变标题栏
+			//			var titleNView = {
+			//				backgroundColor: '#f7f7f7', //导航栏背景色
+			//				titleText: '个人主页', //导航栏标题
+			//				titleColor: '#333333', //文字颜色
+			//				type: 'transparent', //透明渐变样式
+			//				autoBackButton: true, //自动绘制返回箭头
+			//				splitLine: { //底部分割线
+			//					color: '#cccccc'
+			//				}
+			//			}
 			top_box.addEventListener('tap', function() {
 				mui.openWindow({
 					id: 'index-subpage-wode-personalPage.html',
-					url: 'index-subpage-wode-personalPage.html'
+					url: 'index-subpage-wode-personalPage.html',
+					//					styles: {
+					//						titleNView: titleNView
+					//					}
+				});
+			})
+			goto_perData.addEventListener('tap', function(event) {
+			  	event.stopPropagation();
+				mui.openWindow({
+					id: 'perData.html',
+					url: 'perData.html',
 				});
 			})
 		</script>

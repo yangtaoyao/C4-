@@ -6,6 +6,7 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
 		<link href="css/home-detail.css" rel="stylesheet" />
 	</head>
 
@@ -23,7 +24,7 @@
 					</span>
 					<img id="typeicon" src="images/xuexiicon.png" />
 					<div class="detail_box_top">
-						<img src="images/u445.png" />
+						<img src="images/logo.png" />
 						<div>
 							<p>小明</p>
 							<p>2018.1.1</p>
@@ -33,20 +34,24 @@
 					第一个选项卡子项</h4>
 					<ul id="conent_img_list" class="mui-table-view mui-table-view-chevron">
 						<li class="home-table-view-cell">
-							<img src="images/u367.png" />
+							<img src="images/cbd.jpg" />
 							<img src="images/u367.png" />
 						</li>
 					</ul>
-					<p class="detail_box_p1">
+					
+				</div>
+				
+				<div class="bottom_box">
+					<p class="bottom_box_p1">
 						<span>截止时间:</span>
 						<span id="deadline">2018.1.1</span>
 					</p>
-					<p class="detail_box_p2">
+					<p class="bottom_box_p2">
 						<span>赏金:</span>
 						<span id="reward">8.00</span>
 						<span>¥</span>
 					</p>
-					<p class="detail_box_p3">
+					<p class="bottom_box_p3">
 						<span>正在竞标人数：</span>
 						<span id="participants">3</span>
 					</p>
@@ -68,13 +73,16 @@
 
 		<nav class="mui-bar mui-bar-tab">
 			<a id="item-star" class="mui-tab-item" href="#">
-				<span id="star" class="mui-icon mui-icon-star"></span>
+				<span id="star" class="iconfont icon-favorite" ></span>
+				<span>收藏</span>
 			</a>
 			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="iconfont icon-jiedan1"></span>
+				<span>接单</span>
 			</a>
 			<a class="mui-tab-item" href="#forward">
-				<span class="mui-icon mui-icon-undo "></span>
+				<span class="iconfont icon-zhuanfa"></span>
+				<span>转发</span>
 			</a>
 		</nav>
 
@@ -139,13 +147,13 @@
 				document.getElementById('item-star').addEventListener('tap', function() {
 					var changebtn_span = document.getElementById('star');
 					if(change == 0) {
-						changebtn_span.classList.remove('mui-icon-star');
-						changebtn_span.classList.add('mui-icon-star-filled');
+						changebtn_span.classList.remove('icon-favorite');
+						changebtn_span.classList.add('icon-favorite2');
 						change = 1;
 						mui.toast('收藏成功')
 					} else if(change == 1) {
-						changebtn_span.classList.remove('mui-icon-star-filled');
-						changebtn_span.classList.add('mui-icon-star');
+						changebtn_span.classList.remove('icon-favorite2');
+						changebtn_span.classList.add('icon-favorite');
 						change = 0;
 						mui.toast('取消收藏')
 					};
