@@ -1,78 +1,107 @@
 {
-	"index.html": {
-		"resources": [
-			"index-subpage-home.html",
-			"css/mui.min.css",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"index-subpage-xiaoxi.html",
-			"index-subpage-shequ.html",
-			"index-subpage-tianjia.html",
-			"index-subpage-home.html",
-			"index-subpage-wode.html",
-			"index-subpage-wode-setting.html"
-		]
-	},
-	"index-subpage-home.html": {
-		"refer": [
-			"index-subpage-xiaoxi.html",
-			"index-subpage-home-detail.html",
-			"index-subpage-home-searching.html",
-			"index-subpage-home-ranking.html",
-			"index-subpage-home-assortment.html"
-		],
-		"resources": [
-			"images/xunwuicon.png",
-			"css/mui.min.css"
-		]
-	},
-	"index-subpage-home-ranking.html": {
-		"resources": [
-			"index-subpage-home-ranking-1.html"
-		],
-		"refer": [
-			"index-subpage-home-ranking-3.html",
-			"index-subpage-home-ranking-2.html",
-			"index-subpage-home-ranking-1.html"
-		]
-	},
-	"index-subpage-wode.html": {
-		"refer": [
-			"index-subpage-wode-personalPage.html",
-			"index-subpage-wode-assigment.html",
-			"index-subpage-wode-purse.html",
-			"perData.html"
-		]
-	},
-	"index-subpage-shequ.html": {
-		"resources": [
-			"index-subpage-home.html",
-			"shequ1.html"
-		],
-		"refer": [
-			"index-subpage-wode.html",
-			"index-subpage-xiaoxi.html",
-			"index-subpage-tianjia.html",
-			"index-subpage-home.html",
-			"shequ1.html",
-			"shequ2.html",
-			"shequ3.html"
-		]
-	},
-	"index-subpage-wode-personalPage.html": {
-		"refer": [
-			"perData.html"
-		]
-	},
-	"index-subpage-wode-setting.html": {
-		"refer": [
-			"perData.html"
-		]
-	},
-	"index-subpage-xiaoxi.html": {
-		"refer": [
-			"chat.html"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "index-subpage-home.html",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "index-subpage-xiaoxi.html",
+      "index-subpage-shequ.html",
+      "index-subpage-tianjia.html",
+      "index-subpage-home.html",
+      "index-subpage-wode.html",
+      "index-subpage-wode-setting.html",
+      "guide.html",
+      "index-main.html"
+    ]
+  },
+  "index-subpage-home.html": {
+    "refer": [
+      "index-subpage-xiaoxi.html",
+      "index-subpage-home-detail.html",
+      "index-subpage-home-searching.html",
+      "index-subpage-home-ranking.html",
+      "index-subpage-home-assortment.html"
+    ],
+    "resources": [
+      "images/xunwuicon.png",
+      "css/mui.min.css"
+    ]
+  },
+  "index-subpage-home-ranking.html": {
+    "resources": [
+      "index-subpage-home-ranking-1.html"
+    ],
+    "refer": [
+      "index-subpage-home-ranking-3.html",
+      "index-subpage-home-ranking-2.html",
+      "index-subpage-home-ranking-1.html"
+    ]
+  },
+  "index-subpage-wode.html": {
+    "refer": [
+      "index-subpage-wode-personalPage.html",
+      "index-subpage-wode-assigment.html",
+      "index-subpage-wode-purse.html",
+      "perData.html"
+    ]
+  },
+  "index-subpage-shequ.html": {
+    "resources": [
+      "index-subpage-home.html",
+      "shequ1.html",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "index-subpage-wode.html",
+      "index-subpage-xiaoxi.html",
+      "index-subpage-tianjia.html",
+      "index-subpage-home.html",
+      "shequ1.html",
+      "shequ2.html",
+      "shequ3.html"
+    ]
+  },
+  "index-subpage-wode-personalPage.html": {
+    "refer": [
+      "perData.html"
+    ]
+  },
+  "index-subpage-wode-setting.html": {
+    "refer": [
+      "perData.html"
+    ]
+  },
+  "index-subpage-xiaoxi.html": {
+    "refer": [
+      "chat.html"
+    ]
+  },
+  "login.html": {
+    "refer": [
+      "login.html"
+    ]
+  },
+  "guide.html": {
+    "refer": [
+      "login.html",
+      "index.html",
+      "index-main.html"
+    ]
+  },
+  "index-main.html": {
+    "resources": [
+      "index-subpage-home.html"
+    ],
+    "refer": [
+      "index-subpage-wode.html",
+      "index-subpage-xiaoxi.html",
+      "index-subpage-shequ.html",
+      "index-subpage-home.html",
+      "index-subpage-tianjia.html",
+      "index-subpage-wode-setting.html"
+    ]
+  }
 }

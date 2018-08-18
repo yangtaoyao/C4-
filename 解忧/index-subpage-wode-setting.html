@@ -14,59 +14,99 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">设置</h1>
 		</header>
-		<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 60px;">
-			<li class="mui-table-view-cell">
-				<a id="goto_perData" href="#privacy" class="mui-navigate-right">个人资料</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right">账号管理与绑定</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right">通用</a>
-			</li>
-		</ul>
-		<ul class="mui-table-view">
-			<li class="mui-table-view-cell">
-				通知显示消息
-				<div class="mui-switch mui-active mui-switch-mini mui-switch-blue">
-					<div class="mui-switch-handle"></div>
-				</div>
-			</li>
-		</ul>
-		<ul class="mui-table-view mui-table-view-chevron">
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right">
-					关于解忧
-					<i class="mui-pull-right update"></i>
-				</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a >分享好友</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right">帮助与反馈</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a >版本更新</a>
-			</li>
-		</ul>
-		<div class="logout">
-			<button type="button" class="mui-btn mui-btn-primary">退出登录</button>
+		<div id="setting">
+			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 60px;">
+				<li class="mui-table-view-cell">
+					<a id="goto_perData" href="#privacy" class="mui-navigate-right">个人资料</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">账号管理与绑定</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">通用</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					通知显示消息
+					<div class="mui-switch mui-active mui-switch-mini mui-switch-blue">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						关于解忧
+						<i class="mui-pull-right update"></i>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>分享好友</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">帮助与反馈</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>版本更新</a>
+				</li>
+			</ul>
+			<div class="logout">
+				<button type="button" class="mui-btn mui-btn-primary" v-model>退出登录</button>
+			</div>
 		</div>
-
+		<script src="js/vue.min.js"></script>
 		<script src="js/mui.min.js "></script>
 		<script type="text/javascript ">
 			mui.init({
-					swipeBack: true, //启用右滑关闭功能
-				})
-				(function($) {
-					document.getElementById('goto_perData').addEventListener('tap',function(){
-						$.openWindow({
-							url:'perData.html',
-							id:'perData.html'
-						})
+				swipeBack: true, //启用右滑关闭功能
+			})
+			//var logout = (document.getElementsByClassName("logout")[0]).childNodes[0];
+
+			mui.plusReady(function() {
+				/*初始化页面数据*/
+				var launch = plus.storage.getItem("launchFlag");
+				var logbtnnode=document.getElementsByClassName("logout")[0].children[0];
+				//console.log(typeof launch);
+				if(launch=="true") {
+					logbtnnode.innerText = "退出登录";
+					//setting.isLogin = "退出登录";
+				} else {
+					logbtnnode.innerText = "立即登录";
+					//setting.isLogin = "立即登录";
+				}
+				//console.log("setting.isLogin" + logbtnnode.innerText);
+
+				document.getElementById('goto_perData').addEventListener('tap', function() {
+					mui.openWindow({
+						url: 'perData.html',
+						id: 'perData.html'
 					})
-				})(mui)
+				})
+
+				mui("body").on("tap", ".logout button", function() {
+					var launchFlag = plus.storage.getItem("launchFlag");
+					//console.log(typeof launchFlag)
+					if(launchFlag == "true") {
+						this.innerText = "立即登录";
+						plus.storage.setItem("launchFlag", "false");
+						//console.log(this.innerText);
+					} else {
+						this.innerText = "退出登录";
+						plus.storage.setItem("launchFlag", "true");
+						//console.log(this.innerText);
+					}
+
+				})
+
+			})
+
+			var setting = new Vue({
+				el: '#setting',
+				data: {
+					isLogin: "退出登录"
+				}
+			});
 		</script>
 	</body>
 
