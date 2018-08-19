@@ -52,7 +52,7 @@
 				</li>
 			</ul>
 			<div class="logout">
-				<button type="button" class="mui-btn mui-btn-primary" v-model>退出登录</button>
+				<button type="button" class="mui-btn mui-btn-primary">{{isLogin}}</button>
 			</div>
 		</div>
 		<script src="js/vue.min.js"></script>
@@ -66,14 +66,14 @@
 			mui.plusReady(function() {
 				/*初始化页面数据*/
 				var launch = plus.storage.getItem("launchFlag");
-				var logbtnnode=document.getElementsByClassName("logout")[0].children[0];
+				//var logbtnnode=document.getElementsByClassName("logout")[0].children[0];
 				//console.log(typeof launch);
-				if(launch=="true") {
-					logbtnnode.innerText = "退出登录";
-					//setting.isLogin = "退出登录";
+				if(launch == "true") {
+					//logbtnnode.innerText = "退出登录";
+					setting.isLogin = "退出登录";
 				} else {
-					logbtnnode.innerText = "立即登录";
-					//setting.isLogin = "立即登录";
+					//logbtnnode.innerText = "立即登录";
+					setting.isLogin = "立即登录";
 				}
 				//console.log("setting.isLogin" + logbtnnode.innerText);
 
@@ -82,7 +82,7 @@
 						url: 'perData.html',
 						id: 'perData.html'
 					})
-				})
+				});
 
 				mui("body").on("tap", ".logout button", function() {
 					var launchFlag = plus.storage.getItem("launchFlag");
@@ -96,7 +96,6 @@
 						plus.storage.setItem("launchFlag", "true");
 						//console.log(this.innerText);
 					}
-
 				})
 
 			})
@@ -104,7 +103,7 @@
 			var setting = new Vue({
 				el: '#setting',
 				data: {
-					isLogin: "退出登录"
+					isLogin: ""
 				}
 			});
 		</script>

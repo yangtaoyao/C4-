@@ -46,7 +46,8 @@
       "index-subpage-wode-assigment.html",
       "index-subpage-wode-purse.html",
       "perData.html"
-    ]
+    ],
+    "resources": []
   },
   "index-subpage-shequ.html": {
     "resources": [
@@ -67,29 +68,34 @@
   "index-subpage-wode-personalPage.html": {
     "refer": [
       "perData.html"
-    ]
+    ],
+    "resources": []
   },
   "index-subpage-wode-setting.html": {
     "refer": [
       "perData.html"
-    ]
+    ],
+    "resources": []
   },
   "index-subpage-xiaoxi.html": {
     "refer": [
       "chat.html"
-    ]
+    ],
+    "resources": []
   },
   "login.html": {
     "refer": [
       "login.html"
-    ]
+    ],
+    "resources": []
   },
   "guide.html": {
     "refer": [
       "login.html",
       "index.html",
       "index-main.html"
-    ]
+    ],
+    "resources": []
   },
   "index-main.html": {
     "resources": [
@@ -101,7 +107,8 @@
       "index-subpage-shequ.html",
       "index-subpage-home.html",
       "index-subpage-tianjia.html",
-      "index-subpage-wode-setting.html"
+      "index-subpage-wode-setting.html",
+      "guide.html"
     ]
   }
 }

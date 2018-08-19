@@ -119,14 +119,29 @@
 					deceleration: deceleration
 				});
 				$.ready(function() {
-					
-					$('body').on('tap','.mui-table-view-cell a',function(){
+
+					$('body').on('tap', '.mui-table-view-cell a', function() {
 						$.openWindow({
-							id:'chat.html',
-							url:'chat.html'
+							id: 'chat.html',
+							url: 'chat.html',
+							waiting: {
+								autoShow: true, //自动显示等待框，默认为true
+								title: '加载中...', //等待对话框上显示的提示内容
+								options: {
+									width: "100px",
+									height: "100px",
+									color: "#ffffff",
+									background: "rgba(0,0,0,0.4)",
+									loading: {
+										display: "block",
+										height: "30px",
+										icon: "images/logo.png"
+									}
+								}
+							}
 						})
 					})
-					
+
 					//循环初始化所有下拉刷新，上拉加载。
 					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll-wrapper'), function(index, pullRefreshEl) {
 						$(pullRefreshEl).pullRefresh({
@@ -155,68 +170,68 @@
 					var createFragment = function(ul, index, count, reverse) {
 						var length = ul.querySelectorAll('li').length;
 						var fragment = document.createDocumentFragment();
-						
+
 						var li;
 						for(var i = 0; i < count; i++) {
 							li = document.createElement('li');
 							//li.className = 'mui-table-view-cell';
-							switch(index){
+							switch(index) {
 								case 0:
-									li.innerHTML = 
-									'<li class="mui-table-view-cell">'+
-										'<a class="messgae mui-navigate-right">'+
-											'<img class="mui-media-object mui-pull-left" src="images/u445.png">'+
-											'<div class="mui-media-body">'+
-											'	<h5>jiuyou</h5>'+
-											'	<h6>1小时</h6>'+
-										'	</div>'+
-										'	<span class="mui-badge mui-badge-success">4</span>'+
-										'</a>'+
-									'</li>';
-								break;
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
 								case 1:
-									li.innerHTML = 
-									'<li class="mui-table-view-cell">'+
-										'<a class="messgae mui-navigate-right">'+
-											'<img class="mui-media-object mui-pull-left" src="images/u445.png">'+
-											'<div class="mui-media-body">'+
-											'	<h5>jiuyou</h5>'+
-											'	<h6>1小时</h6>'+
-										'	</div>'+
-										'	<span class="mui-badge mui-badge-success">4</span>'+
-										'</a>'+
-									'</li>';
-								break;
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
 								case 2:
-									li.innerHTML = 
-									'<li class="mui-table-view-cell">'+
-										'<a class="messgae mui-navigate-right">'+
-											'<img class="mui-media-object mui-pull-left" src="images/u445.png">'+
-											'<div class="mui-media-body">'+
-											'	<h5>jiuyou</h5>'+
-											'	<h6>1小时</h6>'+
-										'	</div>'+
-										'	<span class="mui-badge mui-badge-success">4</span>'+
-										'</a>'+
-									'</li>';
-								break;
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
 								case 3:
-									li.innerHTML = 
-									'<li class="mui-table-view-cell">'+
-										'<a class="messgae mui-navigate-right">'+
-											'<img class="mui-media-object mui-pull-left" src="images/u445.png">'+
-											'<div class="mui-media-body">'+
-											'	<h5>jiuyou</h5>'+
-											'	<h6>1小时</h6>'+
-										'	</div>'+
-										'	<span class="mui-badge mui-badge-success">4</span>'+
-										'</a>'+
-									'</li>';
-								break;
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
 							}
-							
-							if(ul.querySelector('.none_display')){
-								var none_display=ul.querySelector('.none_display');
+
+							if(ul.querySelector('.none_display')) {
+								var none_display = ul.querySelector('.none_display');
 								ul.removeChild(none_display);
 							}
 							fragment.appendChild(li);

@@ -8,7 +8,7 @@
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<style>
 			body {
-				background: #000000;
+				/*background: #000000;*/
 			}
 		</style>
 	</head>
@@ -25,7 +25,7 @@
 				 * 若不存在，说明是首次启动，进入引导页；
 				 */
 				var launchFlag = plus.storage.getItem("launchFlag");
-				if(launchFlag == "true") {
+				if(launchFlag == "true") { 
 					mui.openWindow({
 						url: "index-main.html",
 						id: "index-main",

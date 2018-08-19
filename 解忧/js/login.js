@@ -125,18 +125,25 @@ mui.plusReady(function() {
 		var a = 60;
 		var thisNode = this;
 		thisNode.innerText = a + 's';
-		thisNode.style.color="#999999";
+		thisNode.style.color = "#999999";
 		a--;
 		var interval = setInterval(function() {
 			thisNode.innerText = a + 's';
 			//console.log("修改"+thisNode.innerText);
 			a--;
-			if(a<-1){
+			if(a < -1) {
 				clearInterval(interval);
 				thisNode.innerText = "获取验证码";
-				thisNode.style.color="#007aff";
+				thisNode.style.color = "#007aff";
 			}
 		}, 1000);
+	})
+
+	mui("body").on('tap', ".mui-btn-primary", function() {
+		mui(this).button('loading');
+		setTimeout(function() {
+			mui(this).button('reset');
+		}.bind(this), 2000);
 	})
 
 })

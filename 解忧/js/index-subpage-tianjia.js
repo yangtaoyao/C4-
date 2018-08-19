@@ -197,7 +197,7 @@
 
 	//获取定位信息
 	var location_state = 0;
-	console.log('初始location_state：' + location_state);
+	//console.log('初始location_state：' + location_state);
 	document.getElementById('location').addEventListener('tap', function() {
 		console.log(location_state);
 

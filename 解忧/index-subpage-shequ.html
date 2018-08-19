@@ -3,208 +3,116 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<title>解忧</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<link rel="stylesheet" href="css/mui.min.css">
-		<style>
-			/*html,
-			body {
-				background-color: white;
-			}
-			.mui-bar~.mui-content .mui-fullscreen {
-				top: 44px;
-				height: auto;
-			}
-			
-			.mui-pull-top-tips {
-				position: absolute;
-				top: -20px;
-				left: 50%;
-				margin-left: -25px;
-				width: 40px;
-				height: 40px;
-				border-radius: 100%;
-				z-index: 1;
-			}
-			
-			.mui-bar~.mui-pull-top-tips {
-				top: 24px;
-			}
-			
-			.mui-pull-top-wrapper {
-				width: 42px;
-				height: 42px;
-				display: block;
-				text-align: center;
-				background-color: #efeff4;
-				border: 1px solid #ddd;
-				border-radius: 25px;
-				background-clip: padding-box;
-				box-shadow: 0 4px 10px #bbb;
-				overflow: hidden;
-			}
-			
-			.mui-pull-top-tips.mui-transitioning {
-				-webkit-transition-duration: 200ms;
-				transition-duration: 200ms;
-			}
-			
-			.mui-pull-top-tips .mui-pull-loading {
-				/*-webkit-backface-visibility: hidden;
-				-webkit-transition-duration: 400ms;
-				transition-duration: 400ms;*/
-			/*margin: 0;
-			}
-			
-			.mui-pull-top-wrapper .mui-icon,
-			.mui-pull-top-wrapper .mui-spinner {
-				margin-top: 7px;
-			}
-			
-			.mui-pull-top-wrapper .mui-icon.mui-reverse {
-				/*-webkit-transform: rotate(180deg) translateZ(0);*/
-			/*}
-			
-			.mui-pull-bottom-tips {
-				text-align: center;
-				background-color: #efeff4;
-				font-size: 15px;
-				line-height: 40px;
-				color: #777;
-			}
-			
-			.mui-pull-top-canvas {
-				overflow: hidden;
-				background-color: #fafafa;
-				border-radius: 40px;
-				box-shadow: 0 4px 10px #bbb;
-				width: 40px;
-				height: 40px;
-				margin: 0 auto;
-			}
-			
-			.mui-pull-top-canvas canvas {
-				width: 40px;
-			}
-			
-			.mui-slider-indicator.mui-segmented-control {
-				background-color: #efeff4;
-			}
-			.mui-content .mui-scroll-wrapper .mui-scroll{
-				width: 100%;
-			}
-			.mui-content .mui-scroll-wrapper .mui-control-item{
-				width: 33.33333%;
-			}*/
-			
-			#mui-scroll {
-				display: table;
-				width: 100%;
-				background: #FFFFFF;
-				padding-left: 32px;
-				padding-right: 32px;
-			}
-			
-			#mui-scroll a {
-				width: 1%;
-				display: table-cell;
-				font-size: 16px;
-			}
-			
-			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
-				color: #999999;
-			}
-			
-			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
-				font-weight: 600;
-			}
-		</style>
+		<link rel="stylesheet" href="css/iconfont.css">
+
+		<link rel="stylesheet" href="css/shequ.css">
 	</head>
 
 	<body>
-
-		<!--<div class="mui-content">
-			<div id="slider" class="mui-slider mui-fullscreen">
-				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<div class="mui-scroll" >
-						<a class="mui-control-item mui-active" href="#item1mobile" data-wid="shequ1.html">
-							动态
-						</a>
-						<a class="mui-control-item" href="#item2mobile" data-wid="shequ2.html">
-							表白
-						</a>
-						<a class="mui-control-item" href="#item3mobile" data-wid="shequ3.html">
-							寻物
-						</a>
-						
-					</div>
-				</div>
-
-			</div>
-		</div>-->
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
-				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<div class="mui-scroll" id="mui-scroll">
-						<a class="mui-control-item mui-active" href="#item1mobile" data-wid="shequ1.html">
-							动态
-						</a>
-						<a class="mui-control-item" href="#item2mobile" data-wid="shequ2.html">
-							表白
-						</a>
-						<a class="mui-control-item" href="#item3mobile" data-wid="shequ3.html">
-							寻物
-						</a>
-					</div>
+				<div id="sliderSegmentedControl" style="background: #FFFFFF;" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item1mobile">
+						动态
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						表白
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						寻物
+					</a>
 				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group">
+					<!--动态-->
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell" v-for="item in items">
+										<div class="mui-card">
+											<!--页眉，放置标题-->
+											<div class="mui-card-header mui-card-media">
+												<img class="mui-media-object mui-pull-left" src="images/u445.png" />
+												<div class="mui-media-body">
+													{{item.column_name}}
+													<p>发表于{{item.created_at}}</p>
+												</div>
+											</div>
+											<!--内容区-->
+											<div class="mui-card-content">
+												<p class="mui-ellipsis">
+													{{item.title}}
+												</p>
+												<img :src="item.cover" />
+											</div>
+											<!--页脚，放置补充信息或支持的操作-->
+											<div class="mui-card-footer">
+												<div class="mui-tab-item">
+													<span class="iconfont icon-favorite"></span>
+													<span>(0)</span>
+												</div>
+												<div class="mui-tab-item">
+													<span class="iconfont icon-pinglun1"></span>
+													<span>(9)</span>
+												</div>
+												<div class="mui-tab-item">
+													<span class="iconfont icon-zhuanfa"></span>
+													<span>(10)</span>
+												</div>
+											</div>
+										</div>
+									</li>
 
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--表白-->
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="none_display">
+										<span>暂时还没有收到评论</span>
+									</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--寻物-->
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="none_display">
+										<span>暂时还没有收到通知</span>
+									</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 		<script src="js/mui.min.js"></script>
-		<script src="js/webviewGroup.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.lazyload.js"></script>
+		<script src="js/mui.lazyload.img.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/shequ.js"></script>
 		<script>
 			mui.init();
-			mui.plusReady(function() {
-				var _self = plus.webview.currentWebview();
-				var group = new webviewGroup(_self.id, {
-					items: [{
-						id: "shequ1.html",
-						url: "shequ1.html",
-						extras: {}
-					}, {
-						id: "shequ2.html",
-						url: "shequ2.html",
-						extras: {}
-					}, {
-						id: "shequ3.html",
-						url: "shequ3.html",
-						extras: {}
-					}, ],
-					onChange: function(obj) {
-						var c = document.querySelector(".mui-control-item.mui-active");
-						if(c) {
-							c.classList.remove("mui-active");
-						}
-						var target = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
-						target.classList.add("mui-active");
-						if(target.scrollIntoView) {
-							target.scrollIntoView();
-						}
-					}
-				});
-				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
-					var wid = this.getAttribute("data-wid");
-					group.switchTab(wid);
-				});
-
+			//var list = document.getElementById("item1mobile");
+			mui('#item1mobile .mui-card-content').imageLazyload({
+				placeholder: "images/60x60.gif",
+				autoDestroy: false
 			});
-			mui.back = function() {
-				var _self = plus.webview.currentWebview();
-				_self.close("auto");
-			}
 		</script>
 	</body>
 
