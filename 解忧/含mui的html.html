@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.masonry {
+				-moz-column-count: 3;
+				/* Firefox */
+				-webkit-column-count: 2;
+				/* Safari 和 Chrome */
+				column-count: 2;
+				-moz-column-gap: 2em;
+				-webkit-column-gap: 2em;
+				column-gap: 2em;
+				width: 80%;
+				margin: 2em auto;
+			}
+			.item {
+				padding: 2em;
+				margin-bottom: 2em;
+				-moz-page-break-inside: avoid;
+				-webkit-column-break-inside: avoid;
+				break-inside: avoid;
+				background: #f60;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="masonry">
+			<div class="item">
+				<div class="item_content content-lar" style="height: 100px;"> 1
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-sma"> 2
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-mid"> 3
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-sma"> 4
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-mid"> 5
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-lar"> 6
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-sma" style="height: 10px;"> 7
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-lar"> 8
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-lar"> 9
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-sma" style="height: 100px;"> 10
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-mid"> 11
+				</div>
+			</div>
+			<div class="item">
+				<div class="item_content content-mid" style="height: 100px;"> 12
+				</div>
+			</div>
+			<!-- more items -->
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

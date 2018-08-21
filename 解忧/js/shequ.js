@@ -32,7 +32,7 @@ mui.plusReady(function() {
 });
 
 var item1mobile = new Vue({
-	el: '#item1mobile',
+	el: '#slider',
 	data: {
 		banner: {}, //顶部banner数据
 		items: [{

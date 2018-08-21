@@ -136,6 +136,21 @@ mui.plusReady(function() {
 		mui.openWindow({
 			url: 'index-subpage-home-detail.html',
 			id: 'detail',
+			waiting: {
+				autoShow: true, //自动显示等待框，默认为true
+				title: '加载中...', //等待对话框上显示的提示内容
+				options: {
+					width: "100px",
+					height: "100px",
+					color: "#ffffff",
+					background: "rgba(0,0,0,0.4)",
+					loading: {
+						display: "block",
+						height: "30px",
+						icon: "images/logo.png"
+					}
+				}
+			}
 		});
 
 	});
@@ -148,7 +163,22 @@ mui.plusReady(function() {
 		console.log('ranking')
 		mui.openWindow({
 			id: 'detail.html',
-			url: 'index-subpage-home-ranking.html'
+			url: 'index-subpage-home-ranking.html',
+			waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '加载中...', //等待对话框上显示的提示内容
+							options: {
+								width: "100px",
+								height: "100px",
+								color: "#ffffff",
+								background: "rgba(0,0,0,0.4)",
+								loading: {
+									display: "block",
+									height: "30px",
+									icon: "images/logo.png"
+								}
+							}
+						}
 		});
 	});
 
@@ -156,7 +186,22 @@ mui.plusReady(function() {
 
 		mui.openWindow({
 			id: 'detail.html',
-			url: 'index-subpage-home-assortment.html'
+			url: 'index-subpage-home-assortment.html',
+			waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '加载中...', //等待对话框上显示的提示内容
+							options: {
+								width: "100px",
+								height: "100px",
+								color: "#ffffff",
+								background: "rgba(0,0,0,0.4)",
+								loading: {
+									display: "block",
+									height: "30px",
+									icon: "images/logo.png"
+								}
+							}
+						}
 		});
 	});
 
@@ -164,7 +209,22 @@ mui.plusReady(function() {
 
 		mui.openWindow({
 			id: 'detail.html',
-			url: 'index-subpage-home-searching.html'
+			url: 'index-subpage-home-searching.html',
+			waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '加载中...', //等待对话框上显示的提示内容
+							options: {
+								width: "100px",
+								height: "100px",
+								color: "#ffffff",
+								background: "rgba(0,0,0,0.4)",
+								loading: {
+									display: "block",
+									height: "30px",
+									icon: "images/logo.png"
+								}
+							}
+						}
 		});
 	});
 

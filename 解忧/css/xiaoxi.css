@@ -1,3 +1,7 @@
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+	border: 0;
+}
+
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
 	color: #999999;
 }

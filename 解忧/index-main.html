@@ -12,12 +12,95 @@
 				color: #1296DB;
 			}
 			
+			.mui-bar .mui-icon {
+				font-size: 22px;
+			}
+			
+			.mui-bar-tab .mui-tab-item .mui-icon {
+				top: 5px;
+			}
+			
 			.mui-title-main {
 				font-size: 19px;
 			}
 			
 			.mui-bar {
 				background: #FFFFFF;
+				box-shadow: 1px 1px 20px 0px rgba(50%, 50%, 50%, .3);
+			}
+			/*图标点击效果*/
+			
+			.mui-bar-tab .mui-tab-item.mui-active>.mui-icon {
+				animation: zoomIn 0.35s;
+				-webkit-animation: zoomIn 0.35s;
+				/*animation: zoomOut 0.35s;
+				-webkit-animation: zoomOut 0.35s;*/
+			}
+			
+			.tianjia:active {
+				animation: zoomIn 0.4s;
+				-webkit-animation: zoomIn 0.4s;
+			}
+			
+			@-webkit-keyframes zoomIn {
+				from {
+					opacity: 0;
+					-webkit-transform: scale3d(0.3, 0.3, 0.3);
+					transform: scale3d(0.3, 0.3, 0.3);
+				}
+				50% {
+					opacity: 1;
+				}
+			}
+			
+			@keyframes zoomIn {
+				from {
+					opacity: 0.5;
+					-webkit-transform: scale3d(0.3, 0.3, 0.3);
+					transform: scale3d(0.3, 0.3, 0.3);
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			.zoomIn {
+				-webkit-animation-name: zoomIn;
+				animation-name: zoomIn;
+			}
+			/**/
+			
+			@-webkit-keyframes zoomOut {
+				from {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.5;
+					-webkit-transform: scale3d(0.3, 0.3, 0.3);
+					transform: scale3d(0.5, 0.5, 0.5);
+				}
+				to {
+					opacity: 0.25;
+				}
+			}
+			
+			@keyframes zoomOut {
+				from {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.5;
+					-webkit-transform: scale3d(0.3, 0.3, 0.3);
+					transform: scale3d(0.5, 0.5, 0.5);
+				}
+				to {
+					opacity: 0.25;
+				}
+			}
+			
+			.zoomOut {
+				-webkit-animation-name: zoomOut;
+				animation-name: zoomOut;
 			}
 		</style>
 	</head>
@@ -180,7 +263,22 @@
 							show: {
 								autoShow: true, //页面loaded事件发生后自动显示，默认为true
 								aniShow: "slide-in-bottom", //页面显示动画，默认为”slide-in-right“；
-								
+								duration: "100ms"
+							},
+							waiting: {
+								autoShow: true, //自动显示等待框，默认为true
+								title: '加载中...', //等待对话框上显示的提示内容
+								options: {
+									width: "100px",
+									height: "100px",
+									color: "#ffffff",
+									background: "rgba(0,0,0,0.4)",
+									loading: {
+										display: "block",
+										height: "30px",
+										icon: "images/logo.png"
+									}
+								}
 							}
 						});
 						return;
