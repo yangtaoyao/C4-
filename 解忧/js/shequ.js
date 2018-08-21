@@ -29,6 +29,29 @@ mui.plusReady(function() {
 			}
 		});
 	});
+	
+	mui('#item1mobile').on('tap','.mui-card',function(){
+		console.log("打开详情页")
+		mui.openWindow({
+			url: 'index-subpage-shequ-detail01.html',
+			id: 'index-subpage-shequ-detail01',
+			waiting: {
+				autoShow: true, //自动显示等待框，默认为true
+				title: '加载中...', //等待对话框上显示的提示内容
+				options: {
+					width: "100px",
+					height: "100px",
+					color: "#ffffff",
+					background: "rgba(0,0,0,0.4)",
+					loading: {
+						display: "block",
+						height: "30px",
+						icon: "images/logo.png"
+					}
+				}
+			}
+		});
+	})
 });
 
 var item1mobile = new Vue({

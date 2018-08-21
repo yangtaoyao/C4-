@@ -17,7 +17,7 @@
 					<li class="mui-table-view-cell mui-media">
 						<a class="mui-navigate-right">
 							<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img"  src="images/u445.png">
+										head-img" src="images/u445.png">
 							<div class="mui-media-body">
 								<h4>
 									<span>hello解忧</span>
@@ -55,14 +55,12 @@
 					</li>
 					<li class="mui-table-view-cell">
 						<a id="goto_purse" class="mui-navigate-right">
-							<i class="iconfont icon-qianbao iconleft" ></i>
-							我的钱包
+							<i class="iconfont icon-qianbao iconleft"></i> 我的钱包
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
 						<a class="mui-navigate-right">
-							<i class="iconfont icon-zhangdan iconleft"></i>
-							公益账单
+							<i class="iconfont icon-zhangdan iconleft"></i> 公益账单
 						</a>
 					</li>
 
@@ -70,8 +68,7 @@
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell" style="margin-top: 8px;">
 						<a class="mui-navigate-right">
-							<i class="iconfont icon-pinglun1 iconleft"></i>
-							我的评论
+							<i class="iconfont icon-pinglun1 iconleft"></i> 我的评论
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
@@ -99,17 +96,47 @@
 			var top_box = document.getElementsByClassName('top_box')[0];
 			var goto_assigment = document.getElementById('goto_assigment');
 			var goto_purse = document.getElementById('goto_purse');
-			var goto_perData=document.getElementById('goto_perData');
+			var goto_perData = document.getElementById('goto_perData');
 			goto_assigment.addEventListener('tap', function() {
 				mui.openWindow({
 					id: 'index-subpage-wode-assigment.html',
-					url: 'index-subpage-wode-assigment.html'
+					url: 'index-subpage-wode-assigment.html',
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '加载中...', //等待对话框上显示的提示内容
+						options: {
+							width: "100px",
+							height: "100px",
+							color: "#ffffff",
+							background: "rgba(0,0,0,0.4)",
+							loading: {
+								display: "block",
+								height: "30px",
+								icon: "images/logo.png"
+							}
+						}
+					}
 				});
 			})
 			goto_purse.addEventListener('tap', function() {
 				mui.openWindow({
 					id: 'index-subpage-wode-purse.html',
-					url: 'index-subpage-wode-purse.html'
+					url: 'index-subpage-wode-purse.html',
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '加载中...', //等待对话框上显示的提示内容
+						options: {
+							width: "100px",
+							height: "100px",
+							color: "#ffffff",
+							background: "rgba(0,0,0,0.4)",
+							loading: {
+								display: "block",
+								height: "30px",
+								icon: "images/logo.png"
+							}
+						}
+					}
 				});
 			})
 
@@ -128,16 +155,43 @@
 				mui.openWindow({
 					id: 'index-subpage-wode-personalPage.html',
 					url: 'index-subpage-wode-personalPage.html',
-					//					styles: {
-					//						titleNView: titleNView
-					//					}
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '加载中...', //等待对话框上显示的提示内容
+						options: {
+							width: "100px",
+							height: "100px",
+							color: "#ffffff",
+							background: "rgba(0,0,0,0.4)",
+							loading: {
+								display: "block",
+								height: "30px",
+								icon: "images/logo.png"
+							}
+						}
+					}
 				});
 			})
 			goto_perData.addEventListener('tap', function(event) {
-			  	event.stopPropagation();
+				event.stopPropagation();
 				mui.openWindow({
 					id: 'perData.html',
 					url: 'perData.html',
+					waiting: {
+						autoShow: true, //自动显示等待框，默认为true
+						title: '加载中...', //等待对话框上显示的提示内容
+						options: {
+							width: "100px",
+							height: "100px",
+							color: "#ffffff",
+							background: "rgba(0,0,0,0.4)",
+							loading: {
+								display: "block",
+								height: "30px",
+								icon: "images/logo.png"
+							}
+						}
+					}
 				});
 			})
 		</script>

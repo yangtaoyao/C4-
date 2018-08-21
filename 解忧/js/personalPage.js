@@ -101,7 +101,7 @@ mui.init({
 				case 1:
 					// 从相册中选择图片
 					plus.gallery.pick(function(path) {
-						console.log('选取图片路径：'+path);
+						console.log('选取图片路径：' + path);
 						cover.style.backgroundImage = "url(" + path + ")";
 						mui.toast('更换成功');
 					}, function(e) {
@@ -112,10 +112,10 @@ mui.init({
 					break;
 				case 2:
 					// 保存到相册
-					var currCss =window.getComputedStyle(cover,null);
-					currPath=currCss.backgroundImage.replace('url("', '').replace('")', '');
-//					console.log(currCss.backgroundImage)
-//					console.log(currPath)
+					var currCss = window.getComputedStyle(cover, null);
+					currPath = currCss.backgroundImage.replace('url("', '').replace('")', '');
+					//					console.log(currCss.backgroundImage)
+					//					console.log(currPath)
 					plus.gallery.save(currPath, function() {
 						$.toast("保存成功");
 					});
@@ -123,12 +123,27 @@ mui.init({
 			}
 		});
 	})
-	
+
 	//跳转修改资料
-	document.getElementById('goto_perData').addEventListener('tap',function(){
+	document.getElementById('goto_perData').addEventListener('tap', function() {
 		$.openWindow({
-			id:'perData.html',
-			url:'perData.html'
+			id: 'perData.html',
+			url: 'perData.html',
+			waiting: {
+				autoShow: true, //自动显示等待框，默认为true
+				title: '加载中...', //等待对话框上显示的提示内容
+				options: {
+					width: "100px",
+					height: "100px",
+					color: "#ffffff",
+					background: "rgba(0,0,0,0.4)",
+					loading: {
+						display: "block",
+						height: "30px",
+						icon: "images/logo.png"
+					}
+				}
+			}
 		})
 	})
 })(mui);

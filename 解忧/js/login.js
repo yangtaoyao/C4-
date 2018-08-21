@@ -7,11 +7,13 @@ var viewApi = mui('#app').view({
 mui('.mui-scroll-wrapper').scroll();
 
 mui.plusReady(function() {
-
+	plus.navigator.setFullscreen(false);
+	
 	(function($) {
 		//处理view的后退与webview后退
 		var oldBack = $.back;
 		$.back = function() {
+			
 			if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
 				viewApi.back();
 			} else { //执行webview后退

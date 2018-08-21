@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+
+		<style>
+			body {
+				background: #FCccF;
+			}
+			
+			.back {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+				background: none;
+				height: 45px;
+			}
+			
+			.back a {
+				position: relative;
+			}
+			
+			.back a:before {
+				background: #c8c7cc;
+				content: "";
+				height: 0.5px;
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: 0;
+				transform: scaleY(.5);
+			}
+			
+			.box {
+				font-size: 30px;
+			}
+			
+			.box .mui-tab-item.mui-active {
+				color: #007aff;
+				animation: zoomIn  0.2s;
+				-webkit-animation: zoomIn 0.2s;
+			}
+			
+			@-webkit-keyframes zoomIn {
+				from{
+					-webkit-transform: scale3d(1,1,1);
+				}
+				75%{
+					-webkit-transform: scale3d(0.7,0.7,0.7);
+				},100%{
+					-webkit-transform: scale3d(1,1,1);
+				}
+			}
+			
+			@keyframes zoomIn {
+				from{
+					-webkit-transform: scale3d(1,1,1);
+				}
+				75%{
+					-webkit-transform: scale3d(0.7,0.7,0.7);
+				},100%{
+					-webkit-transform: scale3d(1,1,1);
+				}
+			}
+			
+			.zoomIn {
+				-webkit-animation-name: zoomIn;
+				animation-name: zoomIn;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="mui-bar mui-bar-tab box">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="index-subpage-home.html" style="height: 100px;">
+				<span class="mui-icon iconfont icon-shouye1" style="font-size: 60px;"></span>
+			</a>
+			<a id="goto_shequ" class="mui-tab-item" href="index-subpage-shequ.html" style="height: 100px;">
+				<span class="mui-icon iconfont icon-sheququan" style="font-size: 60px;"></span>
+			</a>
+
+		</nav>
+
+		<!--<nav class="mui-bar mui-bar-tab back">
+			<a class="mui-tab-item mui-action-back" href="" style="height: 45px;">
+				<span class="mui-icon  iconfont icon-iconfontclose " style="color: #999999; font-size: 26px; text-align: center;"></span>
+			</a>
+		</nav>-->
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

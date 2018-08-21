@@ -162,3 +162,14 @@
 .icon-like-b:before {
 	content: "\e621";
 }
+
+
+/*关闭*/
+
+.icon-iconfontclose:before {
+	content: "\e61d";
+}
+
+.icon-close-o:before {
+	content: "\e613";
+}
