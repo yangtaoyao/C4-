@@ -184,21 +184,14 @@
 		<div class="mui-content"></div>
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			mui.init({
-				preloadPages: [{
-						url: 'index-subpage-tianjia.html',
-						id: 'index-subpage-tianjia'
-					},
-					{
-						url: 'middleBtnPage.html',
-						id: 'middleBtnPage'
-					}
-				]
-				
-			});
+			mui.init({});
 
 			mui.plusReady(function() {
-				
+				//预加载添加页面
+				webview_middleBtnPage = mui.preload({
+					url: 'middleBtnPage.html',
+					id: 'middleBtnPage'
+				});
 				/**/
 				var self = plus.webview.currentWebview();
 				var home = plus.webview.getSecondWebview();
@@ -306,35 +299,68 @@
 					if(this.getAttribute('id') == 'goto_add') {
 						/*重新加载页面*/
 						//						var wobj = plus.webview.getWebviewById("middleBtnPage");
-						//						if(wobj){
+						//						if(wobj) {
 						//							wobj.reload(true);
 						//						}
-						
-						//打开添加页面          
-						mui.openWindow({
-							id: 'middleBtnPage',
-							url: 'middleBtnPage.html',
-							show: {
-								autoShow: true, //页面loaded事件发生后自动显示，默认为true
-								aniShow: "fade-in", //页面显示动画，默认为”slide-in-right“；
-								duration: 400,
-							},
-							waiting: {
-								autoShow: true, //自动显示等待框，默认为true
-								title: '加载中...', //等待对话框上显示的提示内容
-								options: {
-									width: "100px",
-									height: "100px",
-									color: "#ffffff",
-									background: "rgba(0,0,0,0.4)",
-									loading: {
-										display: "block",
-										height: "30px",
-										icon: "images/logo.png"
-									}
-								}
-							}
+					
+						//触发子窗口变更middleBtnPage页面更新数据
+						var myDate = new Date();
+						time = {
+							mydate: '',
+							mymonth: '',
+							myday: '',
+							myyear: '',
+							myhour: '',
+							myminute: '',
+						};
+						time.mydate = myDate.getDate() + "日";
+						switch(myDate.getDay()) {
+							case 0:
+								time.myday = "星期日";
+								break;
+							case 1:
+								time.myday = "星期一";
+								break;
+							case 2:
+								time.myday = "星期二";
+								break;
+							case 3:
+								time.myday = "星期三";
+								break;
+							case 4:
+								time.myday = "星期四";
+								break;
+							case 5:
+								time.myday = "星期五";
+								break;
+							case 6:
+								time.myday = "星期六";
+								break;
+						}
+						time.myyear = myDate.getFullYear() + "年";
+						time.mymonth = myDate.getMonth() + 1 + "月";
+						if(myDate.getHours() < 10) {
+							time.myhour = "0" + myDate.getHours()+":";
+						} else {
+							time.myhour = myDate.getHours()+":";
+						}
+						if(myDate.getMinutes() < 10) {
+							time.myminute = "0" + myDate.getMinutes();
+						} else {
+							time.myminute = myDate.getMinutes();
+						}
+						/*自定义事件*/
+						mui.fire(webview_middleBtnPage, 'get_time', {
+							mydate: time.mydate,
+							mymonth: time.mymonth,
+							myday: time.myday,
+							myyear: time.myyear,
+							myhour: time.myhour,
+							myminute: time.myminute,
 						});
+						//打开添加页面          
+						webview_middleBtnPage.show("fade-in", 420);
+
 						return;
 					}
 
@@ -397,14 +423,17 @@
 				});
 				/**/
 				var middleBtnPage = plus.webview.getWebviewById("middleBtnPage");
-				middleBtnPage.addEventListener("show", function(e) {
-					// 设置系统状态栏背景
-					plus.navigator.setStatusBarBackground('#fcccf');
-				}, false);
-				middleBtnPage.addEventListener("hide", function(e) {
-					// 设置系统状态栏背景
-					plus.navigator.setStatusBarBackground('#FFFFFF');
-				}, false);
+				if(middleBtnPage) {
+
+					middleBtnPage.addEventListener("show", function(e) {
+						// 设置系统状态栏背景
+						plus.navigator.setStatusBarBackground('#fcccf');
+					}, false);
+					middleBtnPage.addEventListener("hide", function(e) {
+						// 设置系统状态栏背景
+						plus.navigator.setStatusBarBackground('#FFFFFF');
+					}, false);
+				}
 
 			});
 			/**

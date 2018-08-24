@@ -10,25 +10,25 @@
 		<link rel="stylesheet" href="css/middleBtnPage.css" />
 		<style>
 			body {
-				background: #ffffff;
+				background: #FFFFFF;
 			}
 		</style>
 	</head>
 
 	<body>
-		<ul id="top_time" class="mui-table-view" style="background: none;top:16px">
+		<ul id="vm_time" class="mui-table-view" style="background: none;vm:16px">
 			<li class="mui-table-view-cell mui-media" style="height: auto;">
 				<a href="">
 					<div class="mui-media-body">
 						<h3 style="font-size: 50px;font-weight: 100;color: #666666;">
-							{{time.myhour}}:{{time.myminute}}
+							{{time.myhour}}{{time.myminute}}
 							
 						</h3>
 						<p class='mui-ellipsis' style="font-size: 14px;color: #999999;">
-							{{time.myyear}}年{{time.mymonth}}月{{time.mydate}}日 星期{{time.myday}}
+							{{time.myyear}}{{time.mymonth}}{{time.mydate}} {{time.myday}}
 						</p>
 						<h5 class='mui-ellipsis' style="color: #996666;font-size: 16px;">
-							天气{{weather.wind}}
+							{{weather.weather}} {{weather.temperature}} {{weather.wind}}
 						</h5>
 					</div>
 				</a>
@@ -95,64 +95,14 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/vue.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
-			mui.init({
-				 
-			});
-
-			var myDate = new Date();
-			top.time = {
-				mydate: '',
-				mymonth: '',
-				myday: '',
-				myyear: '',
-				myhour: '',
-				myminute: '',
-			};
-			top.time.mydate = myDate.getDate();
-			top.time.myday = myDate.getDay();
-			top.time.myyear = myDate.getFullYear();
-			top.time.mymonth = myDate.getMonth() + 1;
-			if(myDate.getHours() < 10) {
-				top.time.myhour = "0" + myDate.getHours();
-			} else {
-				top.time.myhour = myDate.getHours();
-			}
-			if(myDate.getMinutes() < 10) {
-				top.time.myminute = "0" + myDate.getMinutes();
-			} else {
-				top.time.myminute = myDate.getMinutes();
-			}
-
-			mui.getJSON("http://v.juhe.cn/weather/index", {
-				format: 1,
-				cityname: "长春",
-				key: "4f0a915a1de0a93a97b8e0d568165ca4",
-			}, function(data) {
-				top.weather = {
-					temperature: data.result.today.temperature,
-					weather: data.result.today.weather,
-					wind: data.result.today.wind
-				}
-				//console.log(JSON.stringify(top.time));
-				console.log(JSON.stringify(top.weather))
-			});
-			//console.log(JSON.stringify(top.weather));
-
+			mui.init({});
 			mui.plusReady(function() {
-				
-//				var muiBack = mui.back;
-//				mui.back = function() {
-//					plus.navigator.setStatusBarBackground('#FFFFFF');
-//					muiBack();
-//					
-//				};
-				var self = plus.webview.currentWebview();
-				self.addEventListener("show", function(e) {
-					// 设置系统状态栏背景
-					
-				}, false);
 
 				mui("body").on("tap", ".btn-item", function() {
+					
+					var self=plus.webview.currentWebview();
+					plus.webview.hide(self,"fade-out", 400);
+					
 					var thisNode = this.children[0];
 					var thisSpan = thisNode.children[1];
 					switch(thisSpan.innerText) {
@@ -287,28 +237,49 @@
 							//							});
 							break;
 					}
-
-					plus.webview.hide(self);
+					
+					
 				});
 
 			});
-			
 
-			var top = new Vue({
-				el: '#top_time',
+			var vm = new Vue({
+				el: '#vm_time',
 				data: {
-					time: {
-						mydate: 0,
-						mymonth: 0,
-						myday: 0,
-						myyear: 0,
-						myhour: '',
-						myminute: '',
-					},
+					time: {},
 					weather: {},
 				},
 
 			})
+			var date = "";
+			document.addEventListener('get_time', function(event) {
+				vm.time = {
+					mydate: event.detail.mydate,
+					mymonth: event.detail.mymonth,
+					myday: event.detail.myday,
+					myyear: event.detail.myyear,
+					myhour: event.detail.myhour,
+					myminute: event.detail.myminute,
+				};
+				if(date != event.detail.mydate) {
+					mui.getJSON("http://v.juhe.cn/weather/index", {
+						format: 1,
+						cityname: "长春",
+						key: "4f0a915a1de0a93a97b8e0d568165ca4",
+					}, function(data) {
+						if(data.resultcode == "200") {
+							vm.weather = {
+								temperature: data.result.today.temperature,
+								weather: data.result.today.weather,
+								wind: data.result.today.wind
+							}
+						}
+						console.log(JSON.stringify(vm.weather))
+					});
+					date = event.detail.mydate;
+				}
+				console.log(JSON.stringify(vm.time));
+			});
 		</script>
 	</body>
 
