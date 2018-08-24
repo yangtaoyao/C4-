@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="feedback">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/add.css" />
+		<link rel="stylesheet" href="css/mui.picker.min.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">添加寻物</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
+		</header>
+		<div id="scroll" class="mui-content mui-scroll-wrapper add-content">
+			<div class="mui-scroll">
+				<div class="add_box">
+					<div id="input_title" class="mui-input-row">
+						<label>类型</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入类型">
+					</div>
+					<div id="input_title" class="mui-input-row">
+						<label>物品</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入物品">
+					</div>
+					<button id='dtpicker' data-options='{}' class="btn mui-btn mui-btn-block mui-navigate-right">
+						<label>丢失时间</label>
+						<span class='picked_date'>选择日期和时间</span>
+					</button>
+					
+					<div class="type_radio">
+						<!--<span>方式</span>-->
+						<p>方式</p>
+						<div class="mui-radio mui-left">
+							<label>优先接单</label>
+							<input name="radio1" type="radio" checked>
+						</div>
+						<div class="mui-radio mui-left">
+							<label>竞标</label>
+							<input name="radio1" type="radio">
+						</div>
+					</div>
+					<div id="input_title" class="mui-input-row">
+						<label>赏金(元)</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入赏金">
+					</div>
+					<div class="mui-table-view-cell niming">
+						<label>是否匿名</label>
+						<div id="niming" class="mui-switch mui-switch-blue mui-switch-mini">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</div>
+					<div id="input_title" class="mui-input-row">
+						<label>联系方式</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入联系方式">
+					</div>
+					
+					<p style="padding:8px 0;">描述</p>
+					<div class="mui-input-row" style="margin-bottom: 8px;">
+						<textarea id="desc" rows="4" class="mui-input-clear contact" placeholder="描述一下" style="margin: 0;border: 0;margin: 0;"></textarea>
+					</div>
+					<p style="padding:8px 0;">图片(选填,提供问题截图,总大小10M以下)</p>
+					<div id='image-list' class="row image-list"></div>
+					<button id="location" type="button" class="mui-btn mui-icon mui-icon-location-filled">添加定位</button>
+					
+					<button  type="button" class="mui-icon mui-icon-compose tags">添加标签</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui.picker.min.js"></script>
+		<script type="text/javascript" src="js/index-subpage-tianjia.js"></script>
+		<script type="text/javascript">
+			//			mui.init({
+			//				swipeBack: true, //启用右滑关闭功能
+			//			})
+			mui.init();
+			mui('#scroll').scroll();
+		</script>
+	</body>
+
+</html>

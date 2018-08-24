@@ -173,3 +173,22 @@
 .icon-close-o:before {
 	content: "\e613";
 }
+/*签到*/
+.icon-qiandao:before { content: "\e614"; }
+.icon-qiandao1:before { content: "\e66d"; }
+.icon-qiandao2:before { content: "\e669"; }
+/**/
+.icon-dongtai:before { content: "\e667"; }
+.icon-dongtai1:before { content: "\e608"; }
+
+.icon-dongtai2:before { content: "\e908"; }
+
+.icon-dongtai3:before { content: "\e607"; }
+
+.icon-biaobai:before { content: "\e622"; }
+/**/
+.icon-fabuxunwu:before { content: "\e63e"; }
+
+/**/
+.icon-renwu1:before { content: "\e649"; }
+.icon-renwu11:before { content: "\e609"; }

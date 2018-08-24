@@ -62,7 +62,8 @@
       "index-subpage-home.html",
       "shequ1.html",
       "shequ2.html",
-      "shequ3.html"
+      "shequ3.html",
+      "index-subpage-shequ-detail01.html"
     ]
   },
   "index-subpage-wode-personalPage.html": {
@@ -108,7 +109,16 @@
       "index-subpage-home.html",
       "index-subpage-tianjia.html",
       "index-subpage-wode-setting.html",
-      "guide.html"
+      "guide.html",
+      "middleBtnPage.html"
+    ]
+  },
+  "middleBtnPage.html": {
+    "refer": [
+      "index-subpage-tianjia-biaobai.html",
+      "index-subpage-tianjia-xunwu.html",
+      "index-subpage-tianjia-dongtai.html",
+      "index-subpage-tianjia.html"
     ]
   }
 }
