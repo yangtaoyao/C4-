@@ -1,12 +1,21 @@
 mui.init();
 //初始化单页view
-var viewApi = mui('#app').view({
-	defaultPage: '#login'
-});
+//var viewApi = mui('#app').view({
+//	defaultPage: '#login'
+//});
 //初始化单页的区域滚动
 mui('.mui-scroll-wrapper').scroll();
-
 mui.plusReady(function() {
+	var self = plus.webview.currentWebview();
+	if(self.activeP == "login") {
+		var viewApi = mui('#app').view({
+			defaultPage: '#login'
+		});
+	} else {
+		var viewApi = mui('#app').view({
+			defaultPage: '#register'
+		});
+	}
 	plus.navigator.setFullscreen(false);
 	// 设置系统状态栏背景
 	plus.navigator.setStatusBarBackground('#efeff4');
@@ -14,12 +23,11 @@ mui.plusReady(function() {
 		//处理view的后退与webview后退
 		var oldBack = $.back;
 		$.back = function() {
-			
+
 			if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
 				viewApi.back();
 			} else { //执行webview后退
 				oldBack();
-				plus.navigator.setStatusBarBackground('#FFFFFF');
 			}
 		};
 		//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
@@ -148,13 +156,23 @@ mui.plusReady(function() {
 		setTimeout(function() {
 			mui(this).button('reset');
 		}.bind(this), 2000);
-		
-		var data={
-			type:0,
-			passWord:'',
-			phoneNumber:'',
-			identiCode:'',
+
+		var data = {
+			type: 0,
+			passWord: '',
+			phoneNumber: '',
+			identiCode: '',
 		}
-	})
+	});
+	document.addEventListener('goto_login', function(event) {
+		var viewApi = mui('#app').view({
+			defaultPage: '#login'
+		});
+	});
+	document.addEventListener('goto_resgiter', function(event) {
+		var viewApi = mui('#app').view({
+			defaultPage: '#login'
+		});
+	});
 
 })

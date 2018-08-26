@@ -144,44 +144,56 @@ body {
 .mui-ios .mui-navbar .mui-bar .mui-title {
 	position: static;
 }
+
+
 /**/
 
-.mui-bar .mui-title{
+.mui-bar .mui-title {
 	right: 40px;
 }
-.mui-bar-nav{
+
+.mui-bar-nav {
 	background: none;
 	border: 0px;
-	box-shadow:none;
+	box-shadow: none;
 }
 
-.mui-page-content{
+.mui-page-content {
 	/*display: table;*/
 }
 
-.content_box{
+.content_box {
 	/*display: table-cell;*/
 	margin: auto;
 	margin-top: 100px;
 	padding-left: 32px;
-	padding-right:32px ;
-    vertical-align: middle;
+	padding-right: 32px;
+	vertical-align: middle;
 }
 
-.mui-segmented-control{
+.mui-segmented-control {
 	border: none;
 	width: auto;
 	display: block;
 }
-.mui-segmented-control .mui-control-item{
+
+.mui-segmented-control .mui-control-item {
 	color: #999999;
-	display:inline;
+	display: inline;
 	padding: 8px;
 	border: none;
 }
-.mui-segmented-control .mui-control-item.mui-active{
+
+.mui-segmented-control .mui-control-item.mui-active {
 	background: none;
 	/*color: #007aff;*/
 	color: #000000;
 }
 
+
+/**/
+
+.btn{
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+	border-radius: 6px;
+}

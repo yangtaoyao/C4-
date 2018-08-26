@@ -8,76 +8,126 @@
 		<link href="css/mui.min.css" rel="stylesheet" />
 	</head>
 	<style>
-		#goto_login{
+		#goto_login {
 			position: absolute;
-			bottom: 32px;
+			bottom: 150px;
 			width: 80%;
 			left: 10%;
-			color: #333333;
-			/*color: #FFFFFF;*/
 			font-size: 16px;
 			padding: 8px 0;
 		}
-		#goto_resgiter{
+		
+		#goto_register {
 			position: absolute;
-			bottom: 80px;
+			bottom: 90px;
 			width: 80%;
 			left: 10%;
-			color: #333333;
-			/*color: #FFFFFF;*/
 			font-size: 16px;
 			padding: 8px 0;
 		}
-		#start{
+		
+		.mui-btn {
+			color: #666666;
+			background: rgba(255, 255, 255, 0.9);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+			border-radius: 6px;
+		}
+		
+		#start {
 			position: absolute;
 			top: 16px;
 			right: 16px;
-			background:  rgba(0,0,0,0.3);
+			background: rgba(0, 0, 0, 0.3);
 			color: #FFFFFF;
 		}
-		#start:active{
-			background:  rgba(0,0,0,0.9);
+		
+		#start:active {
+			background: rgba(0, 0, 0, 0.9);
+		}
+		
+		img {
+			-webkit-filter: blur(3px);
+			/* Chrome, Opera */
+			-moz-filter: blur(3px);
+			-ms-filter: blur(3px);
+			filter: blur(3px);
 		}
 	</style>
+
 	<body>
-		<div class="mui-fullscreen"
-			style="position: absolute;background: #000000;">
+		<div class="mui-fullscreen" style="position: absolute;background: #000000;">
 			<div style="position: relative;height: 100%;width: 100%;">
-				<img class="guide-img" src="images/1080.png" 
-					style="width: 100%;height: 100%;position: absolute;"/>
-				
+				<img class="guide-img" src="images/1080.png" style="width: 100%;height: 100%;position: absolute;" />
+
 				<button id="goto_login" class="mui-btn">登录</button>
-				<button id="goto_resgiter" class="mui-btn">注册</button>
+				<button id="goto_register" class="mui-btn">注册</button>
 				<button id="start" class="mui-btn">跳过</button>
 			</div>
 		</div>
 
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init();
+			mui.init({
+
+			});
+
 			mui.plusReady(function() {
+
 				/**
 				 * 手动关闭启动界面
 				 */
-				if(mui.os.ios){
+				if(mui.os.ios) {
 					plus.navigator.setFullscreen(true);
-				}else{
+				} else {
 					plus.navigator.setFullscreen(true);
 				}
 				plus.navigator.closeSplashscreen();
-				
-				document.getElementById('start').addEventListener('tap',function(){
+
+				document.getElementById('start').addEventListener('tap', function() {
 					plus.storage.setItem("launchFlag", "true");
 					plus.navigator.setFullscreen(false);
+					plus.navigator.setStatusBarBackground('#FFFFFF');
 					plus.webview.currentWebview().close();
 				})
-				
-				document.getElementById('goto_login').addEventListener('tap',function(){
-					//打开页面          
+				document.getElementById('goto_login').addEventListener('tap', function() {
 					mui.openWindow({
-						id: 'login.html',
-						url: 'login.html'
-					});
+						id: "login",
+						url: "login.html",
+						extras: {
+							activeP: 'login' //扩展参数
+						},
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '加载中...', //等待对话框上显示的提示内容
+							options: {
+								width: "80px",
+								height: "80px",
+								color: "#ffffff",
+								background: "rgba(0,0,0,0.6)",
+
+							}
+						}
+					})
+				})
+				document.getElementById('goto_register').addEventListener('tap', function() {
+					mui.openWindow({
+						id: "login",
+						url: "login.html",
+						extras: {
+							activeP: 'register' //扩展参数
+						},
+						waiting: {
+							autoShow: true, //自动显示等待框，默认为true
+							title: '加载中...', //等待对话框上显示的提示内容
+							options: {
+								width: "80px",
+								height: "80px",
+								color: "#ffffff",
+								background: "rgba(0,0,0,0.6)"
+								
+							}
+						}
+					})
 				})
 			})
 			/**
