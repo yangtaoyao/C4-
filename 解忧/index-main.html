@@ -29,11 +29,13 @@
 				background: #FFFFFF;
 				box-shadow: 1px 1px 20px 0px rgba(50%, 50%, 50%, .3);
 			}
-			.mui-bar-nav{
-				box-shadow:none;
+			
+			.mui-bar-nav {
+				box-shadow: none;
 				border: 0;
 			}
 			/*图标点击效果*/
+			
 			.mui-bar-tab .mui-tab-item.mui-active>.mui-icon {
 				animation: click 0.35s;
 				-webkit-animation: click 0.35s;
@@ -196,6 +198,13 @@
 					url: 'middleBtnPage.html',
 					id: 'middleBtnPage'
 				});
+//				webview_login = mui.preload({
+//					url: 'login02.html',
+//					id: 'login02',
+//					extras: {
+//						activeP: 'guide' //扩展参数
+//					}
+//				});
 				/**/
 				var self = plus.webview.currentWebview();
 				var home = plus.webview.getSecondWebview();
@@ -220,19 +229,23 @@
 
 				} else {
 					//显示启动导航
-					mui.openWindow({
-						id: 'guide',
-						url: 'guide.html',
-						styles: {
-							popGesture: "none"
-						},
-						show: {
-							aniShow: 'none'
-						},
-						waiting: {
-							autoShow: false
-						}
-					});
+										mui.openWindow({
+											id: 'login02',
+											url: 'login02.html',
+											extras: {
+												activeP: 'guide' //扩展参数
+											},
+											styles: {
+												popGesture: "none"
+											},
+											show: {
+												aniShow: 'none'
+											},
+											waiting: {
+												autoShow: false
+											}
+										});
+					//webview_login.show("fade-in", 420);
 					//延迟的原因：优先打开启动导航页面，避免资源争夺
 					setTimeout(function() {
 						//预加载
@@ -306,7 +319,7 @@
 						//						if(wobj) {
 						//							wobj.reload(true);
 						//						}
-					
+
 						//触发子窗口变更middleBtnPage页面更新数据
 						var myDate = new Date();
 						time = {
@@ -344,9 +357,9 @@
 						time.myyear = myDate.getFullYear() + "年";
 						time.mymonth = myDate.getMonth() + 1 + "月";
 						if(myDate.getHours() < 10) {
-							time.myhour = "0" + myDate.getHours()+":";
+							time.myhour = "0" + myDate.getHours() + ":";
 						} else {
-							time.myhour = myDate.getHours()+":";
+							time.myhour = myDate.getHours() + ":";
 						}
 						if(myDate.getMinutes() < 10) {
 							time.myminute = "0" + myDate.getMinutes();

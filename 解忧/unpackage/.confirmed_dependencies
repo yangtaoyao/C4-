@@ -27,7 +27,10 @@
 		],
 		"resources": [
 			"images/xunwuicon.png",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"images/xuexi.png",
+			"images/xuexiicon.png",
+			"images/jietiicon.png"
 		]
 	},
 	"index-subpage-home-ranking.html": {
@@ -111,7 +114,9 @@
 			"index-subpage-tianjia.html",
 			"index-subpage-wode-setting.html",
 			"guide.html",
-			"middleBtnPage.html"
+			"middleBtnPage.html",
+			"login.html",
+			"login02.html"
 		]
 	},
 	"middleBtnPage.html": {
@@ -120,6 +125,11 @@
 			"index-subpage-tianjia-xunwu.html",
 			"index-subpage-tianjia-dongtai.html",
 			"index-subpage-tianjia.html"
+		]
+	},
+	"login02.html": {
+		"refer": [
+			"index-main.html"
 		]
 	}
 }

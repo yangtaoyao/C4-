@@ -199,7 +199,10 @@
 			"index-subpage-home.html": {
 				"resources": [
 					"images/xunwuicon.png",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"images/xuexi.png",
+					"images/xuexiicon.png",
+					"images/jietiicon.png"
 				],
 				"refer": [
 					"index-subpage-xiaoxi.html",
@@ -295,7 +298,9 @@
 					"index-subpage-tianjia.html",
 					"index-subpage-wode-setting.html",
 					"guide.html",
-					"middleBtnPage.html"
+					"middleBtnPage.html",
+					"login.html",
+					"login02.html"
 				],
 				"priority": 0
 			},
@@ -306,6 +311,13 @@
 					"index-subpage-tianjia-xunwu.html",
 					"index-subpage-tianjia-dongtai.html",
 					"index-subpage-tianjia.html"
+				],
+				"priority": 0
+			},
+			"login02.html": {
+				"resources": [],
+				"refer": [
+					"index-main.html"
 				],
 				"priority": 0
 			}

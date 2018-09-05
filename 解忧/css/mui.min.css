@@ -1341,7 +1341,7 @@ input[type=submit]:enabled:active {
  * 自定义标题栏文字
  * */
 .mui-title-main {
-	font-size: 17px;
+	font-size: 18px;
 	font-weight: 500;
 	line-height: 44px;
 	position: absolute;
@@ -1351,7 +1351,7 @@ input[type=submit]:enabled:active {
 	padding: 0;
 	text-align: center;
 	white-space: nowrap;
-	color: #007aff
+	color: #666633;
 }
 
 .mui-title a {

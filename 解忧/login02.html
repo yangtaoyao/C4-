@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/login.css" rel="stylesheet" />
+		<style>
+			#goto_login {
+				position: absolute;
+				bottom: 150px;
+				width: 80%;
+				left: 10%;
+				font-size: 16px;
+				padding: 8px 0;
+			}
+			
+			#goto_register {
+				position: absolute;
+				bottom: 90px;
+				width: 80%;
+				left: 10%;
+				font-size: 16px;
+				padding: 8px 0;
+			}
+			
+			#start {
+				position: absolute;
+				top: 16px;
+				right: 16px;
+				background: rgba(0, 0, 0, 0.3);
+				color: #FFFFFF;
+			}
+			
+			#start:active {
+				background: rgba(0, 0, 0, 0.9);
+			}
+			
+			#guide img {
+				-webkit-filter: blur(3px);
+				/* Chrome, Opera */
+				-moz-filter: blur(3px);
+				-ms-filter: blur(3px);
+				filter: blur(3px);
+			}
+			
+			.mui-navbar {
+				background: #F2F2F2;
+			}
+			
+			.mui-pages {
+				top: 0;
+			}
+		</style>
+	</head>
+
+	<body class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<!--<div class="mui-navbar">
+				</div>-->
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--导航-->
+		<!--<div id="guide" class="mui-page" style="position: absolute;background: #000000;top:-45px;height: auto;">-->
+		<div id="guide" class="mui-page" style="top: 0;">
+			<!--<div class=" mui-bar" style="height: 0;">
+			</div>-->
+			<div class="mui-page-content" style="position: absolute;background: #000000;;height: auto;">
+				<!--<div style="position: relative;height: 100%;width: 100%;">-->
+				<img class="guide-img" src="images/1080.png" style="width: 100%;height: 100%;position: absolute;" />
+				<a id="goto_login" type="button" class="mui-btn" href="#login">登录</a>
+				<a id="goto_register" type="button" class="mui-btn" href="#register">注册</a>
+				<a id="start" class="mui-btn">跳过</a>
+			</div>
+		</div>
+		<!--登录页面-->
+		<div id="login" class="mui-page">
+			<!--页面标题栏开始-->
+
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-bar-nav mui-bar">
+					<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+					<h1 class="mui-center mui-title" style="font-size: 20px;">登录</h1>
+					<a type="button" class="mui-right  mui-btn  
+					mui-btn-link mui-btn-nav mui-pull-right" style="right:15px" href="#register">
+						注册
+					</a>
+				</div>
+				<div class="content_box">
+
+					<div class="mui-segmented-control" style="font-size: 18px;">
+						<a class="mui-control-item mui-active" href="#item1">密码登录</a>
+						<span style="color: #999999;">|</span>
+						<a class="mui-control-item" href="#item2">验证码登录</a>
+					</div>
+
+					<div style="margin-top: 16px;">
+						<div id="item1" class="mui-control-content mui-active">
+							<form class="mui-input-group">
+								<div class="mui-input-row">
+									<input v-model="loginWPsw.phoneNumber" type="text" class="mui-input-clear" placeholder="手机号">
+								</div>
+								<div class="mui-input-row">
+									<input v-model="loginWPsw.password" type="password" class="mui-input-password" placeholder="密码">
+								</div>
+							</form>
+							<div style="margin-top: 16px;">
+								<button @tap='submit_login01($event)' id="submit_login01" style="width: 100%;height: 40px;font-size: 18px;" class="mui-btn mui-btn-primary button-waring btn" data-loading-text="登录中">密码登录</button>
+							</div>
+						</div>
+						<div id="item2" class="mui-control-content">
+							<form class="mui-input-group">
+								<div class="mui-input-row">
+									<input v-model="loginWIcode.phoneNumber" type="text" class="mui-input-clear" placeholder="手机号">
+								</div>
+								<div class="mui-table-view-cell mui-input-row">
+									<input v-model="loginWIcode.identiCode" type="text" placeholder="验证码" style="display: block;position: absolute;top: 0;left: 0;">
+									<span @tap='getIdentCode_login($event)' class="mui-badge getIdentCode" style="float: right;display: block;color: #007aff;background: none;font-size: 15px;right: 0;">获取验证码</span>
+								</div>
+
+							</form>
+							<div style="margin-top: 16px;">
+								<button @tap='submit_login02($event)' id="submit_login02" style="width: 100%;height: 40px;font-size: 18px;" class="mui-btn mui-btn-primary button-waring btn" data-loading-text="登录中">验证码登录</button>
+							</div>
+						</div>
+
+					</div>
+
+					<div style="margin-top: 16px;font-size: 16px;">
+						<a href="#findPwd" style="float: right;">忘记密码</a>
+					</div>
+					<div style="text-align: center;color:#999999;margin-top: 120px;font-size: 14px;">
+						<span>社交账号登录</span>
+					</div>
+					<div style="text-align: center;margin-top: 16px;">
+						<a id="qqlogin" type="button" class="mui-btn mui-btn-link">
+							<span class="mui-icon mui-icon-qq" style="font-size: 30px;"></span>
+						</a>
+						<a type="button" class="mui-btn mui-btn-link">
+							<span class="mui-icon mui-icon-weibo" style="font-size: 35px;"></span>
+						</a>
+						<a type="button" class="mui-btn mui-btn-link">
+							<span class="mui-icon mui-icon-weixin" style="font-size: 30px;"></span>
+						</a>
+
+					</div>
+				</div>
+
+			</div>
+			<!--页面主内容区结束-->
+		</div>
+		<!--注册页面-->
+		<div id="register" class="mui-page ">
+
+			<div class="mui-page-content ">
+				<div class=" mui-bar mui-bar-nav ">
+					<button type="button " class="mui-left mui-action-back mui-btn mui-btn-link mui-btn-nav mui-pull-left ">
+					<span class="mui-icon mui-icon-left-nav "></span>
+				</button>
+					<h1 class="mui-center mui-title" style="font-size: 20px;">注册</h1>
+
+				</div>
+				<div class="content_box">
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<input type="text" class="mui-input-clear" placeholder="手机号 ">
+						</div>
+						<div class="mui-input-row ">
+							<input type="password" class="mui-input-password" placeholder="密码 ">
+						</div>
+						<div class="mui-table-view-cell mui-input-row">
+							<input type="text" placeholder="验证码" style="display: block;position: absolute;top: 0;left: 0;">
+							<span @tap='getIdentCode_register($event)' class="mui-badge getIdentCode" style="float: right;display: block;color: #007aff;background: none;font-size: 15px;right: 0;">获取验证码</span>
+						</div>
+					</form>
+					<div style="margin-top: 16px;">
+						<button style="width: 100%;height: 40px;font-size: 18px;" class="mui-btn mui-btn-primary button-waring btn" data-loading-text="提交中">注册</button>
+					</div>
+					<div style="text-align: center;margin-top: 150px;color: #666666;font-size: 16px;">
+						已有账号？去
+						<a href="#login" class="mui-action-back">登录</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--找回密码页面-->
+		<div id="findPwd" class="mui-page ">
+			
+			<div class="mui-page-content ">
+			<div class=" mui-bar mui-bar-nav ">
+				<button type="button " class="mui-left mui-action-back mui-btn mui-btn-link mui-btn-nav mui-pull-left ">
+					<span class="mui-icon mui-icon-left-nav "></span>
+				</button>
+				<h1 class="mui-center mui-title" style="font-size: 20px;">忘记密码</h1>
+				<a type="button " class="mui-right mui-action-back mui-btn mui-btn-link mui-btn-nav mui-pull-right " style="right:15px ">
+					登录
+				</a>
+			</div>
+				<div class="content_box">
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<input type="text" class="mui-input-clear" placeholder="手机号 ">
+						</div>
+						<div class="mui-input-row ">
+							<input type="password" class="mui-input-password" placeholder="设置新密码 ">
+						</div>
+						<div class="mui-table-view-cell mui-input-row">
+							<input type="text" placeholder="验证码" style="display: block;position: absolute;top: 0;left: 0;">
+							<span class="mui-badge getIdentCode" style="float: right;display: block;color: #007aff;background: none;font-size: 15px;right: 0;">获取验证码</span>
+						</div>
+					</form>
+					<div style="margin-top: 16px;">
+						<button style="width: 100%;height: 40px;font-size: 18px;" class="mui-btn mui-btn-primary button-waring btn" data-loading-text="提交中">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/mui.min.js "></script>
+		<script src="js/mui.view.js "></script>
+		<script src='js/handleSMS.js'></script>
+		<script src='js/jsencrypt.min.js'></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src='js/login02.js'></script>
+		<!--<script>
+			mui.init();
+			mui.ready(function() {
+				//初始化单页view
+				var viewApi = mui('#app').view({
+					defaultPage: '#guide'
+				});
+			});
+		</script>-->
+	</body>
+
+</html>
