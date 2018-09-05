@@ -24,7 +24,7 @@ var count = 0;
 function pullupRefresh() {
 	setTimeout(function() {
 		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 10)); //参数为true代表没有更多数据了。
-		var table = document.body.querySelector('.mui-table-view');
+		var table = document.body.querySelector('.list02');
 		var cells = document.body.querySelectorAll('.home-table-view-cell');
 		var newCount = cells.length > 0 ? 5 : 20; //首次加载20条，满屏
 		for(var i = cells.length, len = i + newCount; i < len; i++) {

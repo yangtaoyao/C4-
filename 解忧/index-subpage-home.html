@@ -16,22 +16,24 @@
 			<div class="mui-scroll">
 				<!--数据列表-->
 				<nav class="home-top-btn">
+					
+					<a id="searching" class="home-top-btn-item" href="#">
+						<span class="home-icon iconfont icon-soushuo" style="color: #969696;"></span>
+						<span class="home-top-btn-label">搜索</span>
+					</a>
 					<a id="ranking" class="home-top-btn-item" href="#">
-						<span class=" iconfont icon-paixing home-icon"></span>
-						<span class="home-top-btn-label">排行</span>
+						<span class=" iconfont icon-paihang home-icon" style="color: #edad19;"></span>
+						<span class="home-top-btn-label" >排行</span>
 					</a>
 					<a id="assortment" class="home-top-btn-item" href="#">
-						<span class="home-icon iconfont icon-leimupinleifenleileibie1"></span>
+						<span class="home-icon iconfont icon-fenlei-c" style="color:#1eaa39;"></span>
+						<!--ff863c-->
 						<span class="home-top-btn-label">分类</span>
-					</a>
-					<a id="searching" class="home-top-btn-item" href="#">
-						<span class="home-icon iconfont icon-sousuo"></span>
-						<span class="home-top-btn-label">搜索</span>
 					</a>
 				</nav>
 
 				<!--轮播图-->
-				<div id="slider" class="mui-slider" style="margin-top: 16px;">
+				<div id="slider" class="mui-slider" style="margin-top: 8px;">
 					<div class="mui-slider-group mui-slider-loop">
 						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
 						<!--4-->
@@ -112,7 +114,7 @@
 						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
 						<!--1-->
 						<div class="mui-slider-item mui-slider-item-duplicate">
-							<a href="# " class="home-card ">
+							<a href="# " class="home-card">
 								<div class="home-card-left ">
 									<span>最急</span>
 									<img src="images/kuaidiicon.png" />
@@ -134,7 +136,7 @@
 					</div>
 
 				</div>
-				<!---->
+				<!--最急任务-->
 				<div style="height:auto;width: 100%;padding: 8px; padding-left: 16px;position: relative;">
 					<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
 						float: left;"></div>
@@ -148,30 +150,80 @@
 						">更多</i>
 					</a>
 				</div>
-				<a href="# " class="home-card ">
-					<div class="home-card-left ">
-						<span>最急</span>
-						<img src="images/kuaidiicon.png" />
-						<p>学习</p>
-					</div>
-					<div class="home-card-right ">
-						<h5>日新楼帮忙去快日新楼帮忙去快日新楼帮忙去快</h5>
-						<p class="deadline"><span>截止 </span><span>2018.01.01</span></p>
-						<p><span class="reward">¥8.00</span><span class="participants">3人</span></p>
-					</div>
-				</a>
-				<a href="# " class="home-card ">
-					<div class="home-card-left ">
-						<span>最急</span>
-						<img src="images/kuaidiicon.png" />
-						<p>学习</p>
-					</div>
-					<div class="home-card-right ">
-						<h5>日新楼帮忙去快递日</h5>
-						<p class="deadline"><span>截止 </span><span>2018.01.01</span></p>
-						<p><span class="reward">¥8.00</span><span class="participants">3人</span></p>
-					</div>
-				</a>
+
+				<ul class="mui-table-view mui-table-view-chevron" style="background:transparent;">
+					<!--<li class="mui-table-view-cell " style="padding-right: 41px;">-->
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right home-card">
+							<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
+							<h6>截止至 2018.6.18 22:30</h6>
+							<div>
+								<img id="head-img" class="mui-media-object mui-pull-left 
+									head-img" src="images/u445.png">
+								<div class="mui-media-body">
+									<h5>
+										hello解忧
+									</h5>
+									<h6 class='mui-ellipsis'>1小时前</h6>
+								</div>
+								<div class="pay">
+									<span>赏金：</span>
+									<i>10￥</i>
+									<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
+										支付
+									</button>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right home-card">
+							<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
+							<h6>截止至 2018.6.18 22:30</h6>
+							<div>
+								<img id="head-img" class="mui-media-object mui-pull-left 
+									head-img" src="images/u445.png">
+								<div class="mui-media-body">
+									<h5>
+										hello解忧
+									</h5>
+									<h6 class='mui-ellipsis'>1小时前</h6>
+								</div>
+								<div class="pay">
+									<span>赏金：</span>
+									<i>10￥</i>
+									<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
+										支付
+									</button>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right home-card">
+							<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
+							<h6>截止至 2018.6.18 22:30</h6>
+							<div>
+								<img id="head-img" class="mui-media-object mui-pull-left 
+									head-img" src="images/u445.png">
+								<div class="mui-media-body">
+									<h5>
+										hello解忧
+									</h5>
+									<h6 class='mui-ellipsis'>1小时前</h6>
+								</div>
+								<div class="pay">
+									<span>赏金：</span>
+									<i>10￥</i>
+									<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
+										支付
+									</button>
+								</div>
+							</div>
+						</a>
+					</li>
+
+				</ul>
 				<!--最新任务-->
 				<div style="height:auto;width: 100%;padding: 8px; padding-left: 16px;position: relative;">
 					<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
@@ -186,35 +238,11 @@
 						">更多</i>
 					</a>
 				</div>
-				<a class="mui-navigate-right card">
-										<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-										<h6>截止至 2018.6.18 22:30</h6>
-										<div>
-											<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/u445.png">
-											<div class="mui-media-body">
-												<h5>
-													hello解忧
-												</h5>
-												<h6 class='mui-ellipsis'>1小时前</h6>
-											</div>
 
-											<div class="pay">
-												<span>赏金：</span>
-												<i>10￥</i>
-												<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-												支付
-												</button>
-											</div>
-
-										</div>
-
-									</a>
-				<ul class="mui-table-view mui-table-view-chevron " style="background:transparent;">
+				<ul class="mui-table-view mui-table-view-chevron list02" style="background:transparent;">
 					<!--<li class="mui-table-view-cell " style="padding-right: 41px;">-->
-					<li class="home-table-view-cell ">
+					
 
-					</li>
 				</ul>
 			</div>
 		</div>

@@ -131,39 +131,13 @@ mui.plusReady(function() {
 		}
 	}
 
-	/*获取验证码*/
-	mui("body").on('tap', ".getIdentCode", function() {
-		mui.toast("获取验证码");
-		var a = 60;
-		var thisNode = this;
-		thisNode.innerText = a + 's';
-		thisNode.style.color = "#999999";
-		a--;
-		var interval = setInterval(function() {
-			thisNode.innerText = a + 's';
-			//console.log("修改"+thisNode.innerText);
-			a--;
-			if(a < -1) {
-				clearInterval(interval);
-				thisNode.innerText = "获取验证码";
-				thisNode.style.color = "#007aff";
-			}
-		}, 1000);
-	})
-
-	mui("body").on('tap', ".mui-btn-primary", function() {
-		mui(this).button('loading');
-		setTimeout(function() {
-			mui(this).button('reset');
-		}.bind(this), 2000);
-
-		var data = {
-			type: 0,
-			passWord: '',
-			phoneNumber: '',
-			identiCode: '',
-		}
-	});
+	//	mui("body").on('tap', ".mui-btn-primary", function() {
+	//		mui(this).button('loading');
+	//		setTimeout(function() {
+	//			mui(this).button('reset');
+	//		}.bind(this), 2000);
+	//	});
+	/*页面跳转*/
 	document.addEventListener('goto_login', function(event) {
 		var viewApi = mui('#app').view({
 			defaultPage: '#login'
@@ -176,3 +150,135 @@ mui.plusReady(function() {
 	});
 
 })
+
+var login = new Vue({
+	el: '#login',
+	data: {
+		loginWPsw: {
+			phoneNumber: '13763369408',
+			password: '123'
+		},
+		loginWIcode: {
+			phoneNumber: '13763369408',
+			identiCode: ''
+		}
+	}
+});
+
+//加密
+var encrypt = new JSEncrypt();
+encrypt.setPublicKey('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6JbMo802QOZHkyLBc590xa9lHjBwxAU7jbDuUfUUYwxlkLdjPhxfoh+hC2HNeHuD6t975UwBpU9QQ5ewepz/+DiOkVy8fh10NtND6LijYRcKlHT4FoVhPIZV7amX2DAcRssGqRUYK2/ufE6LL3dzz/a8Qw9/i0y4LhdxrZecZ176X+6OOQnRQzKNb2c66aKXSZL7dehZuFFqd/To85r4QJt2la7xarCL3lP1/3Ax3wDwxhKPFTIpuDU1R6r7SfE7By6m1n27ikuFbWQigPr3Gx7xDPy+huTYZh+HlcGgG9dcxMwzzN1Q8fKKfecMZNcyBl4urrF+3k0SI28i3nZr0QIDAQAB');
+
+function submit_login01(e) {
+	var thisNode = e.currentTarget;
+	if(login.loginWPsw.phoneNumber == '' || login.loginWPsw.password == '') {
+		mui(thisNode).button('loading');
+		setTimeout(function() {
+			mui(thisNode).button('reset');
+		}.bind(thisNode), 1000);
+		mui.toast('输入框不能为空');
+	} else {
+		var pwd = encrypt.encrypt(login.loginWPsw.password);
+		console.log("加密后：" + pwd);
+		mui(thisNode).button('loading');
+		setTimeout(function() {
+			mui.openWindow({
+				id: 'index',
+				url: 'index-main.html',
+				styles: {
+					popGesture: "none"
+				},
+				show: {
+					aniShow: 'none'
+				},
+				waiting: {
+					autoShow: false
+				}
+			});
+		}.bind(thisNode), 3000);
+	}
+}
+
+function submit_login02(e) {
+	var thisNode = e.currentTarget;
+	if(login.loginWIcode.phoneNumber == '' || login.loginWIcode.identiCode == '') {
+		mui(thisNode).button('loading');
+		setTimeout(function() {
+			mui(thisNode).button('reset');
+		}.bind(thisNode), 1000);
+		mui.toast('输入框不能为空');
+	} else {
+
+	}
+}
+
+//登录页获取验证码
+function getIdentCode_login(e) {
+	var a = 60;
+	var thisNode = e.currentTarget;
+
+	if(login.loginWIcode.phoneNumber == '') {
+		mui.toast('手机号不能为空');
+	} else {
+		mui.ajax('http://59.110.241.117:12001/jieyou/SMS', {
+			data: {
+				tel: login.loginWIcode.phoneNumber
+			},
+			type: 'get', //HTTP请求类型
+			timeout: 100000,
+			success: function(data) {
+				//获得服务器响应
+				res = JSON.parse(data);
+				console.log(res + '' + res.msg);
+				if(res.suc < 0) {
+					mui.toast(res.msg);
+				} else {
+					console.log('请求发送验证码成功：' + res.msg);
+					thisNode.innerText = a + 's';
+					thisNode.style.color = "#999999";
+					thisNode.style.disabled = true;
+					thisNode.classList.add("mui-disabled");
+					a--;
+					var interval = setInterval(function() {
+						thisNode.innerText = a + 's';
+						//console.log("修改"+thisNode.innerText);
+						a--;
+						if(a < -1) {
+							clearInterval(interval);
+							thisNode.innerText = "获取验证码";
+							thisNode.style.color = "#007aff";
+							thisNode.classList.remove("mui-disabled");
+						}
+					}, 1000);
+				}
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log(type);
+				mui.toast('网络请求错误')
+			}
+		});
+	}
+
+}
+//注册页面获取验证码
+function getIdentCode_register(e) {
+	var a = 60;
+	var thisNode = e.currentTarget;
+	thisNode.innerText = a + 's';
+	thisNode.style.color = "#999999";
+	thisNode.style.disabled = true;
+	thisNode.classList.add("mui-disabled");
+	a--;
+	var interval = setInterval(function() {
+		thisNode.innerText = a + 's';
+		//console.log("修改"+thisNode.innerText);
+		a--;
+		if(a < -1) {
+			clearInterval(interval);
+			thisNode.innerText = "获取验证码";
+			thisNode.style.color = "#007aff";
+			thisNode.classList.remove("mui-disabled");
+		}
+	}, 1000);
+}

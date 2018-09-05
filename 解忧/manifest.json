@@ -48,7 +48,7 @@
 		"secondwebview": {
 			"launch_path": "index-subpage-home.html",
 			"id": "index-subpage-home.html",
-			"top": "45px",
+			"top": "44px",
 			"bottom": "51px"
 		},
 		"statusbar": {
@@ -270,7 +270,8 @@
 			"login.html": {
 				"resources": [],
 				"refer": [
-					"login.html"
+					"login.html",
+					"index-main.html"
 				],
 				"priority": 0
 			},

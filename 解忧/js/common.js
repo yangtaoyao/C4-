@@ -533,3 +533,7 @@ var common =
 	};
 
 })(window, common, mui);
+
+(function(win, com, $) {
+	
+})(window, common, mui);
