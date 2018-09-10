@@ -160,8 +160,9 @@ var common =
 	 * @author 1020450921@qq.com
 	 * @link http://www.cnblogs.com/phillyx
 	 * @link http://ask.dcloud.net.cn/people/%E5%B0%8F%E4%BA%91%E8%8F%9C
-	 * @description 本地存储
+	 * @description
 	 */
+	// 本地存储封装localStorage与plus.storage
 	var myStorage = {};
 
 	function getItem(k) {
@@ -535,5 +536,20 @@ var common =
 })(window, common, mui);
 
 (function(win, com, $) {
-	
+	/*
+	 * 服务器
+	 */
+	com.url = 'http://192.168.43.7:12001/jieyou/';
+	/*loading框样式*/
+	com.WaitingLoadingOptions = {
+		width: "100px",
+		height: "100px",
+		color: "#ffffff",
+		background: "rgba(0,0,0,0.4)",
+		loading: {
+			display: "block",
+			height: "30px",
+			icon: "../images/loading01.gif"
+		}
+	}
 })(window, common, mui);

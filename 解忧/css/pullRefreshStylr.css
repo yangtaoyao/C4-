@@ -1,0 +1,28 @@
+/*下拉刷新文字的样式*/
+.mui-pull-caption {
+	/*background-image: url(../images/loading0.gif);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 0px;
+	height: 60px;*/
+	font-size: 16px;
+	color: #1296DB;
+}
+
+
+/*下拉刷新圆形进度条的大小和样式*/
+.mui-spinner {
+	width: 30px;
+	height: 30px;
+}
+
+.mui-spinner:after {
+	background-image: url(../images/loading07.png);
+}
+
+
+/*下拉刷新的箭头颜色*/
+.mui-icon-pulldown {
+	color: #1296DB;
+}

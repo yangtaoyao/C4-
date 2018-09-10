@@ -17,17 +17,24 @@
 		<div class="mui-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" style="background: #FFFFFF;" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item mui-active" href="#item1mobile">
-						动态
-					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						表白
-					</a>
-					<a class="mui-control-item" href="#item3mobile">
-						寻物
-					</a>
+					<div class="mui-control-item-div">
+						<a class="mui-control-item mui-active" href="#item1mobile">
+							动态
+						</a>
+					</div>
+					<div class="mui-control-item-div">
+						<a class="mui-control-item" href="#item2mobile">
+							表白
+						</a>
+					</div>
+					<div class="mui-control-item-div">
+						<a class="mui-control-item" href="#item3mobile">
+							寻物
+						</a>
+					</div>
+
 				</div>
-				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<!--<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>-->
 				<div class="mui-slider-group">
 					<!--动态-->
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
@@ -49,7 +56,7 @@
 												<p class="">
 													{{item.title}}
 												</p>
-												<img :src="item.cover"  />
+												<img :src="item.cover" />
 											</div>
 											<!--页脚，放置补充信息或支持的操作-->
 											<div class="mui-card-footer">
@@ -94,7 +101,7 @@
 												<p class="">
 													{{item.title}}
 												</p>
-												<img :src="item.cover"/>
+												<img :src="item.cover" />
 											</div>
 											<!--页脚，放置补充信息或支持的操作-->
 

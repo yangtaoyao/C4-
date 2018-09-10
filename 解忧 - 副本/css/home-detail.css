@@ -1,0 +1,146 @@
+.mui-bar-tab{
+	height: 45px;
+}
+.mui-bar .mui-tab-item{
+	color:  #797979;;
+	height: 45px;
+	font-size: 16px;
+	vertical-align: middle;
+}
+.mui-bar .mui-tab-item span{
+	vertical-align: middle;
+}
+.mui-bar .mui-tab-item .iconfont{
+	font-size: 16px;
+}
+.mui-bar-tab .mui-tab-item.mui-active{
+	color:  #797979;;
+}
+#scroll{
+	padding-top: 40px;
+	bottom: 46px;
+}
+#scroll .mui-scroll{
+	/*padding: 16px;*/
+	position: initial;
+	width:100%;
+	right:16px;
+	left: 16px;
+}
+#scroll .mui-scroll .detail_box{
+	position: relative;
+	background: #FFFFFF;
+	padding: 16px;
+	/*margin-bottom: 16px;*/
+	margin-top: 12px;
+	box-shadow: inset -1px 0px 20px 0px #CCCCCC;
+}
+#typeicon{
+	display: block;
+	width: 40px;
+	position: absolute;
+	top: 36px;
+	right: 16px;
+}
+#doingspan{
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	font-size: 12px;
+	height:25px;
+	line-height: 25px;
+	padding-left: 10px;
+	vertical-align: middle;
+	border-radius: 10px 0 0 10px ;
+	width: 70px;
+	background: #039CFC;
+	color: #FFFFFF;
+}
+
+.detail_box_top{
+	width: 100%;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.detail_box_top img{
+	width: 50px;
+	vertical-align: middle;
+}
+.detail_box_top div{
+	display: inline-block;
+	vertical-align: middle;
+}
+.detail_box_top div p:nth-child(1){
+	font-size: 16px;
+	color: #666666;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 4px;
+	line-height: normal;
+}
+.detail_box_top div p:nth-child(2){
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+	line-height: normal;
+}
+.detail_box h4{
+	line-height: 26px;
+	font-size: 16px;
+	color: #333333;
+	font-weight: normal;
+	margin-bottom: 8px;
+	margin-top: 16px;
+}
+
+#conent_img_list li img{
+	width: 100%;
+}
+.mui-table-view:after{
+	height: 0;
+}
+
+
+/**/
+.bottom_box{
+	background: #FFFFFF;
+	padding: 16px;
+	margin-bottom: 60px;
+	margin-top: 8px;
+	box-shadow: inset -1px 0px 20px 0px #CCCCCC;
+}
+.bottom_box_p1,.bottom_box_p2,.bottom_box_p3{
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 0;
+}
+.bottom_box_p1 span{
+	font-size: 12px;
+}
+.bottom_box_p2 span{
+	color: #666666;
+}
+.bottom_box_p3 span{
+	color: #666666;
+}
+#reward{
+	font-size: 16px;
+	color: red;
+}
+.participants_icon{
+	margin-left: 40px;
+}
+.participants_icon li{
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+.participants_icon li img{
+	width: 30px;
+}
+
+/**{
+				touch-action: none;
+}*/
+/**/

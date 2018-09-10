@@ -1901,7 +1901,7 @@ input[type=submit]:enabled:active {
 .mui-table-view-cell {
 	position: relative;
 	overflow: hidden;
-	padding: 11px 15px;
+	padding: 13px 15px;
 	-webkit-touch-callout: none
 }
 

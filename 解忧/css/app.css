@@ -3,3 +3,65 @@
  * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
  * 
  * */
+
+
+/*pullrefresh 下拉刷新文字的样式*/
+.mui-pull-top-pocket{
+	/*background: #FFFFFF;*/
+	/*background: url(../images/loading02.gif) no-repeat 0 0;*/
+}
+.mui-pull-caption {
+	/*background-image: url(../images/loading0.gif);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 0px;
+	height: 60px;*/
+	font-size: 16px;
+	color: #1296DB;
+}
+
+
+/*下拉刷新圆形进度条的大小和样式*/
+
+.mui-spinner {
+	width: 30px;
+	height: 30px;
+}
+
+.mui-spinner:after {
+	background-image: url(../images/loading07.png);
+}
+
+
+/*下拉刷新的箭头颜色*/
+
+.mui-icon-pulldown {
+	color: #1296DB;
+}
+
+
+/**/
+
+.UIAlertView {
+	display: none;
+	/*background: #FFFFFF;*/
+	/*border-radius: 30px;*/
+	width: 100%;
+	/*height: 40px;*/
+	/*background: #F2F2F2;*/
+	text-align: center;
+	font-size: 16px;
+	font-weight: 100;
+	color: #007aff;
+	padding:4px 0;
+	margin: 0px;
+}
+
+.UIAlertView span {
+	display: inline-block;
+	font-size: 16px;
+	line-height: 30px;
+	height: 30px;
+	
+}

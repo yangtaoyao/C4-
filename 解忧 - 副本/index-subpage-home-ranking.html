@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/ranking.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="z-index: 0;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">排行</h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="mui-scroll">
+						<a class="mui-control-item mui-active" href="#item1mobile" data-wid="tab-top-subpage-1.html">
+							积分
+						</a>
+						<a class="mui-control-item" href="#item2mobile" data-wid="tab-top-subpage-2.html">
+							公益
+						</a>
+						<a class="mui-control-item" href="#item3mobile" data-wid="tab-top-subpage-3.html">
+							点赞
+						</a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/webviewGroup.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			mui.init();
+
+			mui.plusReady(function() {
+				var _self = plus.webview.currentWebview();
+				var group = new webviewGroup(_self.id, {
+					items: [{
+						id: "tab-top-subpage-1.html",
+						url: "index-subpage-home-ranking-1.html",
+						extras: {}
+					}, {
+						id: "tab-top-subpage-2.html",
+						url: "index-subpage-home-ranking-2.html",
+						extras: {}
+					}, {
+						id: "tab-top-subpage-3.html",
+						url: "index-subpage-home-ranking-3.html",
+						extras: {}
+					}],
+					onChange: function(obj) {
+						var c = document.querySelector(".mui-control-item.mui-active");
+						if(c) {
+							c.classList.remove("mui-active");
+						}
+						var target = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
+						target.classList.add("mui-active");
+						if(target.scrollIntoView) {
+							target.scrollIntoView();
+						}
+					}
+				});
+				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
+					var wid = this.getAttribute("data-wid");
+					group.switchTab(wid);
+				});
+
+			});
+			mui.back = function() {
+				var _self = plus.webview.currentWebview();
+				_self.close("auto");
+			}
+		</script>
+	</body>
+
+</html>

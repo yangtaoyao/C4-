@@ -1,30 +1,46 @@
-.top_box{
-	height: 110px;
-	max-height: 120px;
+.unlogin{
 	width: 100%;
+	background: none;
+	margin-bottom: 10px;
+}
+.unlogin li{
 	background: #ffffff;
-	/*padding:15px;
-	padding-bottom:8px;*/
 }
-.top_box *{
+.unlogin *{
 	vertical-align: middle;
+	font-size: 15px;
 }
-.top_box h4{
-	font-size: 17px;
+.unlogin li h4,.logined li h4{
+	font-size: 16px;
 	font-weight: 700;
 }
-#head-img{
-	height: 80px;
-	width: 80px;
+
+.head-img{
+	border-radius:  50%;
 }
 .mui-table-view .mui-media-object{
 	max-width: 80px;
 	max-height: 80px;
+	height: 50px;
+	width: 50px;
 }
-/*
-.top_box:active{
-	background: #eee;
-}*/
+/**/
+.top_bg{
+	width: 100%;
+	height: 80px;
+	position: absolute;
+	top: 0;
+	/*background: #F0AD4E;*/
+	/*background: #f5dc85;*/
+	background: #FFFFFF;
+}
+/**/
+.logined{
+	margin: 10px;
+	border-radius:  6px;
+	box-shadow:0px 0px 20px 3px #ddd;
+}
+
 .account{
 	height: 70px;
 	background: #FFFFFF;
@@ -67,10 +83,16 @@
     position: relative;
     display: inline-block;
     color: #999999;
-    font-size: 19px;
+    font-size: 22px;
 }
 .mui-table-view-cell:after{
+	transform: scaleY(0.25);
 	left: 40px;
+	right: 0;
+}
+.logined .mui-table-view-cell:after{
+	left: 15px;
+	right: 15px;
 }
 
 

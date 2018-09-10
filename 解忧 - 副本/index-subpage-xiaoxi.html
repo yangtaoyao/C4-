@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/xiaoxi.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item1mobile">
+						私信
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						评论
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						通知
+					</a>
+					<a class="mui-control-item" href="#item4mobile">
+						点赞
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>
+				<div class="mui-slider-group">
+					<!--私信-->
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell">
+										<a class="messgae mui-navigate-right">
+											<img class="mui-media-object mui-pull-left" src="images/u442.png">
+											<div class="mui-media-body">
+												<h5>解忧</h5>
+												<h6>1小时</h6>
+											</div>
+											<span class="mui-badge mui-badge-success">2</span>
+										</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="messgae mui-navigate-right">
+											<img class="mui-media-object mui-pull-left" src="images/u454.png">
+											<div class="mui-media-body">
+												<h5>hello解忧</h5>
+												<h6>1小时</h6>
+											</div>
+											<span class="mui-badge mui-badge-success">1</span>
+										</a>
+									</li>
+									<li class="mui-table-view-cell">
+										<a class="messgae mui-navigate-right">
+											<img class="mui-media-object mui-pull-left" src="images/u445.png">
+											<div class="mui-media-body">
+												<h5>jiuyou</h5>
+												<h6>1小时</h6>
+											</div>
+											<span class="mui-badge mui-badge-success">4</span>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--评论-->
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="none_display">
+										<span>暂时还没有收到评论</span>
+									</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--通知-->
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="none_display">
+										<span>暂时还没有收到通知</span>
+									</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--点赞-->
+					<div id="item4mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="none_display">
+										<span>暂时还没有收到点赞</span>
+									</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					//bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+				$.ready(function() {
+
+					$('body').on('tap', '.mui-table-view-cell a', function() {
+						$.openWindow({
+							id: 'chat.html',
+							url: 'chat.html',
+							waiting: {
+								autoShow: true, //自动显示等待框，默认为true
+								title: '加载中...', //等待对话框上显示的提示内容
+								options: {
+									width: "100px",
+									height: "100px",
+									color: "#ffffff",
+									background: "rgba(0,0,0,0.4)",
+									loading: {
+										display: "block",
+										height: "30px",
+										icon: "images/logo.png"
+									}
+								}
+							}
+						})
+					})
+
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll-wrapper'), function(index, pullRefreshEl) {
+						$(pullRefreshEl).pullRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										ul.insertBefore(createFragment(ul, index, 1, true), ul.firstChild);
+										self.endPulldownToRefresh();
+									}, 1000);
+								}
+							},
+							up: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										ul.appendChild(createFragment(ul, index, 1));
+										self.endPullupToRefresh();
+									}, 1000);
+								}
+							}
+						});
+					});
+					var createFragment = function(ul, index, count, reverse) {
+						var length = ul.querySelectorAll('li').length;
+						var fragment = document.createDocumentFragment();
+
+						var li;
+						for(var i = 0; i < count; i++) {
+							li = document.createElement('li');
+							//li.className = 'mui-table-view-cell';
+							switch(index) {
+								case 0:
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
+								case 1:
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
+								case 2:
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
+								case 3:
+									li.innerHTML =
+										'<li class="mui-table-view-cell">' +
+										'<a class="messgae mui-navigate-right">' +
+										'<img class="mui-media-object mui-pull-left" src="images/u445.png">' +
+										'<div class="mui-media-body">' +
+										'	<h5>jiuyou</h5>' +
+										'	<h6>1小时</h6>' +
+										'	</div>' +
+										'	<span class="mui-badge mui-badge-success">4</span>' +
+										'</a>' +
+										'</li>';
+									break;
+							}
+
+							if(ul.querySelector('.none_display')) {
+								var none_display = ul.querySelector('.none_display');
+								ul.removeChild(none_display);
+							}
+							fragment.appendChild(li);
+						}
+						return fragment;
+					};
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>

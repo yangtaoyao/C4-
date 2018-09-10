@@ -8,32 +8,64 @@
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/home.css" />
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
 	</head>
 
 	<body>
 		<!--下拉刷新容器-->
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
+				<!--加载结果反馈框-->
+				<p class="UIAlertView">
+					<span class="iconfont icon-wancheng1"></span>
+					<span>已为你更新13dsdfsfsa条任务条任务</span>
+				</p>
 				<!--数据列表-->
-				<nav class="home-top-btn">
-					
-					<a id="searching" class="home-top-btn-item" href="#">
+				<nav class="bar-btn">
+					<button @tap='searching_btn' class="mui-tab-item btn-item">
+						<div>
+							<div class="icon">
+								<span class="mui-icon iconfont icon-soushuo">
+								</span>
+							</div>
+							<span class="label">搜索</span>
+						</div>
+					</button>
+					<button  @tap='ranking_btn' class="mui-tab-item btn-item">
+						<div>
+							<div class="icon">
+								<span class="mui-icon iconfont icon-paihang">
+								</span>
+							</div>
+							<span class="label">排行</span>
+						</div>
+					</button>
+					<button  @tap='assortment_btn' class="mui-tab-item btn-item">
+						<div>
+							<div class="icon">
+								<span class="mui-icon iconfont icon-fenlei-c">
+								</span>
+							</div>
+							<span class="label">分类</span>
+						</div>
+					</button>
+					<!--<a id="searching" class="home-top-btn-item" href="#">
 						<span class="home-icon iconfont icon-soushuo" style="color: #969696;"></span>
 						<span class="home-top-btn-label">搜索</span>
 					</a>
 					<a id="ranking" class="home-top-btn-item" href="#">
 						<span class=" iconfont icon-paihang home-icon" style="color: #edad19;"></span>
-						<span class="home-top-btn-label" >排行</span>
+						<span class="home-top-btn-label">排行</span>
 					</a>
 					<a id="assortment" class="home-top-btn-item" href="#">
 						<span class="home-icon iconfont icon-fenlei-c" style="color:#1eaa39;"></span>
-						<!--ff863c-->
+					
 						<span class="home-top-btn-label">分类</span>
-					</a>
+					</a>-->
 				</nav>
 
-				<!--轮播图-->
-				<div id="slider" class="mui-slider" style="margin-top: 8px;">
+				<!--轮播图 list01-->
+				<div id="slider" class="mui-slider" style="margin-top: 10px;">
 					<div class="mui-slider-group mui-slider-loop">
 						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
 						<!--4-->
@@ -136,30 +168,31 @@
 					</div>
 
 				</div>
-				<!--最急任务-->
-				<div style="height:auto;width: 100%;padding: 8px; padding-left: 16px;position: relative;">
-					<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
+				<!--最急任务 list02-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<!--<li class="mui-table-view-cell " style="padding-right: 41px;">-->
+					<div style="height:auto;width: 100%;padding:16px 8px; padding-left: 16px;position: relative;">
+						<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
 						float: left;"></div>
-					<span style="margin-left: 5px;font-size: 14px;color: black;font-weight: bold;">最急任务</span>
-					<a href="#about" class="mui-navigate-right">
-						<i class="mui-pull-right" style="
+						<span style="margin-left: 5px;font-size: 16px;color: #333333;font-weight: bold;">最急任务</span>
+						<a href="#about" class="mui-navigate-right">
+							<i class="mui-pull-right" style="
 						font-style: normal;
 						color: #999999;
 						margin-right: 30px;
 						font-size: 14px
 						">更多</i>
-					</a>
-				</div>
-
-				<ul class="mui-table-view mui-table-view-chevron" style="background:transparent;">
-					<!--<li class="mui-table-view-cell " style="padding-right: 41px;">-->
-					<li class="mui-table-view-cell mui-media">
-						<a class="mui-navigate-right home-card">
-							<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-							<h6>截止至 2018.6.18 22:30</h6>
+						</a>
+					</div>
+					<div class="noConent" v-if="!isL2HasConent">
+						<h4>暂时没有内容，刷新试试？</h4>
+					</div>
+					<li class="mui-table-view-cell mui-media" v-for="item in list02" v-if="isL2HasConent">
+						<a @tap='open_detail(item)' class="mui-navigate-right home-card">
+							<h4 class="mui-ellipsis">{{item.title}}</h4>
+							<h5>截止至{{item.published_at}}</h5>
 							<div>
-								<img id="head-img" class="mui-media-object mui-pull-left 
-									head-img" src="images/u445.png">
+								<img class="mui-media-object mui-pull-left head-img" src="images/u445.png">
 								<div class="mui-media-body">
 									<h5>
 										hello解忧
@@ -167,86 +200,89 @@
 									<h6 class='mui-ellipsis'>1小时前</h6>
 								</div>
 								<div class="pay">
-									<span>赏金：</span>
+									<span>赏金:</span>
 									<i>10￥</i>
-									<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
+									<!--<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
 										支付
-									</button>
+									</button>-->
 								</div>
 							</div>
 						</a>
 					</li>
-					<li class="mui-table-view-cell mui-media">
-						<a class="mui-navigate-right home-card">
-							<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-							<h6>截止至 2018.6.18 22:30</h6>
-							<div>
-								<img id="head-img" class="mui-media-object mui-pull-left 
-									head-img" src="images/u445.png">
-								<div class="mui-media-body">
-									<h5>
-										hello解忧
-									</h5>
-									<h6 class='mui-ellipsis'>1小时前</h6>
-								</div>
-								<div class="pay">
-									<span>赏金：</span>
-									<i>10￥</i>
-									<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-										支付
-									</button>
-								</div>
-							</div>
-						</a>
-					</li>
-					<li class="mui-table-view-cell mui-media">
-						<a class="mui-navigate-right home-card">
-							<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-							<h6>截止至 2018.6.18 22:30</h6>
-							<div>
-								<img id="head-img" class="mui-media-object mui-pull-left 
-									head-img" src="images/u445.png">
-								<div class="mui-media-body">
-									<h5>
-										hello解忧
-									</h5>
-									<h6 class='mui-ellipsis'>1小时前</h6>
-								</div>
-								<div class="pay">
-									<span>赏金：</span>
-									<i>10￥</i>
-									<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-										支付
-									</button>
-								</div>
-							</div>
-						</a>
-					</li>
+					
 
 				</ul>
-				<!--最新任务-->
-				<div style="height:auto;width: 100%;padding: 8px; padding-left: 16px;position: relative;">
-					<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
+				<!--热门分类-->
+				<div class="assortment_scroll mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div style="height:auto;width: 100%;padding:16px 8px; padding-left: 16px;position: relative;text-align: left;">
+						<!--<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
+							float: left;">
+						</div>-->
+						<span style="margin-left: 5px;font-size: 16px;color: #333333;font-weight: bold;">
+							热门分类
+						</span>
+						<a href="#about" class="mui-navigate-right">
+							<i class="mui-pull-right" style="
+								font-style: normal;
+								color: #999999;
+								margin-right: 30px;
+								font-size: 14px">
+								更多分类
+							</i>
+						</a>
+					</div>
+					<div class="mui-scroll">
+						<a class="mui-control-item" v-for="item in assortment">
+							item
+						</a>
+			
+					</div>
+				</div>
+				<!--最新任务 list03-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<div style="height:auto;width: 100%;padding:16px 8px; padding-left: 16px;position: relative;">
+						<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
 						float: left;"></div>
-					<span style="margin-left: 5px;font-size: 14px;color: black;font-weight: bold;">最新任务</span>
-					<a href="#about" class="mui-navigate-right">
-						<i class="mui-pull-right" style="
+						<span style="margin-left: 5px;font-size: 16px;color: #333333;font-weight: bold;">最新任务</span>
+						<a href="#about" class="mui-navigate-right">
+							<i class="mui-pull-right" style="
 						font-style: normal;
 						color: #999999;
 						margin-right: 30px;
 						font-size: 14px;
 						">更多</i>
-					</a>
-				</div>
-
-				<ul class="mui-table-view mui-table-view-chevron list02" style="background:transparent;">
-					<!--<li class="mui-table-view-cell " style="padding-right: 41px;">-->
-					
-
+						</a>
+					</div>
+					<div class="noConent" v-if="!isL3HasConent">
+						<h4>暂时没有内容，刷新试试？</h4>
+					</div>
+					<li class="mui-table-view-cell mui-media" v-for="item in list02" v-if="isL2HasConent">
+						<a @tap='open_detail(item)' class="mui-navigate-right home-card">
+							<h4 class="mui-ellipsis">{{item.title}}</h4>
+							<h6>截止至 {{item.published_at}}</h6>
+							<div>
+								<img class="mui-media-object mui-pull-left head-img" src="images/u445.png">
+								<div class="mui-media-body">
+									<h5>
+										hello解忧
+									</h5>
+									<h6 class='mui-ellipsis'>1小时前</h6>
+								</div>
+								<div class="pay">
+									<span>赏金：</span>
+									<i>10￥</i>
+									
+								</div>
+							</div>
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>
+		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="js/mui.min.js "></script>
+		<script src="js/common.js "></script>
+		<script src="js/vue.min.js"></script>
 		<script src="js/home.js"></script>
 	</body>
 

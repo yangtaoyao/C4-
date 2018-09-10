@@ -107,7 +107,28 @@
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
 	font-weight: 600;
 }*/
-
+.mui-segmented-control.mui-segmented-control-inverted{
+/*	padding: 0 40px;*/
+	vertical-align: middle;
+	height: 40px;
+}
+.mui-segmented-control.mui-segmented-control-inverted div{
+	display: table-cell;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+	line-height: 30px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+	width: 35px;
+	/*margin:0 calc((100%-105px)/6.0);*/
+	height: 33px;
+	padding-bottom: 10px;
+	display: inline-block;
+}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	border-bottom: #007aff 2px solid;
+}
 .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
 	border: 0;
 }

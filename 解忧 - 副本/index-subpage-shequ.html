@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>解忧</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/iconfont.css">
+
+		<link rel="stylesheet" href="css/shequ.css">
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" style="background: #FFFFFF;" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item1mobile">
+						动态
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						表白
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						寻物
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group">
+					<!--动态-->
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell" v-for="item in items">
+										<div class="mui-card">
+											<!--页眉，放置标题-->
+											<div class="mui-card-header mui-card-media">
+												<img class="mui-media-object mui-pull-left" src="images/u445.png" />
+												<div class="mui-media-body">
+													{{item.column_name}}
+													<p>{{item.created_at}}</p>
+												</div>
+											</div>
+											<!--内容区-->
+											<div class="mui-card-content">
+												<p class="">
+													{{item.title}}
+												</p>
+												<img :src="item.cover"  />
+											</div>
+											<!--页脚，放置补充信息或支持的操作-->
+											<div class="mui-card-footer">
+												<div class="mui-tab-item">
+													<span class="iconfont icon-dianzan2"></span>
+													<span>0</span>
+												</div>
+												<div class="mui-tab-item">
+													<span class="iconfont icon-pinglun1"></span>
+													<span>9</span>
+												</div>
+												<div class="mui-tab-item">
+													<span class="iconfont icon-zhuanfa"></span>
+													<span>60</span>
+												</div>
+											</div>
+										</div>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--表白-->
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view pubuliu">
+
+									<li class="mui-table-view-cell" v-for="item in items">
+										<div class="mui-card">
+											<!--页眉，放置标题-->
+											<div class="mui-card-header mui-card-media">
+												<img class="mui-media-object mui-pull-left" src="images/u445.png" />
+												<div class="mui-media-body">
+													{{item.column_name}}
+													<p>发表于{{item.created_at}}</p>
+												</div>
+											</div>
+											<!--内容区-->
+											<div class="mui-card-content">
+												<p class="">
+													{{item.title}}
+												</p>
+												<img :src="item.cover"/>
+											</div>
+											<!--页脚，放置补充信息或支持的操作-->
+
+										</div>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--寻物-->
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<div class="none_display">
+										<span>暂时还没有收到通知</span>
+									</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.lazyload.js"></script>
+		<script src="js/mui.lazyload.img.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/shequ.js"></script>
+		<script>
+			mui.init();
+			//var list = document.getElementById("item1mobile");
+			mui('#item1mobile .mui-card-content').imageLazyload({
+				placeholder: "images/60x60.gif",
+				autoDestroy: false
+			});
+		</script>
+	</body>
+
+</html>
