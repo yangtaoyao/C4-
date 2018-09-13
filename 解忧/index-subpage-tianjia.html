@@ -14,20 +14,17 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">添加任务</h1>
-			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
 		</header>
-		<div id="scroll" class="mui-content mui-scroll-wrapper add-content">
+		<div id="tianjia" class="mui-content mui-scroll-wrapper add-content">
 			<div class="mui-scroll">
-				<div class="add_box">
-					<div id="input_title" class="mui-input-row">
-						<label>标题</label>
-						<input type="text" class="mui-input-clear" placeholder="请输入标题">
-					</div>
+				
+				<form class="add_box" id="add_box">
+					
 					<button id='dtpicker' data-options='{}' class="btn mui-btn mui-btn-block mui-navigate-right">
 						<label>截止时间</label>
-						<span class='picked_date'>选择日期和时间</span>
+						<span class='picked_date'>{{expiretime}}</span>
 					</button>
-					
 					<div class="type_radio">
 						<!--<span>方式</span>-->
 						<p>方式</p>
@@ -42,7 +39,7 @@
 					</div>
 					<div id="input_title" class="mui-input-row">
 						<label>赏金(元)</label>
-						<input type="text" class="mui-input-clear" placeholder="请输入赏金">
+						<input v-model="price" type="text" class="mui-input-clear" placeholder="请输入赏金">
 					</div>
 					<div class="mui-table-view-cell niming">
 						<label>是否匿名</label>
@@ -53,26 +50,27 @@
 
 					<p style="padding:8px 0;">描述</p>
 					<div class="mui-input-row" style="margin-bottom: 8px;">
-						<textarea id="desc" rows="4" class="mui-input-clear contact" placeholder="描述一下" style="margin: 0;border: 0;margin: 0;"></textarea>
+						<textarea v-model="content" rows="4" class="mui-input-clear contact" placeholder="描述一下" style="margin: 0;border: 0;margin: 0;"></textarea>
 					</div>
-					<p style="padding:8px 0;">图片(选填,提供问题截图,总大小10M以下)</p>
-					<div id='image-list' class="row image-list"></div>
+					<!--<p style="padding:8px 0;">图片(选填,提供问题截图,总大小10M以下)</p>
+					<div id='image-list' class="row image-list"></div>-->
 					<button id="location" type="button" class="mui-btn mui-icon mui-icon-location-filled">添加定位</button>
 					
 					<button  type="button" class="mui-icon mui-icon-compose tags">添加标签</button>
-				</div>
+					<!--<button  style="width: 100%;height: 40px;font-size: 18px;" class="mui-btn mui-btn-primary" data-loading-text="设置中">确定</button>-->
+				</form>
 			</div>
 		</div>
 
 		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/vue.min.js"></script>
 		<script type="text/javascript" src="js/mui.picker.min.js"></script>
 		<script type="text/javascript" src="js/index-subpage-tianjia.js"></script>
 		<script type="text/javascript">
-			//			mui.init({
-			//				swipeBack: true, //启用右滑关闭功能
-			//			})
 			mui.init();
-			mui('#scroll').scroll();
+			mui('#tianjia').scroll();
 		</script>
 	</body>
 

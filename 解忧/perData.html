@@ -52,24 +52,24 @@
 					<div class="mui-scroll">
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
-								<a id="head" class="mui-navigate-right">头像
+								<a @tap="setHeadImg" class="mui-navigate-right">头像
 									<span class="mui-pull-right head">
-									<img class="head-img mui-action-preview" id="head-img" src="images/u445.png"/>
+									<img @tap.stop="" class="head-img mui-action-preview" id="head-img" :src="imgUrl"/>
 								</span>
 								</a>
 							</li>
 						</ul>
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
-								<a id="name">
+								<a @tap="setName($event)" id="name">
 									昵称
-									<i class="mui-pull-right update">hello解忧</i>
+									<i class="mui-pull-right update">{{nickname}}</i>
 								</a>
 							</li>
 							<li class="mui-table-view-cell">
-								<a id="signature">
+								<a @tap="setSignature($event)" id="signature">
 									签名
-									<i class="mui-pull-right update">hello</i>
+									<i class="mui-pull-right update">{{signature}}</i>
 								</a>
 							</li>
 							<li class="mui-table-view-cell">
@@ -81,27 +81,27 @@
 						</ul>
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
-								<a id="sex">
+								<a @tap="setSex($event)" id="sex">
 									性别
-									<i class="mui-pull-right update">男</i>
+									<i class="mui-pull-right update">{{sex}}</i>
 								</a>
 							</li>
 							<li class="mui-table-view-cell">
-								<a id="age">
+								<a @tap="setAge($event)" id="age">
 									年龄
-									<i class="mui-pull-right update">18</i>
+									<i class="mui-pull-right update">{{age}}</i>
 								</a>
 							</li>
 							<li class="mui-table-view-cell">
-								<a id="showCityPicker" class="mui-navigate-right">
+								<a @tap="showCityPicker($event)" id="showCityPicker" class="mui-navigate-right">
 									所在地
-									<i class="mui-pull-right update">长春</i>
+									<i class="mui-pull-right update">{{city}}</i>
 								</a>
 							</li>
 							<li class="mui-table-view-cell">
-								<a id="email">
+								<a @tap="setEmail($event)" id="email">
 									邮箱
-									<i class="mui-pull-right update">123456454@qq.com</i>
+									<i class="mui-pull-right update">{{email}}</i>
 								</a>
 							</li>
 						</ul>
@@ -124,7 +124,7 @@
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title">更改简介</h1>
-				<button id="desc_save" type="button" class="mui-right mui-action-back mui-btn  
+				<button @tap="desc_save($event)" id="desc_save" type="button" class="mui-right mui-btn  
 					mui-btn-link mui-btn-nav mui-pull-right" style="right:15px">
 					保存
 				</button>
@@ -133,7 +133,7 @@
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<div class="mui-input-row" style="margin-bottom: 8px;margin-top: 20px;">
-							<textarea id="desc" rows="10" class="mui-input-clear contact" placeholder="个人简介" style="margin: 0;border: 0;margin: 0;"></textarea>
+							<textarea v-model="description" id="desc" rows="10" class="mui-input-clear contact" placeholder="个人简介" style="margin: 0;border: 0;margin: 0;"></textarea>
 						</div>
 					</div>
 				</div>
@@ -146,6 +146,7 @@
 		<script src="js/mui.min.js "></script>
 		<script src="js/mui.view.js"></script>
 		<script src="js/common.js"></script>
+		<script src="js/vue.min.js"></script>
 		<script src="js/city.data.js"></script>
 		<script src="js/mui.picker.min.js"></script>
 		<script src='js/perData.js'></script>

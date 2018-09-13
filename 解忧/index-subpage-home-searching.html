@@ -6,28 +6,339 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/app.css" rel="stylesheet" />
+		<style>
+			.mui-bar-nav~.mui-content {
+				margin-top: 90px;
+				padding-top: 0
+			}
+			
+			.mui-table-view {
+				background: #ffffff;
+				padding-top: 70px;
+			}
+			
+			.input-div {
+				left: 0;
+				right: 0;
+				position: fixed;
+				z-index: 10;
+				top: 0;
+				background: #f4f4f4;
+				padding: 18px 10px 10px 10px;
+				padding-right: 70px;
+				height: auto;
+			}
+			
+			.mui-btn.mui-action {
+				z-index: 11;
+				position: fixed;
+				height: 68px;
+				width: 70px;
+				background: none;
+				border: 0;
+				display: block;
+				top: 0;
+				right: 0;
+			}
+			
+			.mui-btn.mui-action:enabled:active {
+				background: none;
+			}
+			
+			.mui-input-row.mui-search {
+				height: 40px;
+			}
+			
+			.mui-input-row.mui-search .input-content {
+				background: #FFFFFF;
+				right: 44px;
+			}
+			/*无内容提示*/
+			
+			.noConent {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.noConent h4 {
+				height: 200px;
+				width: calc(100%-20px);
+				border-radius: 5px;
+				margin: 10px;
+				/*background: #F2F2F2;*/
+				line-height: 200px;
+				text-align: center;
+				font-weight: 600;
+				color: #666666;
+				font-size: 16px;
+			}
+			/*输入记录*/
+			
+			.ul_input {
+				z-index: 10;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				position: absolute;
+				width: 100%;
+				/*background: none;*/
+				background: #FFFFFF;
+			}
+			
+			.ul_input_show {
+				z-index: 100;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				position: absolute;
+				width: 100%;
+				left: 0;
+				right: 0;
+				/*background: none;*/
+				background: #FFFFFF;
+			}
+			
+			.ul_input_show:before {
+				visibility: visible;
+				position: absolute;
+				right: 0;
+				top: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.mui-table-view:after {
+				height: 0;
+			}
+			
+			.ul_input_show .li_input.mui-table-view:after {
+				left: 0;
+				right: 0;
+				height: 0;
+			}
+			
+			.ul_input_show .li_title.mui-table-view-cell {
+				/*height: 40px;*/
+				background: #F2F2F2;
+			}
+			
+			.mui-table-view .li_title.mui-table-view-cell a:not(.mui-btn) {
+				padding: 0 16px 0 0;
+			}
+			
+			.ul_input_show .li_title.mui-table-view-cell:after {
+				height: 0;
+			}
+			
+			.ul_input_show .li_input.mui-table-view-cell:after {
+				left: 0;
+			}
+			
+			.li_input {
+				/*background: #FFFFFF;*/
+				/*border: 1px solid #333333;*/
+				padding-top: 14px;
+				padding-bottom: 14px;
+			}
+		</style>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">搜索</h1>
-		</header>
-		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<div class="mui-scroll">
-				<!--这里放置真实显示的DOM内容-->
-				<div class="mui-input-row mui-search" style="margin:8px 16px 8px 16px;">
-					<input type="search" class="mui-input-clear" placeholder="搜索" style="background: #FFFFFF;">
+		<div id="search_app">
+			<!--<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">搜索</h1>
+			</header>-->
+			<button class="mui-btn mui-action mui-action-back" v-if="!isInput_str">取消</button>
+			<button @tap="search_submit" class="mui-btn mui-action" v-if="isInput_str">确定</button>
+			<div class="input-div">
+				<div class="mui-input-row mui-search">
+					<input @keypress="search_submit" type="search" v-model="input_str" class="input-content" placeholder="搜索" autofocus="autofocus">
 				</div>
-				
+				<ul class="mui-table-view ul_input">
+
+				</ul>
+			</div>
+
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--这里放置真实显示的DOM内容-->
+					<div class="noConent" v-if="!isListHasConent">
+						<h4>暂时没有内容，换个关键词试试？</h4>
+					</div>
+					<ul class="mui-table-view mui-table-view-chevron" v-if="isListHasConent">
+						
+						<li class="mui-table-view-cell mui-media" v-for="item in list">
+							<a @tap='open_detail(item)' class="mui-navigate-right home-card">
+								<h4 class="mui-ellipsis">描述：{{item.content}}</h4>
+								<h6>截止至{{item.expiretime}}</h6>
+								<div>
+									<img class="mui-media-object mui-pull-left head-img" :src="item.imgurl" onerror="this.onerror=null; this.src='images/touxiangboy.png'">
+									<div class="mui-media-body">
+										<h5>
+											{{item.uid}}
+										</h5>
+										<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+									</div>
+									<div class="pay">
+										<span>赏金：</span>
+										<i>{{parseInt(item.price)}}金币</i>
+
+									</div>
+								</div>
+							</a>
+						</li>
+
+					</ul>
+
+				</div>
 			</div>
 		</div>
 
 		<script src="js/mui.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/search.js"></script>
 		<script type="text/javascript">
 			mui.init({
-				swipeBack: true //启用右滑关闭功能
+				swipeBack: true, //启用右滑关闭功能
+//				pullRefresh: {
+//					container: '#pullrefresh',
+//					down: {
+//						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+//						color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+//						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+//						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+//						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+//						auto: false, //可选,默认false.首次加载自动上拉刷新一次
+//						callback: pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//					},
+//
+//				},
 			});
+			mui('#pullrefresh').scroll()
+
+			/*保存搜索记录到localStorage--------------------------*/
+			mui('body').on('input', '.input-content', function() {
+				//var thisNode = e.currentTarget;
+				var thisNode = this;
+				var div = thisNode.parentNode;
+				var ul = div.nextElementSibling;
+				ul.classList.remove('ul_input');
+				ul.classList.add('ul_input_show');
+
+				if(localStorage.getItem('input_str')) {
+					var arr_input = JSON.parse(localStorage.getItem('input_str'));
+					var _value;
+
+					_value = search_vm.input_str;
+					//console.log(_value)
+					if(_value) {
+						autoComplete(_value, arr_input, ul);
+					} else {
+						//ul.innerHTML = '';
+						var lis = [];
+						if(arr_input.length != 0) {
+							lis.push('<li class="mui-table-view-cell li_title"><a  class="mui-media-object mui-pull-right mui-icon mui-icon-trash"></a><span>搜索历史</span></li>')
+
+						}
+						arr_input.forEach(function(word) {
+							lis.push('<li class="mui-table-view-cell li_input">' + word + '</li>')
+						})
+						ul.innerHTML = lis.join('')
+					}
+				}
+			})
+			mui('body').on('focusout', '.input-content', function() {
+				var thisNode = this;
+				var div = thisNode.parentNode;
+				var ul = div.nextElementSibling;
+				ul.innerHTML = '';
+				ul.classList.remove('ul_input_show')
+				ul.classList.add('ul_input');
+			})
+			mui('body').on('focusin', '.input-content', function() {
+				var thisNode = this;
+				var div = thisNode.parentNode;
+				var ul = div.nextElementSibling;
+				ul.innerHTML = '';
+				if(localStorage.getItem('input_str')) {
+					var arr_input = JSON.parse(localStorage.getItem('input_str'));
+					if(arr_input.length != 0) {
+						ul.classList.remove('ul_input');
+						ul.classList.add('ul_input_show');
+						var lis = [];
+						lis.push('<li class="mui-table-view-cell li_title"><a class="mui-media-object mui-pull-right mui-icon mui-icon-trash"></a><span>搜索历史</span></li>')
+						arr_input.forEach(function(word) {
+							lis.push('<li class="mui-table-view-cell li_input">' + word + '</li>')
+						})
+						ul.innerHTML = lis.join('')
+					}
+				}
+			})
+			mui('body').on('tap', '.li_input', function() {
+				var thisNode = this;
+				var par = thisNode.parentNode;
+				var div = par.previousElementSibling;
+				var input = div.childNodes[0];
+				_value = thisNode.innerHTML;
+				search_vm.input_str = _value;
+				par.innerHTML = '';
+				par.classList.remove('ul_input_show')
+				par.classList.add('ul_input');
+			})
+
+			function autoComplete(str, arr, ul) {
+				var lis = [];
+				if(arr.length != 0) {
+					lis.push('<li class="mui-table-view-cell li_title"><a  class="mui-media-object mui-pull-right mui-icon mui-icon-trash"></a><span>搜索历史</span></li>')
+				}
+				arr.forEach(function(word) {
+					if(word.startsWith(str)) {
+						lis.push('<li class="mui-table-view-cell li_input">' + word + '</li>')
+					}
+				})
+				ul.innerHTML = lis.join('')
+			}
+			///添加数组元素到localStorage
+			function localStorage_addItem(key_arr, input_str) {
+				//保存数据到localStorage
+				if(localStorage.getItem(key_arr)) {
+					var arr_input = JSON.parse(localStorage.getItem(key_arr));
+				} else {
+					var arr_input = [];
+				}
+				//console.log(JSON.stringify(arr_input));
+				if(input_str != '') {
+					var i = 0;
+					arr_input.forEach(function(word) {
+						if(word == input_str) {
+							i++;
+						}
+					})
+					if(i == 0) {
+						arr_input.push(input_str);
+						localStorage.setItem(key_arr, JSON.stringify(arr_input));
+					}
+				}
+
+			}
+			mui('body').on('tap', '.li_title a', function() {
+				var arr_input = [];
+				localStorage.setItem('input_str', JSON.stringify(arr_input));
+				var thisNode = this;
+				var par01 = thisNode.parentNode;
+				var par02 = par01.parentNode;
+				par02.innerHTML = '';
+				par02.classList.remove('ul_input_show')
+				par02.classList.add('ul_input');
+			})
+			/*-----------------------------------------------*/
 		</script>
 	</body>
 

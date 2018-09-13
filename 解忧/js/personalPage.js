@@ -1,13 +1,13 @@
 mui.plusReady(function() {
-	//				var nb = plus.webview.currentWebview().getTitleNView();
-	//				nb.drawText('返回', {
-	//					'top': '0px',
-	//					'left': '8px',
-	//					'width': '96px',
-	//					'height': '100%'
-	//				}, {
-	//					'color': '#eee'
-	//				});
+//	var nb = plus.webview.currentWebview().getTitleNView();
+//	nb.drawText('返回', {
+//		'top': '0px',
+//		'left': '8px',
+//		'width': '96px',
+//		'height': '100%'
+//	}, {
+//		'color': '#eee'
+//	});
 
 })
 
@@ -147,3 +147,77 @@ mui.init({
 		})
 	})
 })(mui);
+
+var wode = new Vue({
+	el: '.mui-content',
+	data: {
+		isLogin: false,
+		userInfo: {
+			uid: '',
+			nickname: '',
+			signature: '',
+			desc: '',
+			sex: '',
+			age: '',
+			city: '',
+			email: '',
+			imgUrl: '',
+			tel: ''
+		}
+	},
+	computed: {
+		isLogout: function() {
+			return !this.isLogin;
+		}
+	}
+});
+
+//初始化用户信息
+function initInfo() {
+	if(!myStorage.getItem('userInfo')) {
+		var userInfo = {
+			age: 0,
+			balance: 0,
+			birthday: "",
+			city: "",
+			credit: 0,
+			crttime: "",
+			description: "",
+			email: "",
+			imgUrl: "",
+			nickname: "默认昵称",
+			openid: "",
+			regTel: "",
+			sex: "",
+			signature: "",
+			tel: "",
+			uid: ""
+		}
+	} else {
+		var userInfo = JSON.parse(myStorage.getItem('userInfo'));
+		wode.userInfo.uid = userInfo.uid;
+		if(userInfo.nickname != "") {
+			wode.userInfo.nickname = userInfo.nickname;
+		}
+		if(userInfo.signature != "") {
+			wode.userInfo.signature = userInfo.signature;
+		}
+		if(userInfo.imgUrl != "") {
+			wode.userInfo.imgUrl = userInfo.imgUrl;
+		}
+	}
+	myStorage.setItem('userInfo', JSON.stringify(userInfo));
+	var len = myStorage.getLength();
+	for(var i = 0; i < len; i++) {
+		var str = JSON.stringify(myStorage.getItemByIndex(i));
+		console.log(str);
+	}
+
+	if(myStorage.getItem("isLogin") == "true") {
+		wode.isLogin = true;
+	} else {
+		wode.isLogin = false;
+	}
+	console.log(wode.isLogin)
+	console.log('wode:initInfo');
+}

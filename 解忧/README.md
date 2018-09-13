@@ -15,3 +15,5 @@ var currentWebview = plus.webview.currentWebview();
 var opener = currentWebview.opener();
 
 box-shadow: 0 1px 3px 0px #c8c7cc;
+
+var url = common.url+"task?action=search&key=" + encodeURI(encodeURI(search_vm.input_str).trim());

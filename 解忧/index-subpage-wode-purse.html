@@ -6,17 +6,221 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/view.css" rel="stylesheet" />
+		<style>
+			/**/
+			
+			.logined {
+				margin: 10px;
+				border-radius: 6px;
+				box-shadow: 0px 0px 20px 3px #ddd;
+				background: #0062CC;
+				color: #FFFFFF;
+				height: 100px;
+			}
+			
+			.logined .mui-table-view-cell {
+				height: 100%;
+			}
+			
+			.logined h6 {
+				height: 30%;
+				line-height: 30%;
+			}
+			
+			.logined h3 {
+				height: 70%;
+				line-height: 70%;
+			}
+			
+			.mui-navbar-inner.mui-bar.mui-bar-nav {
+				background: #FFFFFF;
+			}
+			/*安全键盘*/
+			
+			.pay_key.mui-table-view.mui-grid-view.mui-grid-12 {
+				position: fixed;
+				bottom: 0;
+				padding: 0;
+				margin-bottom: 0;
+				padding-bottom: 0;
+				background: #F9F9F9;
+			}
+			
+			.pay_key.mui-table-view.mui-grid-view.mui-grid-12 .mui-table-view-cell {
+				border-right: 1px solid #eee;
+				border-bottom: 1px solid #eee;
+				padding: 0;
+			}
+			
+			.pay_key.mui-table-view.mui-grid-view.mui-grid-12 .mui-table-view-cell a {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.pay_key.mui-table-view.mui-grid-view.mui-grid-12 .mui-table-view-cell.mui-active {
+				background: #F0F0F0;
+			}
+			
+			.pay_key.mui-table-view.mui-grid-view .mui-table-view-cell a .mui-media-body {
+				padding: 20px;
+				font-size: 28px;
+				color: #333333;
+				height: auto;
+			}
+		</style>
 	</head>
 
-	<body>
-		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">我的钱包</h1>
-		</header>
-		
+	<body class="mui-fullscreen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--登录页面-->
+		<div id="purse" class="mui-page">
+			<!--页面标题栏开始-->
+			<!--页面主内容区开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+						<span class="mui-icon mui-icon-left-nav"></span>
+					</button>
+				<h1 class="mui-center mui-title">我的钱包</h1>
+
+			</div>
+			<div class="mui-page-content">
+
+				<div class="content_box">
+
+					<!--已登录显示-->
+					<ul class="mui-table-view logined">
+						<li class="mui-table-view-cell">
+
+							<h6>账户余额</h6>
+							<h3>
+									0.00
+							</h3>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a @tap="" class="mui-navigate-right">
+								账户充值
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="#setPwd" class="mui-navigate-right">
+								设置支付密码
+							</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<!--页面主内容区结束-->
+		</div>
+
+		<!---->
+		<div id="setPwd" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button " class="mui-left mui-action-back mui-btn mui-btn-link mui-btn-nav mui-pull-left ">
+						<span class="mui-icon mui-icon-left-nav "></span>
+					</button>
+				<h1 class="mui-title">设置支付密码</h1>
+			</div>
+			<div class="mui-page-content">
+				<form class="mui-input-group" style="background: #FFFFFF;margin:0 16px;padding:20px 10px ;margin-top: 50px;font-size: 18px;">
+					<h4 style="padding: 16px 16px 30px 16px;">设置密码</h4>
+					<div class="mui-input-row">
+						<input v-model="input_pwd" type="password" readonly="readonly" autocomplete="off" class="mui-input-password" placeholder="密码"
+							style="font-size: 20px;">
+					</div>
+					<div style="margin-top: 16px;padding: 16px;">
+						<button @tap="setPwd_btn($event)" style="width: 100%;height: 40px;font-size: 18px;" class="mui-btn mui-btn-primary" data-loading-text="设置中">确定</button>
+					</div>
+				</form>
+
+				<ul class="mui-table-view mui-grid-view mui-grid-12 pay_key">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">1</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">2</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">3</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">4</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">5</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">6</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">7</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">8</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">9</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" style="background: #E8E8E8;">
+						<a href="#">
+							<div class="mui-media-body">.</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#">
+							<div class="mui-media-body">0</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" style="background: #E8E8E8;">
+						<a href="#">
+							<span class="mui-media-body mui-icon mui-icon-arrowthinleft"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<script src="js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
+		<script src="js/mui.view.js "></script>
+		<script src="js/common.js"></script>
+		<script src="js/jsencrypt.min.js"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/purse.js"></script>
+		<script>
+			mui.init();
+			mui.plusReady(function() {
+
+			})
+			
 		</script>
 	</body>
 

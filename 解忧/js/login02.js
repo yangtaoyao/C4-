@@ -1,9 +1,9 @@
 mui.init();
 //初始化单页view
-var viewApi = mui('#app').view({
-	defaultPage: '#guide '
-});
-//var viewApi = '';
+//var viewApi = mui('#app').view({
+//	defaultPage: '#guide '
+//});
+
 //加密
 var encrypt = new JSEncrypt();
 encrypt.setPublicKey('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6JbMo802QOZHkyLBc590xa9lHjBwxAU7jbDuUfUUYwxlkLdjPhxfoh+hC2HNeHuD6t975UwBpU9QQ5ewepz/+DiOkVy8fh10NtND6LijYRcKlHT4FoVhPIZV7amX2DAcRssGqRUYK2/ufE6LL3dzz/a8Qw9/i0y4LhdxrZecZ176X+6OOQnRQzKNb2c66aKXSZL7dehZuFFqd/To85r4QJt2la7xarCL3lP1/3Ax3wDwxhKPFTIpuDU1R6r7SfE7By6m1n27ikuFbWQigPr3Gx7xDPy+huTYZh+HlcGgG9dcxMwzzN1Q8fKKfecMZNcyBl4urrF+3k0SI28i3nZr0QIDAQAB');
@@ -28,19 +28,25 @@ mui.plusReady(function() {
 			defaultPage: '#guide'
 		});
 	}
-	
+
 	//全屏
 	plus.navigator.setFullscreen(true);
-	
+
 	/*
 	 * 处理view的后退与webview后退与推出应用
-	 */ 
+	 */
 	var first = null;
 	var currentWebview = plus.webview.currentWebview();
 	var opener = currentWebview.opener();
 	var webViewBack = function() {
 		plus.navigator.setFullscreen(false);
-		plus.webview.close(currentWebview, "zoom-fade-in",200);
+		plus.webview.close(currentWebview, "zoom-fade-in", 200);
+
+		//更新设置页面登录按钮
+		var Webv_setting = plus.webview.getWebviewById("index-subpage-wode-setting.html");
+		if(Webv_setting != undefined) {
+			Webv_setting.evalJS('updateIslogin("false")');
+		}
 	};
 	var thisApp_close = function() {
 		if(!first) {
@@ -76,20 +82,6 @@ mui.plusReady(function() {
 	};
 
 	var view = viewApi.view;
-	//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
-	//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
-	//	view.addEventListener('pageBeforeShow', function(e) {
-	//		console.log(e.detail.page.id + ' beforeShow');
-	//	});
-	//	view.addEventListener('pageShow', function(e) {
-	//		console.log(e.detail.page.id + ' show');
-	//	});
-	//	view.addEventListener('pageBeforeBack', function(e) {
-	//		console.log(e.detail.page.id + ' beforeBack');
-	//	});
-	//	view.addEventListener('pageBack', function(e) {
-	//		console.log(e.detail.page.id + ' back');
-	//	});
 
 	/*授权登录*/
 	var auths = null;
@@ -180,11 +172,12 @@ mui.plusReady(function() {
 		}
 	}
 
+	//跳过
 	document.getElementById('start').addEventListener('tap', function() {
 		myStorage.setItem("launchFlag", "true");
 		plus.navigator.setFullscreen(false);
 		plus.navigator.setStatusBarBackground('#FFFFFF');
-		mui.toast('欢迎进入解忧 ');
+		mui.toast('欢迎进入解忧');
 		plus.webview.currentWebview().close();
 	})
 
@@ -249,7 +242,7 @@ function submit_login01(e) {
 	if(login.loginWPsw.phoneNumber == '' || login.loginWPsw.password == '') {
 		mui(thisNode).button('loading');
 		setTimeout(function() {
-
+			mui(thisNode).button('reset');
 		}.bind(thisNode), 200);
 		mui.toast('输入框不能为空');
 	} else {
@@ -259,31 +252,54 @@ function submit_login01(e) {
 		var timestamp1 = Date.parse(new Date()) + '';
 		var pwd = timestamp1.substring(0, 9) + '_' + login.loginWPsw.password;
 		pwd = encrypt.encrypt(pwd);
+		pwd = common.urlEncode(pwd);
 		console.log('pwd:' + pwd);
-		//console.log("加密后：" + pwd);
+		req = {
+			id: register.registerWIcode.phoneNumber,
+			//id:'10001',
+			password: pwd,
+			_: timestamp1.substring(0, 9),
+			way: 'tel_pwd'
+		};
+
 		mui(thisNode).button('loading');
 		mui.ajax(url + 'doLogin', {
-			data: {
-				password: pwd,
-				phoneNumber: login.loginWPsw.phoneNumber,
-				way: 'tel_pwd',
-			},
+			data: JSON.stringify(req),
 			type: 'post', //HTTP请求类型
-			timeout: 10000,
+			timeout: 20000,
 			success: function(data) {
 				//获得服务器响应
 				res = JSON.parse(data);
 				console.log(res + '' + res.msg);
 				if(res.suc < 0) {
-					mui.toast('密码登录失败：' + JSON.stringify(res));
-					console.log('密码登录失败：' + res.msg);
-					mui(thisNode).button('reset');
+					if(res.msg == "该用户已经登录") {
+						console.log('该用户已经登录：' + JSON.stringify(res));
+						mui.toast('密码登录成功!');
+
+						myStorage.setItem("launchFlag", "true");
+						myStorage.setItem("isLogin", "true");
+
+						setUserInfo(JSON.parse(myStorage.getItem("userInfo")));
+						//跳转首页
+						plus.navigator.setFullscreen(false);
+						plus.navigator.setStatusBarBackground('#FFFFFF');
+						plus.webview.currentWebview().close();
+						mui(thisNode).button('reset');
+					} else {
+						mui.toast('密码登录失败：' + JSON.stringify(res));
+						console.log('密码登录失败：' + JSON.stringify(res));
+						mui(thisNode).button('reset');
+					}
+
 				} else {
 					console.log('密码登录成功：' + JSON.stringify(res));
-					mui.toast('密码登录成功：' + res.msg);
+					mui.toast('密码登录成功!');
 
-					//跳转首页
 					myStorage.setItem("launchFlag", "true");
+					myStorage.setItem("isLogin", "true");
+
+					setUserInfo(res.data);
+					//跳转首页
 					plus.navigator.setFullscreen(false);
 					plus.navigator.setStatusBarBackground('#FFFFFF');
 					plus.webview.currentWebview().close();
@@ -305,6 +321,25 @@ function submit_login01(e) {
 	}
 }
 
+//登录成功设置信息
+function setUserInfo(data) {
+	if(data!=null||data!=undefined){
+		myStorage.setItem("userInfo", JSON.stringify(data));
+	}
+	
+	//传值到我的页面
+	var Webv_wode = plus.webview.getWebviewById("index-subpage-wode.html");
+	Webv_wode.evalJS('initInfo()');
+	
+	var Webv_setting = plus.webview.getWebviewById("index-subpage-wode-setting.html");
+	console.log('updateIslogin before')
+	if(Webv_setting != undefined) {
+		console.log('updateIslogin before')
+		Webv_setting.evalJS('updateIslogin("true")');
+	}
+	
+}
+
 //登录页获取验证码
 function getIdentCode_login(e) {
 	var thisNode = e.currentTarget;
@@ -324,7 +359,7 @@ function getIdentCode_login(e) {
 				action: 'get'
 			},
 			type: 'get', //HTTP请求类型
-			timeout: 10000,
+			timeout: 20000,
 			success: function(data) {
 				//获得服务器响应
 				res = JSON.parse(data);
@@ -374,31 +409,53 @@ function submit_login02(e) {
 		var timestamp1 = Date.parse(new Date()) + '';
 		var pwd = timestamp1.substring(0, 9) + '_' + login.loginWIcode.identiCode;
 		pwd = encrypt.encrypt(pwd);
+		pwd = common.urlEncode(pwd);
 		console.log('pwd:' + pwd);
+		req = {
+			id: register.registerWIcode.phoneNumber,
+			identiCode: register.registerWIcode.identiCode,
+			password: pwd,
+			_: timestamp1.substring(0, 9),
+			way: 'tel_verify_code'
+		};
+
 		//console.log("加密后：" + pwd);
 		mui(thisNode).button('loading');
 		mui.ajax(url + 'doLogin', {
-			data: {
-				password: pwd,
-				phoneNumber: login.loginWIcode.phoneNumber,
-				way: 'tel_verify_code',
-			},
+			data: JSON.stringify(req),
 			type: 'post', //HTTP请求类型
-			timeout: 10000,
+			timeout: 20000,
 			success: function(data) {
 				//获得服务器响应
 				res = JSON.parse(data);
-				console.log(res + '' + res.msg);
+				console.log(data + '' + res.msg);
 				if(res.suc < 0) {
-					console.log('验证码登录失败：' + res.msg);
-					mui.toast('验证码登录失败：' + res.msg);
-					mui(thisNode).button('reset');
-				} else {
-					console.log('验证码登录成功：' + res.msg);
-					mui.toast('验证码登录成功：' + res.msg);
+					if(res.msg == "该用户已经登录") {
+						console.log('该用户已经登录：' + JSON.stringify(res));
+						mui.toast('该用户已经登录!');
 
-					//跳转首页
+						myStorage.setItem("launchFlag", "true");
+						myStorage.setItem("isLogin", "true");
+
+						setUserInfo(JSON.parse(myStorage.getItem("userInfo")));
+						//跳转首页
+						plus.navigator.setFullscreen(false);
+						plus.navigator.setStatusBarBackground('#FFFFFF');
+						plus.webview.currentWebview().close();
+						mui(thisNode).button('reset');
+					} else {
+						mui.toast('验证码登录失败');
+						console.log('验证码登录失败：' + JSON.stringify(res));
+						mui(thisNode).button('reset');
+					}
+				} else {
+					console.log('验证码登录成功：' + JSON.stringify(res));
+					mui.toast('验证码登录成功!');
+
 					myStorage.setItem("launchFlag", "true");
+					myStorage.setItem("isLogin", "true");
+					setUserInfo(res.data);
+					//跳转首页
 					plus.navigator.setFullscreen(false);
 					plus.navigator.setStatusBarBackground('#FFFFFF');
 					plus.webview.currentWebview().close();
@@ -422,7 +479,7 @@ function submit_login02(e) {
 //注册页面获取验证码
 function getIdentCode_register(e) {
 
-	plus.nativeUI.showWaiting("等待中...", common.WaitingLoadingOptions);
+	//plus.nativeUI.showWaiting("等待中...", common.WaitingLoadingOptions);
 	setTimeout(function() {
 		plus.nativeUI.closeWaiting();
 	}, 5000);
@@ -445,7 +502,7 @@ function getIdentCode_register(e) {
 				action: 'get'
 			},
 			type: 'get',
-			timeout: 10000,
+			timeout: 20000,
 			success: function(data) {
 				//获得服务器响应
 				res = JSON.parse(data);
@@ -539,22 +596,22 @@ function go_register(e) {
 		var timestamp1 = Date.parse(new Date()) + '';
 		var pwd = timestamp1.substring(0, 9) + '_' + register.registerWIcode.password;
 		pwd = encrypt.encrypt(pwd);
-
+		pwd = common.urlEncode(pwd);
 		console.log('pwd:' + pwd);
 		//console.log("加密后：" + pwd);
 		mui(thisNode).button('loading');
-		data = {
-				phoneNumber: register.registerWIcode.phoneNumber,
-				identiCode: register.registerWIcode.identiCode,
-				password: pwd,
-				timestamp: timestamp1
-			},
-			console.log(typeof JSON.stringify(data))
+		req = {
+			phoneNumber: register.registerWIcode.phoneNumber,
+			identiCode: register.registerWIcode.identiCode,
+			password: pwd,
+			_: timestamp1.substring(0, 9)
+		};
+		//console.log(typeof JSON.stringify(data))
 		mui.ajax(url + 'doRegister', {
-			data: JSON.stringify(data),
+			data: JSON.stringify(req),
 			asycn: false,
 			type: 'post', //HTTP请求类型
-			timeout: 10000,
+			timeout: 20000,
 			success: function(data) {
 				//获得服务器响应
 				res = JSON.parse(data);
@@ -573,7 +630,6 @@ function go_register(e) {
 
 					viewApi.go('#login');
 					mui(thisNode).button('reset');
-
 				}
 			},
 			error: function(xhr, type, errorThrown) {
@@ -589,6 +645,7 @@ function go_register(e) {
 		});
 	}
 }
+
 //显示隐藏其他登录方式
 function login_show() {
 	if(login.qqlogin_show) {
@@ -597,6 +654,8 @@ function login_show() {
 		login.qqlogin_show = true;
 	}
 }
+
+/*---------------------------------------------------------------*/
 /*保存手机号记录到localStorage*/
 mui('body').on('input', '.mui-input-clear', function() {
 	//var thisNode = e.currentTarget;
@@ -611,8 +670,6 @@ mui('body').on('input', '.mui-input-clear', function() {
 	} else {
 		var arr_input = [];
 	}
-
-	//var arr_input = ['123', '1224', '123345', '14646', '56757', 'before', 'become', 'being', 'highmaintains', 'by', 'bye', 'banana']
 	var _value;
 	switch(id) {
 		case 'loginWPsw_phoneNumber':
@@ -690,3 +747,83 @@ function localStorage_addArrItem(key_arr, input_str) {
 		localStorage.setItem(key_arr, JSON.stringify(arr_input));
 	}
 }
+
+//
+var a = {
+	"data": {
+		"age": 0,
+		"balance": 0,
+		"birthday": "",
+		"city": "",
+		"credit": 0,
+		"crttime": "2018-09-11 22:06:35.0",
+		"description": "",
+		"email": "",
+		"imgUrl": "",
+		"nickname": "",
+		"openid": "",
+		"regTel": "",
+		"sex": "?",
+		"signature": "",
+		"tel": "",
+		"uid": "10001"
+	},
+	"msg": "登陆成功!",
+	"ret": 0,
+	"suc": 0
+}
+
+//注册成功
+var b = {
+	"data": {
+		"age": 0,
+		"balance": 0,
+		"birthday": "",
+		"city": "",
+		"credit": 0,
+		"crttime": "2018-09-11 22:06:35",
+		"description": "",
+		"email": "",
+		"imgUrl": ";",
+		"nickname": "",
+		"openid": "",
+		"regTel": "13763369408",
+		"sex": "男",
+		"signature": "",
+		"tel": "",
+		"uid": "10001"
+	},
+	"msg": "注册成功!",
+	"ret": 0,
+	"suc": 0
+}
+var len = myStorage.getLength();
+console.log(len)
+//void myStorage.removeItem();
+//void myStorage.clear();
+//var foo = myStorage.key(index);
+//var foo = myStorage.keyPlus(index);
+//var item=myStorage.getItemByIndex(index);
+//var item=myStorage.getItemByIndexPlus(index);
+//var items=myStorage.getItems(key)
+//void myStorage.removeItemBykeys(keys,cb)
+for(var i = 0; i < len; i++) {
+	var str = JSON.stringify(myStorage.getItemByIndex(i));
+	console.log(str);
+}
+/* 
+{"keyname":"age","keyvalue":"28"} at js/login02.js:750
+ {"keyname":"arr"} at js/login02.js:750
+ {"keyname":"city","keyvalue":"北京市 东城区"} at js/login02.js:750
+ {"keyname":"desc","keyvalue":"这个人很懒，什么也没留下"} at js/login02.js:750
+ {"keyname":"email","keyvalue":"1"} at js/login02.js:750
+ {"keyname":"input_str"} at js/login02.js:750
+ {"keyname":"isLogin","keyvalue":"false"} at js/login02.js:750
+ {"keyname":"launchFlag","keyvalue":"false"} at js/login02.js:750
+ {"keyname":"loginWIcode_phoneNumber"} at js/login02.js:750
+ {"keyname":"loginWPsw_phoneNumber"} at js/login02.js:750
+ {"keyname":"name","keyvalue":"萨瓦迪卡啦"} at js/login02.js:750
+ {"keyname":"registerWIcode_phoneNumber"} at js/login02.js:750
+ {"keyname":"sex","keyvalue":"男"} at js/login02.js:750
+ {"keyname":"signature","keyvalue":"暂时没想到写点什么"} at js/login02.js:750
+ */

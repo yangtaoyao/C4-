@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<form id="form1" class="mui-input-group" style="overflow: visible;">
+			<div class="mui-input-row">
+				<input name="" id="loginWPsw_phoneNumber" autocomplete="off" type="number" class="mui-input-clear" placeholder="手机号">
+			</div>
+			<ul class="mui-table-view ul_input">
+
+			</ul>
+			<div class="mui-input-row" style="z-index: 0;">
+				<input name="" type="password" autocomplete="off" class="mui-input-password" placeholder="密码">
+			</div>
+		</form>
+		<div style="margin-top: 16px;">
+			<button @tap='submit_login01($event)' id="submit_login01" style="width: 100%;height: 40px;font-size: 18px;" class="mui-btn mui-btn-primary button-waring btn" data-loading-text="登录中">密码登录</button>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src='js/jsencrypt.min.js '></script>                   >
+		<script src="js/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var encrypt = new JSEncrypt();
+			encrypt.setPublicKey('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6JbMo802QOZHkyLBc590xa9lHjBwxAU7jbDuUfUUYwxlkLdjPhxfoh+hC2HNeHuD6t975UwBpU9QQ5ewepz/+DiOkVy8fh10NtND6LijYRcKlHT4FoVhPIZV7amX2DAcRssGqRUYK2/ufE6LL3dzz/a8Qw9/i0y4LhdxrZecZ176X+6OOQnRQzKNb2c66aKXSZL7dehZuFFqd/To85r4QJt2la7xarCL3lP1/3Ax3wDwxhKPFTIpuDU1R6r7SfE7By6m1n27ikuFbWQigPr3Gx7xDPy+huTYZh+HlcGgG9dcxMwzzN1Q8fKKfecMZNcyBl4urrF+3k0SI28i3nZr0QIDAQAB');
+
+			var timestamp1 = Date.parse(new Date()) + '';
+			var pwd = timestamp1.substring(0, 9) + '_' + '123';
+			pwd = encrypt.encrypt(pwd);
+			pwd = common.urlEncode(pwd);
+			console.log('pwd:' + pwd);
+			req = {
+				id: '13763369408',
+				//id:'10001',
+				password: pwd,
+				_: timestamp1.substring(0, 9),
+				way: 'tel_pwd'
+			};
+			mui('#form1').submit(function() {
+				mui.ajax({
+					url: common.url + 'doLogin',
+					data: req.serialize(),
+					contentType: "application/x-www-form-urlencoded;charset=utf-8",
+					type: "post", //HTTP请求类型
+					timeout: 20000,
+					success: function(data) {
+						//获得服务器响应
+						res = JSON.parse(data);
+						console.log(res + '' + data);
+						if(res.suc < 0) {
+							mui.toast('发布失败：' + data);
+							console.log('发布失败：' + data);
+						} else {
+							console.log('发布成功：' + data);
+							mui.toast('发布成功!');
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；        02
+						console.log('网络请求错误:' + type + JSON.stringify(xhr));
+						if(type == 'timeout') {
+							mui.toast('网络请求超时');
+						} else {
+							mui.toast('网络请求错误');
+						}
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

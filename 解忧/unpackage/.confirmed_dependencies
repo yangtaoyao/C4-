@@ -1,136 +1,187 @@
 {
-  "index.html": {
-    "resources": [
-      "index-subpage-home.html",
-      "css/mui.min.css",
-      "fonts/mui.ttf",
-      "js/mui.min.js"
-    ],
-    "refer": [
-      "index-subpage-xiaoxi.html",
-      "index-subpage-shequ.html",
-      "index-subpage-tianjia.html",
-      "index-subpage-home.html",
-      "index-subpage-wode.html",
-      "index-subpage-wode-setting.html",
-      "guide.html",
-      "index-main.html"
-    ]
-  },
-  "index-subpage-home.html": {
-    "refer": [
-      "index-subpage-xiaoxi.html",
-      "index-subpage-home-detail.html",
-      "index-subpage-home-searching.html",
-      "index-subpage-home-ranking.html",
-      "index-subpage-home-assortment.html"
-    ],
-    "resources": [
-      "images/xunwuicon.png",
-      "css/mui.min.css",
-      "images/xuexi.png",
-      "images/xuexiicon.png",
-      "images/jietiicon.png"
-    ]
-  },
-  "index-subpage-home-ranking.html": {
-    "resources": [
-      "index-subpage-home-ranking-1.html"
-    ],
-    "refer": [
-      "index-subpage-home-ranking-3.html",
-      "index-subpage-home-ranking-2.html",
-      "index-subpage-home-ranking-1.html"
-    ]
-  },
-  "index-subpage-wode.html": {
-    "refer": [
-      "index-subpage-wode-personalPage.html",
-      "index-subpage-wode-assigment.html",
-      "index-subpage-wode-purse.html",
-      "perData.html",
-      "login02.html"
-    ],
-    "resources": []
-  },
-  "index-subpage-shequ.html": {
-    "resources": [
-      "index-subpage-home.html",
-      "shequ1.html",
-      "js/mui.min.js"
-    ],
-    "refer": [
-      "index-subpage-wode.html",
-      "index-subpage-xiaoxi.html",
-      "index-subpage-tianjia.html",
-      "index-subpage-home.html",
-      "shequ1.html",
-      "shequ2.html",
-      "shequ3.html",
-      "index-subpage-shequ-detail01.html"
-    ]
-  },
-  "index-subpage-wode-personalPage.html": {
-    "refer": [
-      "perData.html"
-    ],
-    "resources": []
-  },
-  "index-subpage-wode-setting.html": {
-    "refer": [
-      "perData.html"
-    ],
-    "resources": []
-  },
-  "index-subpage-xiaoxi.html": {
-    "refer": [
-      "chat.html"
-    ],
-    "resources": []
-  },
-  "login.html": {
-    "refer": [
-      "login.html",
-      "index-main.html"
-    ],
-    "resources": []
-  },
-  "guide.html": {
-    "refer": [
-      "login.html",
-      "index.html",
-      "index-main.html"
-    ],
-    "resources": []
-  },
-  "index-main.html": {
-    "resources": [
-      "index-subpage-home.html"
-    ],
-    "refer": [
-      "index-subpage-wode.html",
-      "index-subpage-xiaoxi.html",
-      "index-subpage-shequ.html",
-      "index-subpage-home.html",
-      "index-subpage-tianjia.html",
-      "index-subpage-wode-setting.html",
-      "guide.html",
-      "middleBtnPage.html",
-      "login.html",
-      "login02.html"
-    ]
-  },
-  "middleBtnPage.html": {
-    "refer": [
-      "index-subpage-tianjia-biaobai.html",
-      "index-subpage-tianjia-xunwu.html",
-      "index-subpage-tianjia-dongtai.html",
-      "index-subpage-tianjia.html"
-    ]
-  },
-  "login02.html": {
-    "refer": [
-      "index-main.html"
-    ]
-  }
+	"index.html": {
+		"resources": [
+			"index-subpage-home.html",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"index-subpage-xiaoxi.html",
+			"index-subpage-shequ.html",
+			"index-subpage-tianjia.html",
+			"index-subpage-home.html",
+			"index-subpage-wode.html",
+			"index-subpage-wode-setting.html",
+			"guide.html",
+			"index-main.html"
+		]
+	},
+	"index-subpage-home.html": {
+		"refer": [
+			"index-subpage-xiaoxi.html",
+			"index-subpage-home-detail.html",
+			"index-subpage-home-searching.html",
+			"index-subpage-home-ranking.html",
+			"index-subpage-home-assortment.html"
+		],
+		"resources": [
+			"images/xunwuicon.png",
+			"css/mui.min.css",
+			"images/xuexi.png",
+			"images/xuexiicon.png",
+			"images/jietiicon.png",
+			"css/home.css",
+			"images/kuaidiicon.png",
+			"images/u445.png",
+			"css/app.css",
+			"css/iconfont.css"
+		]
+	},
+	"index-subpage-home-ranking.html": {
+		"resources": [
+			"index-subpage-home-ranking-1.html"
+		],
+		"refer": [
+			"index-subpage-home-ranking-3.html",
+			"index-subpage-home-ranking-2.html",
+			"index-subpage-home-ranking-1.html"
+		]
+	},
+	"index-subpage-wode.html": {
+		"refer": [
+			"index-subpage-wode-personalPage.html",
+			"index-subpage-wode-assigment.html",
+			"index-subpage-wode-purse.html",
+			"perData.html",
+			"login02.html"
+		],
+		"resources": [
+			"images/touxiangboy.png",
+			"css/wode.css",
+			"images/touxiangdefault.png"
+		]
+	},
+	"index-subpage-shequ.html": {
+		"resources": [
+			"index-subpage-home.html",
+			"shequ1.html",
+			"js/mui.min.js",
+			"css/shequ.css",
+			"images/u445.png"
+		],
+		"refer": [
+			"index-subpage-wode.html",
+			"index-subpage-xiaoxi.html",
+			"index-subpage-tianjia.html",
+			"index-subpage-home.html",
+			"shequ1.html",
+			"shequ2.html",
+			"shequ3.html",
+			"index-subpage-shequ-detail01.html"
+		]
+	},
+	"index-subpage-wode-personalPage.html": {
+		"refer": [
+			"perData.html"
+		],
+		"resources": []
+	},
+	"index-subpage-wode-setting.html": {
+		"refer": [
+			"perData.html",
+			"login02.html",
+			"about.html",
+			"changePwd.html"
+		],
+		"resources": []
+	},
+	"index-subpage-xiaoxi.html": {
+		"refer": [
+			"chat.html"
+		],
+		"resources": [
+			"images/u454.png",
+			"css/xiaoxi.css",
+			"images/u442.png",
+			"images/u445.png"
+		]
+	},
+	"login.html": {
+		"refer": [
+			"login.html",
+			"index-main.html"
+		],
+		"resources": []
+	},
+	"guide.html": {
+		"refer": [
+			"login.html",
+			"index.html",
+			"index-main.html"
+		],
+		"resources": []
+	},
+	"index-main.html": {
+		"resources": [
+			"index-subpage-home.html",
+			"css/app.css",
+			"css/iconfont.css",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"index-subpage-wode.html",
+			"index-subpage-xiaoxi.html",
+			"index-subpage-shequ.html",
+			"index-subpage-home.html",
+			"index-subpage-tianjia.html",
+			"index-subpage-wode-setting.html",
+			"guide.html",
+			"middleBtnPage.html",
+			"login.html",
+			"login02.html"
+		]
+	},
+	"middleBtnPage.html": {
+		"refer": [
+			"index-subpage-tianjia-biaobai.html",
+			"index-subpage-tianjia-xunwu.html",
+			"index-subpage-tianjia-dongtai.html",
+			"index-subpage-tianjia.html"
+		],
+		"resources": [
+			"css/middleBtnPage.css",
+			"css/iconfont.css",
+			"css/mui.min.css"
+		]
+	},
+	"login02.html": {
+		"refer": [
+			"index-main.html"
+		]
+	},
+	"index-subpage-home-assortment.html": {
+		"refer": [
+			"offcanvas-drag-left-plus-menu.html",
+			"home-assortment-drag-left-menu.html"
+		]
+	},
+	"index-subpage-home-detail.html": {
+		"resources": [
+			"images/u367.png",
+			"images/logo.png",
+			"css/home-detail.css",
+			"images/xuexiicon.png"
+		]
+	},
+	"index-subpage-wode-purse.html": {
+		"refer": [
+			"index-subpage-wode-purse.html"
+		]
+	},
+	"index-subpage-tianjia.html": {
+		"refer": [
+			"index-subpage-tianjia.html"
+		]
+	}
 }

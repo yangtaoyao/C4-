@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="./css/mui.min.css">
+		<style>
+			body,
+			.mui-content {
+				background-color: #FFFFFF;
+				color: #333333;
+			}
+			
+			header.mui-bar {
+				display: none;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding: 0;
+			}
+			
+			.title {
+				margin: 35px 15px 10px;
+			}
+			
+			.content {
+				width: 100%;
+				padding: 10px 15px;
+				color: #bbb;
+				text-indent: 1em;
+				font-size: 14px;
+				line-height: 24px;
+			}
+			.clear{
+				clear: both;
+			}
+			.content button{
+				width: 40%;
+				margin: 10px;
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="title">分类</div>
+			<div class="content">
+					<button type="button" class="mui-btn mui-btn-outlined">学习资料</button>
+					<button type="button" class="mui-btn mui-btn-outlined">解题</button>
+					<button type="button" class="mui-btn mui-btn-outlined">生活互助</button>
+					<button type="button" class="mui-btn mui-btn-outlined">竞赛组队</button>
+					<div class="clear"></div>
+			</div>
+			<div class="title" style="margin-bottom: 25px;">排序</div>
+			<div class="content">
+					<button type="button" class="mui-btn mui-btn-outlined">时间</button>
+					<button type="button" class="mui-btn mui-btn-outlined">距离</button>
+					<div class="clear"></div>
+			</div>
+			<p style="margin: 10px 15px;position: absolute;bottom: 0;">
+				<button id="close-btn" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;width: 100%;">关闭</button>
+			</p>
+		</div>
+		<script src="./js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			//关闭back、menu按键监听，这样侧滑主界面会自动获得back和memu的按键事件，仅在主界面处理按键逻辑即可；
+			mui.init({
+				keyEventBind: {
+					backbutton: false,
+					menubutton: false
+				}
+			});
+			var main = null;
+			mui.plusReady(function() {
+				main = plus.webview.currentWebview().opener();
+			})
+
+			function closeMenu() {
+				mui.fire(main, "menu:swiperight");
+			}
+
+			document.getElementById("close-btn").addEventListener('tap', closeMenu);
+		</script>
+	</body>
+
+</html>

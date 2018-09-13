@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">关于</h1>
+		</header>
+		<div id="about">
+			<div style="background: none;padding:20px 10px ;margin-top: 80px;font-size: 18px;text-align: center;">
+				<img src="images/logo.png" />
+				
+			</div>
+			<div style="background: none;margin:10px;font-size: 18px;text-align: center;">
+				<h4>解忧APP</h4>
+				<h5>有了解忧不烦恼。你的学习、生活的烦恼由我们来承包了</h5>
+				<h6>
+					由解忧开发小组开发
+				</h6>
+			</div>
+
+			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 50px;">
+
+				<li class="mui-table-view-cell">
+					<a @tap="update">版本更新</a>
+				</li>
+			</ul>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var about = new Vue({
+				el: '#about',
+				data: {
+
+				},
+				computed: {
+					isLoginOrLogout: function() {
+						if(this.isLogin == "true") {
+							return "安全退出";
+						} else {
+							return "立即登录";
+						}
+					},
+				}
+			});
+
+			function update() {
+				setTimeout(function() {
+					mui.toast('已是最新版本')
+				}, 500)
+			}
+		</script>
+	</body>
+
+</html>

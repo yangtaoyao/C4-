@@ -19,17 +19,6 @@ mui.init({
 	},
 
 });
-
-//mui('.assortment_scroll').scroll({
-//	deceleration: 0.001, //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-//	scrollY: false, //是否竖向滚动
-//	scrollX: true, //是否横向滚动
-//	startX: 0, //初始化时滚动至x
-//	//startY: 0, //初始化时滚动至y
-//	indicators: false, //是否显示滚动条
-//	deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
-//	bounce: true //是否启用回弹
-//});
 var lastId = '',
 	minId = ''; //最新新闻的id 
 var webview_detail = null; //详情页webview
@@ -38,7 +27,6 @@ mui.plusReady(function() {
 	slider.slider({
 		interval: 5000
 	});
-
 	webview_detail = mui.preload({
 		url: 'index-subpage-home-detail.html',
 		id: 'index-subpage-home-detail',
@@ -69,12 +57,63 @@ mui.plusReady(function() {
 var home = new Vue({
 	el: '#pullrefresh',
 	data: {
-		assortment:['推荐','推荐','推荐','推荐','推荐'],
+		assortment: [{
+				title: '推荐',
+				desc: '10个任务正在进行中'
+			},
+			{
+				title: '学习资料分享',
+				desc: '12个任务正在进行中'
+			},
+			{
+				title: '学霸来支招',
+				desc: '8个任务正在进行中'
+			},
+			{
+				title: '校园竞赛组队',
+				desc: '1个任务正在进行中'
+			},
+			{
+				title: '生活互助服务',
+				desc: '8个任务正在进行中'
+			},
+			{
+				title: '生活互助服务',
+				desc: '8个任务正在进行中'
+			}
+		],
 		list01: {
 
 		},
 		list02: [],
 		list03: [{
+			"id": 67383,
+			"from_id": "36kr",
+			"title": "C语言指针溢出问题",
+			"published_at": "2018-08-19 15:16:04",
+
+			"created_at": "2018-08-19 15:21:05",
+			"updated_at": "2018-08-19 15:21:05"
+		}, {
+			"id": 67379,
+			"from_id": "36kr",
+			"title": "解个高数问题",
+			"published_at": "2018-08-19 14:45:33",
+			"store_at": "0000-00-00 00:00:00",
+			"type": "news",
+			"created_at": "2018-08-19 14:52:04",
+			"updated_at": "2018-08-19 14:52:04"
+		}, {
+			"id": 67380,
+			"from_id": "36kr",
+			"title": "请教一下学长如何为考研准备",
+			"published_at": "2018-08-19 14:41:22",
+			"store_at": "0000-00-00 00:00:00",
+			"type": "news",
+			"created_at": "2018-08-19 14:52:04",
+			"updated_at": "2018-08-19 14:52:04"
+		},
+		{
 			"id": 67383,
 			"from_id": "36kr",
 			"title": "为了殖民火星，人类必须进行一场激进的基因改造",
@@ -143,24 +182,22 @@ var home = new Vue({
 		fullName: {
 			// getter
 			get: function() {
-				return this.firstName + ' ' + this.lastName
+
 			},
 			// setter
 			set: function(newValue) {
-				var names = newValue.split(' ')
-				this.firstName = names[0]
-				this.lastName = names[names.length - 1]
+
 			}
 		},
 		//判断是否有数据
 		isL1HasConent: function() {
-			(list01.length==0)?false:true;
+			return(this.list01 === null) ? false : true;
 		},
 		isL2HasConent: function() {
-			(list02.length==0)?false:true;
+			return(this.list02 === undefined || this.list02.length == 0) ? false : true;
 		},
 		isL3HasConent: function() {
-			(list03.length==0)?false:true;
+			return(this.list03 === undefined || this.list03.length == 0) ? false : true;
 		}
 	}
 });
@@ -243,39 +280,39 @@ var count = 0;
 //上拉刷新
 function pullupRefresh() {
 	setTimeout(function() {
-//		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 10)); //参数为true代表没有更多数据了。
-//		var table = document.body.querySelector('.list02');
-//		var cells = document.body.querySelectorAll('.home-table-view-cell');
-//		var newCount = cells.length > 0 ? 5 : 20; //首次加载20条，满屏
-		for(var i = cells.length, len = i + newCount; i < len; i++) {
-			//			var li = document.createElement('li');
-			//			li.className = 'home-table-view-cell';
-			//			li.innerHTML =
-			//				'<a href="#" class="home-card ">' +
-			//				'<div class="home-card-left ">' +
-			//				'<span>最急</span>' +
-			//				'<img src="images/kuaidiicon.png" />' +
-			//				'<p>学习</p>' +
-			//				'</div>' +
-			//				'<div class="home-card-right ">' +
-			//				'<h5>帮帮单' + Math.ceil(10 * Math.random()) + '</h5>' +
-			//				'<p class="deadline"><span>截止 </span><span >' + new Date() + '</span></p>' +
-			//				'<p ><span class="reward">¥8.00</span><span class="participants">' + Math.ceil(10 * Math.random()) + '人</span></p>' +
-			//				'</div>' +
-			//				'</a>';
-			//
-			//			var a = li.getElementsByTagName('a')[0];
-			//			var span = (a.children[0]).getElementsByTagName('span')[0];
-			//			var img = (a.children[0]).getElementsByTagName('img')[0];
-			//			var p = (a.children[0]).getElementsByTagName('p')[0];
-			//			//更新数据
-			//			a.src = 'index-subpage-wode.html';
-			//			span = '最新';
-			//			var imgs = ['images/xuexi.png', 'images/xuexiicon.png', 'images/xunwuicon.png', 'images/kuaidiicon.png', 'images/jietiicon.png']
-			//			img.src = imgs[parseInt(Math.random() * 5)];
-			//
-			//			table.appendChild(li);
-		}
+		//		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 10)); //参数为true代表没有更多数据了。
+		//		var table = document.body.querySelector('.list02');
+		//		var cells = document.body.querySelectorAll('.home-table-view-cell');
+		//		var newCount = cells.length > 0 ? 5 : 20; //首次加载20条，满屏
+		//for(var i = cells.length, len = i + newCount; i < len; i++) {
+		//			var li = document.createElement('li');
+		//			li.className = 'home-table-view-cell';
+		//			li.innerHTML =
+		//				'<a href="#" class="home-card ">' +
+		//				'<div class="home-card-left ">' +
+		//				'<span>最急</span>' +
+		//				'<img src="images/kuaidiicon.png" />' +
+		//				'<p>学习</p>' +
+		//				'</div>' +
+		//				'<div class="home-card-right ">' +
+		//				'<h5>帮帮单' + Math.ceil(10 * Math.random()) + '</h5>' +
+		//				'<p class="deadline"><span>截止 </span><span >' + new Date() + '</span></p>' +
+		//				'<p ><span class="reward">¥8.00</span><span class="participants">' + Math.ceil(10 * Math.random()) + '人</span></p>' +
+		//				'</div>' +
+		//				'</a>';
+		//
+		//			var a = li.getElementsByTagName('a')[0];
+		//			var span = (a.children[0]).getElementsByTagName('span')[0];
+		//			var img = (a.children[0]).getElementsByTagName('img')[0];
+		//			var p = (a.children[0]).getElementsByTagName('p')[0];
+		//			//更新数据
+		//			a.src = 'index-subpage-wode.html';
+		//			span = '最新';
+		//			var imgs = ['images/xuexi.png', 'images/xuexiicon.png', 'images/xunwuicon.png', 'images/kuaidiicon.png', 'images/jietiicon.png']
+		//			img.src = imgs[parseInt(Math.random() * 5)];
+		//
+		//			table.appendChild(li);
+		//}
 	}, 1500);
 }
 

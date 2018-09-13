@@ -18,11 +18,11 @@
 				position: absolute;
 				display: block;
 				top: 28%;
-				width: 200px;
+				width: 130px;
 				height: 100px;
-				left: calc( 50% - 100px);
-				left: -webkit- calc( 50% - 100px);
-				left: -moz- calc( 50% - 100px);
+				left: calc( 50% - 65px);
+				left: -webkit- calc( 50% - 65px);
+				left: -moz- calc( 50% - 65px);
 				/*box-shadow: 0 1px 6px 1px #c8c7cc;
 				border-radius: 50%;*/
 			}
@@ -145,9 +145,9 @@
 			<div class="mui-page-content" style="position: absolute;background: #000000;;height: auto;">
 				<!--<div style="position: relative;height: 100%;width: 100%;">-->
 
-				<img class="guide-img" src="images/guide.jpg" style="width: 100%;height: 100%;position: absolute;" />
+				<img class="guide-img" src="images/guide_bg02.jpg" style="width: 100%;height: 100%;position: absolute;" />
 
-				<img src="images/logo04.png" id="logo"></img>
+				<img src="images/logo05.png" id="logo"></img>
 				<a id="goto_login" type="button" class="mui-btn" href="#login">登录</a>
 				<a id="goto_register" type="button" class="mui-btn" href="#register">注册</a>
 				<a id="start" class="mui-btn">跳过</a>
@@ -314,18 +314,16 @@
 
 		<script src="js/mui.min.js "></script>
 		<script src="js/mui.view.js "></script>
+		<script src='js/jsencrypt.min.js'></script>
 		<script src="js/common.js"></script>
 		<script src="js/jquery-1.11.3.min.js"></script>
-		<script src='js/jsencrypt.min.js'></script>
 		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src='js/handleSMS.js'></script>
 		<script src='js/login02.js'></script>
 		
 		<script>
 			mui.init();
-			mui.plusReady(function() {
-				
-			})
+			var viewApi = '';
 		</script>
 	</body>
 

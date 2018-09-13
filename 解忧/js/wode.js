@@ -1,19 +1,61 @@
 /*
  *
  */
-
 mui.plusReady(function() {
 	var Login = myStorage.getItem("isLogin");
 	//var logbtnnode=document.getElementsByClassName("logout")[0].children[0];
 	//console.log(typeof launch);
 	if(Login == "true") {
 		wode.isLogin = true;
-		wode.isLogout = false;
 	} else {
 		wode.isLogin = false;
-		wode.isLogout = true;
+	}
+
+	//var userInfo = myStorage.getItem("userInfo");
+	var len = myStorage.getLength();
+	for(var i = 0; i < len; i++) {
+		var str = JSON.stringify(myStorage.getItemByIndex(i));
+		console.log("myStorage:" + str);
 	}
 })
+
+function goto_perPage() {
+	var titleNView = {
+    backgroundColor: '#f7f7f7',//导航栏背景色
+    titleText: '透明渐变(native模式)',//导航栏标题
+    titleColor: '#000000',//文字颜色
+    type:'transparent',//透明渐变样式
+    autoBackButton: true,//自动绘制返回箭头
+    splitLine:{//底部分割线
+        color:'#cccccc'
+    }
+}
+	mui.openWindow({
+		id: 'index-subpage-wode-personalPage.html',
+		url: 'index-subpage-wode-personalPage.html',
+		waiting: {
+			autoShow: true, //自动显示等待框，默认为true
+			title: '加载中...', //等待对话框上显示的提示内容
+			options: common.WaitingLoadingOptions
+		},
+//		styles:{
+//		titleNView: titleNView
+//		}
+	});
+}
+
+function goto_perData(event) {
+	event.stopPropagation();
+	mui.openWindow({
+		id: 'perData.html',
+		url: 'perData.html',
+		waiting: {
+			autoShow: true, //自动显示等待框，默认为true
+			title: '加载中...', //等待对话框上显示的提示内容
+			options: common.WaitingLoadingOptions
+		}
+	});
+}
 
 function goto_login() {
 	//打开登录页
@@ -37,6 +79,10 @@ function goto_login() {
 }
 
 function goto_assigment() {
+	if(!wode.isLogin) {
+		goto_login();
+		return;
+	}
 	console.log('isLogin:' + myStorage.getItem('isLogin'));
 	console.log('wode.isLogin:' + wode.isLogin);
 	console.log('wode.isLogout:' + wode.isLogout);
@@ -52,6 +98,11 @@ function goto_assigment() {
 }
 
 function goto_purse() {
+	if(!wode.isLogin) {
+		goto_login();
+		return;
+	}
+
 	mui.openWindow({
 		id: 'index-subpage-wode-purse.html',
 		url: 'index-subpage-wode-purse.html',
@@ -62,7 +113,54 @@ function goto_purse() {
 		}
 	});
 }
+//账单
+function goto_bill() {
+	if(!wode.isLogin) {
+		goto_login();
+		return;
+	}
+	mui.openWindow({
+		id: 'index-subpage-wode-assigment.html',
+		url: 'index-subpage-wode-assigment.html',
+		waiting: {
+			autoShow: true, //自动显示等待框，默认为true
+			title: '加载中...', //等待对话框上显示的提示内容
+			options: common.WaitingLoadingOptions
+		}
+	});
+}
 
+function goto_shoucang() {
+	if(!wode.isLogin) {
+		goto_login();
+		return;
+	}
+	mui.openWindow({
+		id: 'index-subpage-wode-assigment.html',
+		url: 'index-subpage-wode-assigment.html',
+		waiting: {
+			autoShow: true, //自动显示等待框，默认为true
+			title: '加载中...', //等待对话框上显示的提示内容
+			options: common.WaitingLoadingOptions
+		}
+	});
+}
+
+function goto_pinglun() {
+	if(!wode.isLogin) {
+		goto_login();
+		return;
+	}
+	mui.openWindow({
+		id: 'index-subpage-wode-assigment.html',
+		url: 'index-subpage-wode-assigment.html',
+		waiting: {
+			autoShow: true, //自动显示等待框，默认为true
+			title: '加载中...', //等待对话框上显示的提示内容
+			options: common.WaitingLoadingOptions
+		}
+	});
+}
 //个人主页原生渐变标题栏
 //			var titleNView = {
 //				backgroundColor: '#f7f7f7', //导航栏背景色
@@ -74,67 +172,83 @@ function goto_purse() {
 //					color: '#cccccc'
 //				}
 //			}
-function goto_perPage() {
-	mui.openWindow({
-		id: 'index-subpage-wode-personalPage.html',
-		url: 'index-subpage-wode-personalPage.html',
-		waiting: {
-			autoShow: true, //自动显示等待框，默认为true
-			title: '加载中...', //等待对话框上显示的提示内容
-			options: common.WaitingLoadingOptions
-		}
-	});
-}
-
-function goto_perData(event) {
-	event.stopPropagation();
-	mui.openWindow({
-		id: 'perData.html',
-		url: 'perData.html',
-		waiting: {
-			autoShow: true, //自动显示等待框，默认为true
-			title: '加载中...', //等待对话框上显示的提示内容
-			options: common.WaitingLoadingOptions
-		}
-	});
-}
-
 var wode = new Vue({
 	el: '#wode',
 	data: {
-		isLogin: true,
-		isLogout: false,
-		userInfo:{
-			uid:'',
-			data:{
-				name:'',
-				signature:'',
-				desc:'',
-				sex:'',
-				age:'',
-				city:'',
-				email:''
-			}
+		isLogin: false,
+		userInfo: {
+			uid: '',
+			nickname: '',
+			signature: '',
+			desc: '',
+			sex: '',
+			age: '',
+			city: '',
+			email: '',
+			imgUrl: '',
+			tel: ''
+		}
+	},
+	computed: {
+		isLogout: function() {
+			return !this.isLogin;
 		}
 	}
 });
 
-//更新登录状态
-function updateIsLogin(isLogin) {
-	wode.isLogin = isLogin;
-	wode.isLogout = !isLogin;
-	console.log(wode.isLogin)
-}
+//初始化用户信息
+function initInfo() {
+	if(!myStorage.getItem('userInfo')) {
+		var userInfo = {
+			age: 0,
+			balance: 0,
+			birthday: "",
+			city: "",
+			credit: 0,
+			crttime: "",
+			description: "",
+			email: "",
+			imgUrl: "",
+			nickname: "默认昵称",
+			openid: "",
+			regTel: "",
+			sex: "",
+			signature: "",
+			tel: "",
+			uid: ""
+		}
+	} else {
+		var userInfo = JSON.parse(myStorage.getItem('userInfo'));
+		wode.userInfo.uid = userInfo.uid;
+		if(userInfo.nickname != "") {
+			wode.userInfo.nickname = userInfo.nickname;
+		}
+		if(userInfo.signature != "") {
+			wode.userInfo.signature = userInfo.signature;
+		}
+		if(userInfo.imgUrl != "") {
+			wode.userInfo.imgUrl = userInfo.imgUrl;
+		}
+	}
+	myStorage.setItem('userInfo', JSON.stringify(userInfo));
+	var len = myStorage.getLength();
+	for(var i = 0; i < len; i++) {
+		var str = JSON.stringify(myStorage.getItemByIndex(i));
+		console.log(str);
+	}
 
-//获取用户信息
-function initInfo(){
-	wode.userInfo.data.name=myStorage.getItem('name');
-	wode.userInfo.data.signature=myStorage.getItem('signature');
+	if(myStorage.getItem("isLogin") == "true") {
+		wode.isLogin = true;
+	} else {
+		wode.isLogin = false;
+	}
+	console.log(wode.isLogin)
+	console.log('wode:initInfo');
 }
 initInfo();
 //获取用户信息
-function changeInfo(){
-	
+function changeInfo() {
+
 }
 //获取用户信息
 function getInfo() {

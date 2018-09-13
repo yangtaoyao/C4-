@@ -93,18 +93,22 @@
 			</a>
 		</nav>
 		<script src="js/mui.min.js"></script>
+		<script src="js/common.js"></script>
 		<script src="js/vue.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			mui.init({});
 			mui.plusReady(function() {
 
 				mui("body").on("tap", ".btn-item", function() {
-					
 					var self=plus.webview.currentWebview();
 					plus.webview.hide(self,"fade-out", 400);
-					
 					var thisNode = this.children[0];
 					var thisSpan = thisNode.children[1];
+					
+					if(myStorage.getItem("isLogin")=="false"){
+						mui.toast('请先登录')
+						return;
+					}
 					switch(thisSpan.innerText) {
 						case "任务":
 							mui.openWindow({
@@ -237,8 +241,6 @@
 							//							});
 							break;
 					}
-					
-					
 				});
 
 			});
@@ -246,11 +248,13 @@
 			var vm = new Vue({
 				el: '#vm_time',
 				data: {
+					isLogin:'',
 					time: {},
 					weather: {},
 				},
 
 			})
+			
 			var date = "";
 			document.addEventListener('get_time', function(event) {
 				vm.time = {

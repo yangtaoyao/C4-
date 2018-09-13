@@ -16,6 +16,47 @@ mui.plusReady(function() {
 	 * 若不存在，说明是首次启动，进入引导页；
 	 */
 	var showGuide = myStorage.getItem("launchFlag");
+	var isLogin = myStorage.getItem("isLogin");
+	if(!isLogin) {
+		myStorage.setItem("isLogin", "false");
+	} else {
+		mui.ajax(common.url + 'doLogin', {
+			data: '',
+			type: 'post', //HTTP请求类型
+			timeout: 20000,
+			success: function(data) {
+				//获得服务器响应
+				res = JSON.parse(data);
+				console.log(data + '' + res.msg);
+				if(res.suc < 0) {
+					console.log('自动登录失败：' + JSON.stringify(res));
+					mui.toast('自动登录失败!');
+					myStorage.setItem("isLogin", "false");
+				} else {
+					console.log('自动登录成功：' + JSON.stringify(res));
+					mui.toast('自动登录成功!');
+					myStorage.setItem("isLogin", "true");
+				}
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；        02
+				console.log('网络请求错误:' + type);
+				mui(thisNode).button('reset');
+				if(type == 'timeout') {
+					mui.toast('网络请求超时');
+				} else {
+					mui.toast('网络请求错误');
+				}
+				myStorage.setItem("isLogin", "false");
+			}
+		});
+	}
+
+	if(showGuide == undefined) {
+		myStorage.setItem("launchFlag", "false");
+		showGuide = myStorage.getItem("launchFlag");
+	}
+
 	//仅支持竖屏显示
 	plus.screen.lockOrientation("portrait-primary");
 	if(showGuide == "true") {
@@ -89,7 +130,7 @@ mui.plusReady(function() {
 	wode_righticon.className = 'mui-icon mui-pull-right mui-icon-gear-filled';
 	wode_righticon.addEventListener('tap', function() {
 		mui.openWindow({
-			id: 'iindex-subpage-wode-setting.html',
+			id: 'index-subpage-wode-setting.html',
 			url: 'index-subpage-wode-setting.html',
 			waiting: {
 				autoShow: true, //自动显示等待框，默认为true
@@ -269,3 +310,5 @@ mui.back = function() {
 		}
 	}
 };
+
+myStorage.clear()

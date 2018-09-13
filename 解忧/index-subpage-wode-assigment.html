@@ -19,294 +19,220 @@
 				<a class="mui-control-item" href="#page2">帮TA</a>
 			</h5>
 		</header>
+		<div id="assigment">
 
-		<!--帮我页面 --page1-->
-		<div id="page1" class="mui-control-content mui-active mui-fullscreen">
-			<div id="page1_slider" class="mui-slider">
-				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item mui-active" href="#page1_item1">
-						正在进行
-					</a>
-					<a class="mui-control-item" href="#page1_item2">
-						未接单
-					</a>
-					<a class="mui-control-item" href="#page1_item3">
-						已完成
-					</a>
-				</div>
-				<!--div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4">
+			<!--帮我页面 --page1-->
+			<div id="page1" class="mui-control-content mui-active mui-fullscreen">
+				<div id="page1_slider" class="mui-slider">
+					<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<a class="mui-control-item mui-active" href="#page1_item1">
+							正在进行
+						</a>
+						<a class="mui-control-item" href="#page1_item2">
+							未接单
+						</a>
+						<a class="mui-control-item" href="#page1_item3">
+							已完成
+						</a>
+					</div>
+					<!--div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4">
 			</div>-->
-				<div class="mui-slider-group">
-					<div id="page1_item1" class="mui-slider-item mui-control-content mui-active ">
-						<div id="page1_scroll1" class="mui-scroll-wrapper ">
-							<ul class="mui-table-view mui-table-view-chevron mui-scroll">
-								<li class="mui-table-view-cell mui-media">
-									<a class="mui-navigate-right card">
-										<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-										<h6>截止至 2018.6.18 22:30</h6>
-										<div>
-											<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/u445.png">
-											<div class="mui-media-body">
-												<h5>
-													hello解忧
-												</h5>
-												<h6 class='mui-ellipsis'>1小时前</h6>
-											</div>
-
-											<div class="pay">
-												<span>赏金：</span>
-												<i>10￥</i>
-												<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-												支付
-												</button>
-											</div>
-
-										</div>
-
-									</a>
-								</li>
-
-							</ul>
-						</div>
-					</div>
-					<div id="page1_item2" class="mui-slider-item mui-control-content">
-						<div id="page1_scroll2" class="mui-scroll-wrapper">
-
-							<ul class="mui-table-view mui-table-view-chevron mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
-
+					<div class="mui-slider-group">
+						<div id="page1_item1" class="mui-slider-item mui-control-content mui-active ">
+							<div id="page1_scroll1" class="mui-scroll-wrapper ">
+								<ul class="mui-table-view mui-table-view-chevron mui-scroll">
+									<div class="noConent" v-if="!isL1_01HasConent">
+										<h4>暂时没有任务</h4>
 									</div>
-								</div>
-
-								<!--<li class="mui-table-view-cell mui-media">
-									<a class="mui-navigate-right card">
-										<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-										<h6>截止至 2018.6.18 22:30</h6>
-										<div>
-											<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/u445.png">
-											<div class="mui-media-body">
-												<h5>
-													hello解忧
+									<li class="mui-table-view-cell mui-media" v-for="item in list0101" v-if="isL1_01HasConent">
+										<a class="mui-navigate-right card">
+											<h4 class="mui-ellipsis">{{item.content}}</h4>
+											<h6>截止至 {{item.expiretime}}</h6>
+											<div>
+												<img id="head-img" class="mui-media-object mui-pull-left 
+										head-img" src="images/touxiangdefault.png">
+												<div class="mui-media-body">
+													<h5>
+													{{item.uid}}
 												</h5>
-												<h6 class='mui-ellipsis'>1小时前</h6>
+													<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+												</div>
+
+												<div class="pay">
+													<span>赏金：</span>
+													<i>{{item.price}}金币</i>
+													<button @tap="" type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
+														支付
+													</button>
+												</div>
+
 											</div>
-										</div>
 
-									</a>
-								</li>-->
-
-							</ul>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<div id="page1_item3" class="mui-slider-item mui-control-content">
-						<div id="page1_scroll3" class="mui-scroll-wrapper">
-							<ul class="mui-table-view mui-table-view-chevron mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
+						<div id="page1_item2" class="mui-slider-item mui-control-content">
+							<div id="page1_scroll2" class="mui-scroll-wrapper">
 
+								<ul class="mui-table-view mui-table-view-chevron mui-scroll">
+									<div class="noConent" v-if="!isL1_02HasConent">
+										<h4>暂时没有任务</h4>
 									</div>
-								</div>
-								<!--<li class="mui-table-view-cell mui-media">
-									<a class="mui-navigate-right card">
-										<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-										<h6>截止至 2018.6.18 22:30</h6>
-										<div>
-											<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/u445.png">
-											<div class="mui-media-body">
-												<h5>
-													hello解忧
+
+									<li class="mui-table-view-cell mui-media" v-for="item in list0102" v-if="isL1_02HasConent">
+										<a class="mui-navigate-right card">
+											<h4 class="mui-ellipsis">{{item.content}}</h4>
+											<h6>截止至 {{item.expiretime}}</h6>
+											<div>
+												<img id="head-img" class="mui-media-object mui-pull-left 
+										head-img" src="images/touxiangdefault.png">
+												<div class="mui-media-body">
+													<h5>
+													{{item.uid}}
 												</h5>
-												<h6 class='mui-ellipsis'>1小时前</h6>
+													<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+												</div>
+
+												<div class="pay">
+													<span>赏金：</span>
+													<i>{{item.price}}金币</i>
+												</div>
 											</div>
+										</a>
+									</li>
 
-											<div class="pay">
-												<span>赏金：</span>
-												<i>10￥</i>
-												<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-												已支付
-												</button>
-											</div>
-
-										</div>
-
-									</a>
-								</li>-->
-
-							</ul>
+								</ul>
+							</div>
 						</div>
-					</div>
+						<div id="page1_item3" class="mui-slider-item mui-control-content">
+							<div id="page1_scroll3" class="mui-scroll-wrapper">
+								<ul class="mui-table-view mui-table-view-chevron mui-scroll">
+									<div class="noConent" v-if="!isL1_03HasConent">
+										<h4>暂时没有任务</h4>
+									</div>
+									<li class="mui-table-view-cell mui-media" v-for="item in list0103" v-if="isL1_03HasConent">
+										<a class="mui-navigate-right card">
+											<h4 class="mui-ellipsis">{{item.content}}</h4>
+											<h6>截止至 {{item.expiretime}}</h6>
+											<div>
+												<img id="head-img" class="mui-media-object mui-pull-left 
+										head-img" src="images/touxiangdefault.png">
+												<div class="mui-media-body">
+													<h5>
+													{{item.uid}}
+												</h5>
+													<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+												</div>
 
+												<div class="pay">
+													<span>赏金：</span>
+													<i>{{item.price}}金币</i>
+												</div>
+											</div>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<!--帮TA页面 --page2-->
-		<div id="page2" class="mui-control-content  mui-fullscreen">
-			<div id="page2_slider" class="mui-slider">
-				<div id="sliderSegmentedControl2" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item mui-active" href="#page2_item1">
-						正在进行
-					</a>
-					<a class="mui-control-item" href="#page2_item2">
-						已完成
-					</a>
-					<a class="mui-control-item"></a>
-				</div>
-				<!--				<div id="sliderProgressBar2" class="mui-slider-progress-bar mui-col-xs-4"></div>
+			<!--帮TA页面 --page2-->
+			<div id="page2" class="mui-control-content  mui-fullscreen">
+				<div id="page2_slider" class="mui-slider">
+					<div id="sliderSegmentedControl2" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<a class="mui-control-item mui-active" href="#page2_item1">
+							正在进行
+						</a>
+						<a class="mui-control-item" href="#page2_item2">
+							已完成
+						</a>
+						<a class="mui-control-item"></a>
+					</div>
+					<!--				<div id="sliderProgressBar2" class="mui-slider-progress-bar mui-col-xs-4"></div>
 -->
-				<div class="mui-slider-group">
-					<div id="page2_item1" class="mui-slider-item mui-control-content mui-active">
-						<div id="page2_scroll1" class="mui-scroll-wrapper ">
-							<ul class="mui-table-view mui-table-view-chevron mui-scroll">
-								<!--<div class="mui-loading">
-									<div class="mui-spinner">
-
+					<div class="mui-slider-group">
+						<div id="page2_item1" class="mui-slider-item mui-control-content mui-active">
+							<div id="page2_scroll1" class="mui-scroll-wrapper ">
+								<ul class="mui-table-view mui-table-view-chevron mui-scroll">
+									<div class="noConent" v-if="!isL2_01HasConent">
+										<h4>暂时没有任务</h4>
 									</div>
-								</div>-->
-								<li class="mui-table-view-cell mui-media">
-									<a class="mui-navigate-right card">
-										<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-										<h6>截止至 2018.6.18 22:30</h6>
-										<div>
-											<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/u445.png">
-											<div class="mui-media-body">
-												<h5>
-													hello解忧
+									<li class="mui-table-view-cell mui-media" v-for="item in list0201" v-if="isL2_01HasConent">
+										<a class="mui-navigate-right card">
+											<h4 class="mui-ellipsis">{{item.content}}</h4>
+											<h6>截止至 {{item.expiretime}}</h6>
+											<div>
+												<img id="head-img" class="mui-media-object mui-pull-left 
+										head-img" src="images/touxiangdefault.png">
+												<div class="mui-media-body">
+													<h5>
+													{{item.uid}}
 												</h5>
-												<h6 class='mui-ellipsis'>1小时前</h6>
+													<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+												</div>
+
+												<div class="pay">
+													<span>赏金：</span>
+													<i>{{item.price}}金币</i>
+												</div>
 											</div>
-										</div>
+										</a>
+									</li>
 
-									</a>
-								</li>
-
-							</ul>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<div id="page2_item2" class="mui-slider-item mui-control-content">
-						<div id="page2_scroll2" class="mui-scroll-wrapper">
-							<ul class="mui-table-view mui-table-view-chevron mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
-
+						<div id="page2_item2" class="mui-slider-item mui-control-content">
+							<div id="page2_scroll2" class="mui-scroll-wrapper">
+								<ul class="mui-table-view mui-table-view-chevron mui-scroll">
+									<div class="noConent" v-if="!isL2_02HasConent">
+										<h4>暂时没有任务</h4>
 									</div>
-								</div>
-								<!--<li class="mui-table-view-cell mui-media">
-									<a class="mui-navigate-right card">
-										<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>
-										<h6>截止至 2018.6.18 22:30</h6>
-										<div>
-											<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/u445.png">
-											<div class="mui-media-body">
-												<h5>
-													hello解忧
+									<li class="mui-table-view-cell mui-media" v-for="item in list0202" v-if="isL2_02HasConent">
+										<a class="mui-navigate-right card">
+											<h4 class="mui-ellipsis">{{item.content}}</h4>
+											<h6>截止至 {{item.expiretime}}</h6>
+											<div>
+												<img id="head-img" class="mui-media-object mui-pull-left 
+										head-img" src="images/touxiangdefault.png">
+												<div class="mui-media-body">
+													<h5>
+													{{item.uid}}
 												</h5>
-												<h6 class='mui-ellipsis'>1小时前</h6>
+													<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+												</div>
+
+												<div class="pay">
+													<span>赏金：</span>
+													<i>{{item.price}}金币</i>
+												</div>
 											</div>
+										</a>
+									</li>
 
-											<div class="pay">
-												<span>赏金：</span>
-												<i>10￥</i>
-												<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-												已支付
-												</button>
-											</div>
+								</ul>
+							</div>
 
-										</div>
-
-									</a>
-								</li>-->
-
-							</ul>
 						</div>
 
 					</div>
-
 				</div>
 			</div>
 		</div>
-
 		<script src="js/mui.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/wode-assigment.js"></script>
 		<script type="text/javascript">
 			mui.init({
 
 			});
-			(function($) {
-				$('.mui-scroll-wrapper').scroll({
-					indicators: true //是否显示滚动条
-				});
-				var segmentedControl = document.getElementById('segmentedControl');
-
-				var html2 ='<li class="mui-table-view-cell mui-media">'+
-									'<a class="mui-navigate-right card">'+
-										'<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>'+
-										'<h6>截止至 2018.6.18 22:30</h6>'+
-										'<div>'+
-										'<img id="head-img" class="mui-media-object mui-pull-left head-img" src="images/u445.png">'+
-										'<div class="mui-media-body">'+
-										'<h5>hello解忧</h5>'+
-										'<h6 class="mui-ellipsis>1小时前</h6>'+
-										'</div>'+
-										'</div>'+
-									'</a>'+
-							'</li>';
-				var html3 = '<li class="mui-table-view-cell mui-media">'+
-									'<a class="mui-navigate-right card">'+
-										'<h4 class="mui-ellipsis">C语言空指针异常和访0x0000005异常</h4>'+
-										'<h6>截止至 2018.6.18 22:30</h6>'+
-									'	<div>'+
-									'		<img id="head-img" class="mui-media-object mui-pull-left '+
-									'	head-img" src="images/u445.png">'+
-									'		<div class="mui-media-body">'+
-									'		<h5>hello解忧</h5>'+
-									'		<h6 class="mui-ellipsis">1小时前</h6>'+
-									'		</div>'+
-									'		<div class="pay">'+
-									'		<span>赏金：</span>'+
-									'		<i>10￥</i>'+
-									'		<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">'+
-									'		已支付'+
-									'		</button>'+
-									'		</div>'+
-									'	</div>'+
-									'</a>'+
-								'</li>';
-				var page1_item2 = document.getElementById('page1_item2');
-				var page1_item3 = document.getElementById('page1_item3');
-				document.getElementById('page1_slider').addEventListener('slide', function(e) {
-					if(e.detail.slideNumber === 1) {
-						if(page1_item2.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								page1_item2.querySelector('.mui-scroll').innerHTML = html2;
-							}, 500);
-						}
-					} else if(e.detail.slideNumber === 2) {
-						if(page1_item3.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								page1_item3.querySelector('.mui-scroll').innerHTML = html3;
-							}, 500);
-						}
-					}
-
-				});
-
-				var page2_item2 = document.getElementById('page2_item2');
-				document.getElementById('page2_slider').addEventListener('slide', function(e) {
-					if(e.detail.slideNumber === 1) {
-						if(page2_item2.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								page2_item2.querySelector('.mui-scroll').innerHTML = html2;
-							}, 500);
-						}
-					}
-				});
-			})(mui);
 		</script>
 	</body>
 

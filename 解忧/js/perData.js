@@ -1,29 +1,174 @@
 mui.init();
 mui.plusReady(function() {
 	//初始化数据
-	initData();
-	console.log(myStorage.getLength())
-
-	for(var i = 0, len = myStorage.getLength(); i < len; i++) {
-		console.log(JSON.stringify(myStorage.getItemByIndex(i)))
-	}
+	//console.log(myStorage.getLength())
+	//	for(var i = 0, len = myStorage.getLength(); i < len; i++) {
+	//		console.log(JSON.stringify(myStorage.getItemByIndex(i)))
+	//	}
 	//myStorage.clear();
-	console.log('myStorage.getLength():' + myStorage.getLength())
+	//console.log('myStorage.getLength():' + myStorage.getLength())
 });
 
 //初始化单页view
 var viewApi = mui('#app').view({
 	defaultPage: '#setting'
 });
+
+var setting = new Vue({
+	el: '#setting',
+	data: {
+		uid: ' ',
+		nickname: '',
+		signature: '',
+		sex: ' ',
+		age: ' ',
+		city: ' ',
+		email: ' ',
+		imgUrl: ' ',
+		tel: ' '
+	},
+	computed: {
+
+	}
+});
+var perIndruction = new Vue({
+	el: '#perIndruction',
+	data: {
+		description: ''
+	},
+	computed: {
+
+	}
+});
+/*
+ * 返回保存信息
+ */
+mui.back = function() {
+	if(viewApi.canBack()) { //如果view可以后退，则执行view的后退
+		viewApi.back();
+	} else { //执行webview后退
+		var userInfo = JSON.parse(myStorage.getItem("userInfo"));
+		userInfo.nickname = setting.nickname;
+		userInfo.signature = setting.signature;
+		userInfo.sex = setting.sex;
+		userInfo.age = setting.age;
+		userInfo.city = setting.city;
+		userInfo.email = setting.email;
+		userInfo.imgUrl = setting.imgUrl;
+		userInfo.description = perIndruction.description;
+		myStorage.setItem("userInfo", JSON.stringify(userInfo));
+		console.log(JSON.stringify(myStorage.getItem("userInfo")));
+		//更新我的页面
+		var Webv_wode = plus.webview.getWebviewById("index-subpage-wode.html");
+		Webv_wode.evalJS('initInfo()');
+
+		var currentWebview = plus.webview.currentWebview();
+		plus.webview.close(currentWebview, "slide-out-right", 200);
+		//changeInfo();
+		//createUpload(userInfo.imgUrl);
+	}
+};
+
+function createUpload(doc_url,key_str) {
+	console.log("开始上传")
+	var wt = plus.nativeUI.showWaiting();
+	var task = plus.uploader.createUpload(common.url + "file?type=user", {
+			method: "POST",
+			blocksize: 204800,
+			priority: 100
+		},
+		function(t, status) {
+			// 上传完成
+			if(status == 200) {
+				res=JSON.parse(t.responseText);
+				console.log(res.suc);
+				if(res.suc<0){
+					console.log("上传头像失败: " + t.url+t.responseText);
+					mui.toast('上传头像失败');
+				}else{
+					console.log("上传头像成功: " + t.url+t.responseText);
+					mui.toast('上传头像成功');
+				}
+				wt.close();
+			} else {
+				console.log("上传头像失败: " + status);
+				mui.toast('上传头像失败');
+				wt.close();
+			}
+		}
+	);
+	task.addFile(doc_url, {
+		key: key_str
+	});
+	//task.addData("upload", new Date());
+	//task.addEventListener( "statechanged", onStateChanged, false );
+	task.start();
+}
+
+initData();
+//初始化数据
+function initData() {
+	var userInfo = JSON.parse(myStorage.getItem("userInfo"));
+	
+		var str = myStorage.getItem("userInfo");
+		console.log(str);
+	
+
+	setting.nickname = userInfo.nickname;
+	setting.signature = userInfo.signature;
+	setting.sex = userInfo.sex;
+	setting.age = userInfo.age;
+	setting.city = userInfo.city;
+	setting.email = userInfo.email;
+	perIndruction.description = userInfo.description;
+
+}
+function changeInfo() {
+	console.log(setting.nickname == "" ? " " : setting.nickname);
+	req = {
+		//action: 'changeInfo',
+		//		info:myStorage.getItem("userInfo")
+		nickname: setting.nickname == "" ? " " : setting.nickname,
+		signature: setting.signature == "" ? " " : setting.signature,
+		sex: setting.sex == "" ? " " : setting.sex,
+		age: setting.age == "" ? " " : setting.age,
+		city: setting.city == "" ? " " : setting.city,
+		email: setting.email == "" ? " " : setting.email,
+		imgUrl: setting.imgUrl == "" ? " " : setting.imgUrl,
+		description: perIndruction.description == "" ? " " : perIndruction.description,
+	};
+	console.log('req:' + JSON.stringify(req));
+	mui.ajax(common.url + 'user?action=changeInfo', {
+		data: JSON.stringify(req),
+		type: 'post', //HTTP请求类型
+		timeout: 20000,
+		success: function(data) {
+			//获得服务器响应
+			res = JSON.parse(data);
+			console.log('res:' + data);
+			if(res.suc < 0) {
+				mui.toast('修改失败：' + JSON.stringify(res));
+				console.log('修改失败：' + JSON.stringify(res));
+			} else {
+				console.log('修改成功：' + JSON.stringify(res));
+				mui.toast('修改成功!');
+
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+			//异常处理；        02
+			console.log('网络请求错误:' + type);
+			if(type == 'timeout') {
+				mui.toast('网络请求超时');
+			} else {
+				mui.toast('网络请求错误');
+			}
+
+		}
+	});
+}
 //初始化单页的区域滚动
 mui('.mui-scroll-wrapper').scroll();
-
-setTimeout(function() {
-	defaultImg();
-	setTimeout(function() {
-		initImgPreview();
-	}, 300);
-}, 500);
 
 var view = viewApi.view;
 (function($) {
@@ -52,8 +197,17 @@ var view = viewApi.view;
 	});
 
 })(mui);
+
+/*-------------------------------------------------------*/
+setTimeout(function() {
+	defaultImg();
+	setTimeout(function() {
+		initImgPreview();
+	}, 300);
+}, 500);
+
 //更换头像
-mui(".mui-table-view-cell").on("tap", "#head", function(e) {
+function setHeadImg() {
 	if(mui.os.plus) {
 		var a = [{
 			title: "拍照"
@@ -80,7 +234,7 @@ mui(".mui-table-view-cell").on("tap", "#head", function(e) {
 		})
 	}
 
-});
+}
 
 function getImage() {
 	var c = plus.camera.getCamera();
@@ -105,6 +259,7 @@ function getImage() {
 
 function galleryImg() {
 	plus.gallery.pick(function(a) {
+
 		plus.io.resolveLocalFileSystemURL(a, function(entry) {
 			plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
 				root.getFile("head.jpg", {}, function(file) {
@@ -113,8 +268,11 @@ function galleryImg() {
 						console.log("file remove success");
 						entry.copyTo(root, 'head.jpg', function(e) {
 								var e = e.fullPath + "?version=" + new Date().getTime();
-								document.getElementById("head-img").src = e;
+								//document.getElementById("head-img").src = e;
 
+								setting.imgUrl = e;
+								console.log('head-img path e:' + e)
+								createUpload(setting.imgUrl,"head_img");
 								//变更大图预览的src
 								//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
 								document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
@@ -129,8 +287,12 @@ function galleryImg() {
 					//文件不存在
 					entry.copyTo(root, 'head.jpg', function(e) {
 							var path = e.fullPath + "?version=" + new Date().getTime();
-							document.getElementById("head-img").src = path;
+							//document.getElementById("head-img").src = path;
 
+							setting.imgUrl = path;
+							console.log('head-img path:' + path);
+							
+							createUpload(userInfo.imgUrl,"head_img");
 							//变更大图预览的src
 							//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
 							document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
@@ -148,26 +310,24 @@ function galleryImg() {
 	}, function(a) {}, {
 		filter: "image"
 	})
-};
+}
 
+//默认图片
 function defaultImg() {
 	if(mui.os.plus) {
 		plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
 			var s = entry.fullPath + "?version=" + new Date().getTime();;
-			document.getElementById("head-img").src = s;
+			setting.imgUrl = s;
 		}, function(e) {
-			document.getElementById("head-img").src = 'images/u445.png';
-
+			setting.imgUrl = 'images/u445.png';
 		})
 	} else {
-		document.getElementById("head-img").src = 'images/u445.png';
+		setting.imgUrl = 'images/u445.png';
 	}
 
 }
-document.getElementById("head-img").addEventListener('tap', function(e) {
-	e.stopPropagation();
-});
 
+//图片预览
 function initImgPreview() {
 	var imgs = document.querySelectorAll("img.mui-action-preview");
 	imgs = mui.slice.call(imgs);
@@ -207,20 +367,19 @@ function initImgPreview() {
 		var _slider = mui(slider).slider();
 	}
 }
-
+/*-------------------------------------------------------*/
 //修改昵称
-document.getElementById("name").addEventListener('tap', function(e) {
+function setName(e) {
 	e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
 	var btnArray = ['确定', '取消'];
-	var name = this.children[0];
 	mui.prompt("更改昵称", "", "更改提示", btnArray, function(e) {
 		if(e.index == 0) {
 			//console.log(e.value);
 			if(e.value == "") {
-				mui.toast('昵称不能为空');
+				mui.toast('还没设置昵称呢');
+				setting.nickname = "还没设置昵称呢";
 			} else {
-				name.innerText = e.value;
-				myStorage.setItem('name', e.value);
+				setting.nickname = e.value;
 				mui.toast('修改成功');
 			}
 
@@ -229,20 +388,17 @@ document.getElementById("name").addEventListener('tap', function(e) {
 		}
 	})
 
-});
+}
 //修改签名
-document.getElementById("signature").addEventListener('tap', function(e) {
+function setSignature(e) {
 	e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
 	var btnArray = ['确定', '取消'];
-	var inode = this.children[0];
 	mui.prompt("更改签名", "", "更改提示", btnArray, function(e) {
 		if(e.index == 0) {
 			if(e.value == "") {
-				inode.innerText = '暂时没想到写点什么';
-				myStorage.setItem('signature', '暂时没想到写点什么');
+				setting.signature = '暂时没想到写点什么？';
 			} else {
-				inode.innerText = e.value;
-				myStorage.setItem('signature', e.value);
+				setting.signature = e.value;
 				mui.toast('修改成功');
 			}
 		} else {
@@ -250,31 +406,31 @@ document.getElementById("signature").addEventListener('tap', function(e) {
 		}
 	})
 
-});
+}
 //更改简介
-document.getElementById("desc_save").addEventListener('tap', function(e) {
+function desc_save(e) {
 	e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
-	var text = document.getElementById('desc').innerText;
+	var text = perIndruction.description;
 	if(text == "") {
-		myStorage.setItem('desc', '这个人很懒，什么也没留下');
+		perIndruction.description = '这个人很懒，什么也没留下';
 	} else {
-		myStorage.setItem('desc', text);
+		perIndruction.description = e.value;
 	}
-	mui.toast('保存成功')
-});
+	mui.toast('保存成功');
+	viewApi.back()
+	console.log(perIndruction.description)
+}
 
 //修改年龄
-document.getElementById("age").addEventListener('tap', function(e) {
+function setAge(e) {
 	e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
 	var btnArray = ['确定', '取消'];
-	var inode = this.children[0];
 	mui.prompt("更改年龄", "", "更改提示", btnArray, function(e) {
 		if(e.index == 0) {
 			if(e.value == "") {
 				mui.toast('年龄不能为空');
 			} else {
-				inode.innerText = e.value;
-				myStorage.setItem('age', e.value);
+				setting.age = e.value;
 				mui.toast('修改成功');
 			}
 		} else {
@@ -282,23 +438,21 @@ document.getElementById("age").addEventListener('tap', function(e) {
 		}
 	})
 
-});
+}
 //修改邮箱
-document.getElementById("email").addEventListener('tap', function(e) {
+function setEmail(e) {
 	e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
 	var btnArray = ['确定', '取消'];
-	var inode = this.children[0];
 	mui.prompt("更改邮箱", "", "更改提示", btnArray, function(e) {
 		if(e.index == 0) {
-			inode.innerText = e.value;
-			myStorage.setItem('email', e.value);
+			setting.email = e.value;
 			mui.toast('修改成功');
 		} else {
 			mui.toast('已取消');
 		}
 	})
 
-});
+}
 
 //
 
@@ -307,16 +461,15 @@ var cityPicker = new mui.PopPicker({
 	layer: 2
 });
 cityPicker.setData(cityData);
-document.getElementById("showCityPicker").addEventListener('tap', function(e) {
-	var inode = this.children[0];
+
+function showCityPicker(e) {
 	cityPicker.show(function(items) {
 		//console.log("你选择的城市是:" + items[0].text + " " + items[1].text)
-		inode.innerText = items[0].text + " " + items[1].text;
-		myStorage.setItem('city', items[0].text + " " + items[1].text);
+		setting.city = items[0].text + " " + items[1].text;
 		//返回 false 可以阻止选择框的关闭
 		//return true;
 	});
-}, false);
+}
 //性别
 var sexPicker = new mui.PopPicker({
 	layer: 1
@@ -328,23 +481,13 @@ sexPicker.setData([{
 	value: 'women',
 	text: '女'
 }]);
-document.getElementById("sex").addEventListener('tap', function(e) {
-	var inode = this.children[0];
+
+function setSex(e) {
 	sexPicker.show(function(items) {
-		inode.innerText = items[0].text;
-		myStorage.setItem('sex', items[0].text);
+		setting.sex = items[0].text;
 		//返回 false 可以阻止选择框的关闭
 		//return true;
 	});
-}, false);
-
-//初始化数据
-function initData() {
-	(document.getElementById('name').children[0]).innerText = myStorage.getItem('name');
-	(document.getElementById('signature').children[0]).innerText = myStorage.getItem('signature');
-	(document.getElementById('sex').children[0]).innerText = myStorage.getItem('sex');
-	(document.getElementById('age').children[0]).innerText = myStorage.getItem('age');
-	(document.getElementById('showCityPicker').children[0]).innerText = myStorage.getItem('city');
-	(document.getElementById('email').children[0]).innerText = myStorage.getItem('email');
-	document.getElementById('desc').innerText = myStorage.getItem('desc');
 }
+
+

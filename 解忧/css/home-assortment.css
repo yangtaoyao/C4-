@@ -1,0 +1,91 @@
+.mui-bar-nav~.mui-content {
+	padding-top:100px;
+}
+.mui-bar{
+	background: #ffffff;
+}
+.UIAlertView {}
+
+
+/*横向滚动 热门分类 */
+
+.assortment_list_scroll>#more {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 50px;
+	height: 52px;
+	/*背景颜色渐变*/
+	background-image: linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,1));
+	line-height: 52px;
+	z-index: 10;
+}
+
+.assortment_list_scroll #more i {
+	font-size: 21px;
+	margin-right: 18px;
+}
+
+.assortment_list_scroll.mui-segmented-control.mui-segmented-control-inverted {
+	background: #FFFFFF;
+	height: 54px;
+	overflow: hidden;
+	padding-right: 40px;
+	position: fixed;
+	z-index: 10;
+	top: 44px;
+}
+
+.assortment_list_scroll.mui-segmented-control.mui-segmented-control-inverted 
+.mui-scroll {
+	height: auto;
+	width: 1500px;
+}
+
+.assortment_list_scroll.mui-segmented-control.mui-segmented-control-inverted
+ .mui-control-item {
+	/*width: 150px;*/
+	/*height: 45px;*/
+	/*line-height: 45px;*/
+	background: #F2F2F2;
+	border-radius: 40px;
+	margin: 11px 4px;
+	padding: 2px 16px;
+	float: left;
+	text-align: left;
+}
+
+.assortment_list_scroll.mui-segmented-control.mui-segmented-control-inverted
+.mui-control-item h5 {
+	font-size: 16px;
+	margin-bottom: 5px;
+	color: #3aa8fd;
+}
+
+.assortment_list_scroll.mui-segmented-control.mui-segmented-control-inverted 
+.mui-control-item.mui-active{
+	border: none;
+	
+}
+.assortment_list_scroll.mui-segmented-control.mui-segmented-control-inverted 
+.mui-control-item.mui-active>h5{
+	color: red;
+}
+
+.assortment_list_scroll:after {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #c8c7cc;
+}
+
+
+/*无内容提示*/
+.noConent {
+	width: 100%;
+}

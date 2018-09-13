@@ -15,93 +15,95 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">详情</h1>
 		</header>
-
-		<div id="scroll" class="mui-content mui-scroll-wrapper detail-content">
-			<div class="mui-scroll">
-				<div class="detail_box">
-					<span id="doingspan">
+		<div id="webview_detail">
+			<div id="scroll" class="mui-content mui-scroll-wrapper detail-content">
+				<div class="mui-scroll">
+					<div class="detail_box">
+						<span id="doingspan">
 						正在进行
 					</span>
-					<img id="typeicon" src="images/xuexiicon.png" />
-					<div class="detail_box_top">
-						<img src="images/logo.png" />
-						<div>
-							<p>小明</p>
-							<p>2018.1.1</p>
+						<img id="typeicon" :src="labelicon" src="images/kuaidiicon.png"/>
+						<div class="detail_box_top">
+							<img  src="images/logo.png" style="border-radius: 50%;"/>
+							<div>
+								<p>{{uid}}</p>
+								<p>{{crttime}}</p>
+							</div>
 						</div>
-					</div>
-					<h4>第一个选项卡子项第一个选项卡子项第一个选项卡子项
-					第一个选项卡子项</h4>
-					<ul id="conent_img_list" class="mui-table-view mui-table-view-chevron">
-						<li class="home-table-view-cell">
-							<img src="images/cbd.jpg" />
-							<img src="images/u367.png" />
-						</li>
-					</ul>
-					
-				</div>
-				
-				<div class="bottom_box">
-					<p class="bottom_box_p1">
-						<span>截止时间:</span>
-						<span id="deadline">2018.1.1</span>
-					</p>
-					<p class="bottom_box_p2">
-						<span>赏金:</span>
-						<span id="reward">8.00</span>
-						<span>¥</span>
-					</p>
-					<p class="bottom_box_p3">
-						<span>正在竞标人数：</span>
-						<span id="participants">3</span>
-					</p>
-					<ul class="participants_icon mui-table-view">
-						<li>
-							<img src="images/u442.png" />
-						</li>
-						<li>
-							<img src="images/u445.png" />
-						</li>
-						<li>
-							<img src="images/u442.png" />
-						</li>
-					</ul>
-				</div>
+						<h4>描述：{{content}}</h4>
+						<ul id="conent_img_list" class="mui-table-view mui-table-view-chevron">
+							<li class="home-table-view-cell">
+								<img :src="imgurl" src=""/>
+							</li>
+						</ul>
 
+					</div>
+
+					<div class="bottom_box">
+						<p class="bottom_box_p1">
+							<span>截止时间:</span>
+							<span id="deadline">{{expiretime}}</span>
+						</p>
+						<p class="bottom_box_p2">
+							<span>赏金:</span>
+							<span id="reward">{{price}}</span>
+							<span>金币</span>
+						</p>
+						<p class="bottom_box_p3">
+							<span>正在竞标人数：</span>
+							<span id="participants">3</span>
+						</p>
+						<ul class="participants_icon mui-table-view">
+							<li>
+								<img src="images/u442.png" />
+							</li>
+							<li>
+								<img src="images/u445.png" />
+							</li>
+							<li>
+								<img src="images/u442.png" />
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<nav class="mui-bar mui-bar-tab">
+				<a id="item-star" class="mui-tab-item" href="#">
+					<span id="star" class="iconfont icon-favorite"></span>
+					<span>收藏</span>
+				</a>
+				<a @tap="receive_task()" class="mui-tab-item" href="#">
+					<span class="iconfont icon-jiedan1"></span>
+					<span>接单</span>
+				</a>
+				<a class="mui-tab-item" href="#forward">
+					<span class="iconfont icon-zhuanfa"></span>
+					<span>转发</span>
+				</a>
+			</nav>
+
+			<div id="forward" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view ">
+					<li class="mui-table-view-cell">
+						<a href="# ">回复</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="# ">转发</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view ">
+					<li class="mui-table-view-cell">
+						<a href="#">取消</a>
+					</li>
+				</ul>
 			</div>
 		</div>
-
-		<nav class="mui-bar mui-bar-tab">
-			<a id="item-star" class="mui-tab-item" href="#">
-				<span id="star" class="iconfont icon-favorite" ></span>
-				<span>收藏</span>
-			</a>
-			<a class="mui-tab-item" href="#">
-				<span class="iconfont icon-jiedan1"></span>
-				<span>接单</span>
-			</a>
-			<a class="mui-tab-item" href="#forward">
-				<span class="iconfont icon-zhuanfa"></span>
-				<span>转发</span>
-			</a>
-		</nav>
-
-		<div id="forward" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view ">
-				<li class="mui-table-view-cell">
-					<a href="# ">回复</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="# ">转发</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view ">
-				<li class="mui-table-view-cell">
-					<a href="#">取消</a>
-				</li>
-			</ul>
-		</div>
 		<script src="js/mui.min.js "></script>
+			<script src="js/common.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/detail.js"></script>
 		<script type="text/javascript ">
 			mui.init({
 				swipeBack: true, //启用右滑关闭功能
@@ -140,7 +142,7 @@
 					indicators: false, //是否显示滚动条,默认是true
 				});
 			})(mui);
-
+			
 			var change = 0;
 			mui.plusReady(function() {
 				//收藏按钮效果
@@ -194,10 +196,10 @@
 							break;
 					}
 				});
-				
-				showImageview('#conent_img_list','#conent_img_list img');
+
+				showImageview('#conent_img_list', '#conent_img_list img');
 				/*点击图片预览*/
-				function showImageview( fatherId,classStr) {
+				function showImageview(fatherId, classStr) {
 					var images = [].slice.call(document.querySelectorAll(classStr));
 					var urls = [];
 					images.forEach(function(item) {
@@ -212,22 +214,23 @@
 						});
 					});
 				}
-				
-//				var images = [].slice.call(document.querySelectorAll('#conent_img_list img'));
-//				var urls = [];
-//				images.forEach(function(item) {
-//					urls.push(item.src);
-//				});
-//				mui('.mui-content-padded').on('tap', 'img', function() {
-//					var index = images.indexOf(this);
-//					plus.nativeUI.previewImage(urls, {
-//						current: index,
-//						loop: false,
-//						indicator: 'number'
-//					});
-//				});
+
+				//				var images = [].slice.call(document.querySelectorAll('#conent_img_list img'));
+				//				var urls = [];
+				//				images.forEach(function(item) {
+				//					urls.push(item.src);
+				//				});
+				//				mui('.mui-content-padded').on('tap', 'img', function() {
+				//					var index = images.indexOf(this);
+				//					plus.nativeUI.previewImage(urls, {
+				//						current: index,
+				//						loop: false,
+				//						indicator: 'number'
+				//					});
+				//				});
 
 			})
+			
 		</script>
 	</body>
 

@@ -96,29 +96,9 @@
 .home-top-btn .home-top-btn-item .home-icon:active {
 	background: 0 0
 }
-/*轮播图*/
-.mui-slider .mui-slider-group .mui-slider-item img {
-    width: 50px;
-}
-.mui-slider .mui-slider-group .mui-slider-item>a:not(.mui-control-item){
-	display: flex;
-}
+
 
 /*订单卡片*/
-.home-card{
-	height: 110px;
-	 display: flex; 
-	 
-	margin-bottom: 8px;
-	background: #FFFFFF;
-	margin-left: 10px;
-	margin-right: 10px;
-	border-radius:  2px;
-	overflow: hidden;
-	/*box-shadow: 0 1px 2px rgba(0, 0, 0, .3);*/
-	box-shadow:0px 0px 10px 0px #ddd;
-	 /*box-shadow: inset -1px 0px 20px 0px #CCCCCC;*/
-}
 .home-card-left{
 	height: auto;
 	width: 80px;
@@ -196,53 +176,26 @@
 	content: '';
 }
 
-/*最急卡片*/
-.mui-table-view{
-	background: #FFFFFF;
-	/*background:transparent;*/
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding-bottom: 10px;
-}
-.mui-table-view .mui-table-view-cell.mui-media{
-	overflow: visible;
-	/*margin:8px 16px;*/
-	padding: 0;
-	background: none;
-}
 
-.mui-table-view-cell.mui-media>a:not(.mui-btn){
-	margin:5px 10px 5px 10px;
-	padding: 8px;
-}
-
-.mui-table-view-cell.mui-media>a:not(.mui-btn) h4{
-	font-weight: 600;
-	padding: 2px 0;
-}
-.pay{
-	position: absolute;
-	right:16px;
-	bottom: 8px;
-}
-.pay span{
-	font-size: 15px;
-}
-.pay i{
-	color: red;
-	font-size: 18px;
-	margin-right: 10px;
-}
-.head-img{
-	border-radius: 50%;
-}
-
-.mui-ellipsis{
-	/*overflow: visible;*/
-}
 /**/
+/*轮播图*/
+.mui-slider-indicator{
+	bottom: 12px;
+}
+.mui-slider#slider{
+	background: #FFFFFF;
+	margin: 0;
+	padding-top:16px ;
+	padding-bottom:10px ;
+}
+.mui-slider .mui-slider-group .mui-slider-item>a:not(.mui-control-item){
+	display: flex;
+}
 .mui-slider-item .home-card{
 	margin:0 10px 4px 10px;
+}
+.mui-slider-item .home-card.slider_img img{
+	width: 100%;
 }
 /*横向滚动 热门分类 */
 .assortment_scroll.mui-segmented-control.mui-segmented-control-inverted{
@@ -256,12 +209,19 @@
 }
 .assortment_scroll.mui-segmented-control.mui-segmented-control-inverted 
 .mui-control-item{
-	width: 150px;
+	/*width: 150px;*/
 	height: 60px;
 	background: #F2F2F2;
 	border-radius:  4px;
 	margin: 10px;
+	padding: 10px 16px;
 	float: left;
+	text-align: left;
+}
+.assortment_scroll.mui-segmented-control.mui-segmented-control-inverted 
+.mui-control-item h5{
+	font-size: 16px;
+	margin-bottom: 5px;
 	color: #3aa8fd;
 }
 .assortment_scroll.mui-segmented-control.mui-segmented-control-inverted 

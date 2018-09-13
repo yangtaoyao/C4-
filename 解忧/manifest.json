@@ -36,11 +36,9 @@
 		"Messaging": {
 			"description": "访问通讯能力"
 		},
-		"Maps": {},
-		"Speech": {
-			"description": "管理语音识别插件"
-		},
-		"OAuth": {},"Payment":{}
+
+
+		"OAuth": {}
 	},
 	"plus": {
 		"secondwebview": {
@@ -60,7 +58,11 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {"plugins":{"payment":{"alipay":{"description":"阿里支付","scheme":""}},"maps":{"baidu":{"appkey_ios":"x9SGN9SrYaHqhhDPCQ1YQo4HSTQv30wF","appkey_android":"rLBstggBWQGU6vTtRylBoOiYRIbEso9N","appkey":"","description":""}}},
+		"distribute": {
+			"plugins": {
+				"payment": {},
+				"maps": {}
+			},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -74,7 +76,24 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
+				"permissions": [
+					"<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"/>",
+					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+					"<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.SEND_SMS\"/>",
+					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+					"<uses-feature android:name=\"android.hardware.camera\"/>",
+					"<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_SMS\"/>"
+				]
 			},
 			"orientation": [
 				"portrait-primary",
@@ -87,12 +106,12 @@
 					"iphone": {
 						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
 						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
-						"retina7": "",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
 						"spotlight-normal": "", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
 						"spotlight-retina": "", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
 						"spotlight-retina7": "",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
 						"settings-normal": "", /*iPhone设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
+						"app@2x":"E:/解忧APP/120.png","app@3x":"E:/解忧APP/180.png","settings@2x":"E:/解忧APP/58.png","settings@3x":"E:/解忧APP/87.png"
 					},
 					"ipad": {
 						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
@@ -112,7 +131,8 @@
 					"ldpi": "E:/解忧APP/48.png", /*大屏程序图标，分辨率：48x48*/
 					"hdpi": "E:/解忧APP/72.png", /*高分屏程序图标，分辨率：72x72*/
 					"xhdpi": "E:/解忧APP/96.png",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": "E:/解忧APP/144.png","xxxhdpi":"E:/解忧APP/192.png"
+					"xxhdpi": "E:/解忧APP/144.png",
+					"xxxhdpi": "E:/解忧APP/192.png"
 				}
 			},
 			"splashscreen": {
@@ -171,7 +191,12 @@
 					"css/mui.min.css",
 					"images/xuexi.png",
 					"images/xuexiicon.png",
-					"images/jietiicon.png"
+					"images/jietiicon.png",
+					"css/home.css",
+					"images/kuaidiicon.png",
+					"images/u445.png",
+					"css/app.css",
+					"css/iconfont.css"
 				],
 				"refer": [
 					"index-subpage-xiaoxi.html",
@@ -193,7 +218,11 @@
 				"priority": 0
 			},
 			"index-subpage-wode.html": {
-				"resources": [],
+				"resources": [
+					"images/touxiangboy.png",
+					"css/wode.css",
+					"images/touxiangdefault.png"
+				],
 				"refer": [
 					"index-subpage-wode-assigment.html",
 					"index-subpage-wode-purse.html",
@@ -207,7 +236,9 @@
 				"resources": [
 					"index-subpage-home.html",
 					"shequ1.html",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"css/shequ.css",
+					"images/u445.png"
 				],
 				"refer": [
 					"index-subpage-wode.html",
@@ -229,12 +260,20 @@
 			"index-subpage-wode-setting.html": {
 				"resources": [],
 				"refer": [
-					"perData.html"
+					"perData.html",
+					"login02.html",
+					"about.html",
+					"changePwd.html"
 				],
 				"priority": 0
 			},
 			"index-subpage-xiaoxi.html": {
-				"resources": [],
+				"resources": [
+					"images/u454.png",
+					"css/xiaoxi.css",
+					"images/u442.png",
+					"images/u445.png"
+				],
 				"refer": [
 					"chat.html"
 				],
@@ -260,7 +299,10 @@
 			"index-main.html": {
 				"resources": [
 					"index-subpage-home.html",
-					"index-subpage-shequ.html"
+					"index-subpage-shequ.html",
+					"css/app.css",
+					"css/iconfont.css",
+					"css/mui.min.css"
 				],
 				"refer": [
 					"index-subpage-wode.html",
@@ -275,7 +317,11 @@
 				"priority": 0
 			},
 			"middleBtnPage.html": {
-				"resources": [],
+				"resources": [
+					"css/middleBtnPage.css",
+					"css/iconfont.css",
+					"css/mui.min.css"
+				],
 				"refer": [
 					"index-subpage-tianjia-biaobai.html",
 					"index-subpage-tianjia-xunwu.html",
@@ -288,6 +334,38 @@
 				"resources": [],
 				"refer": [
 					"index-main.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-home-assortment.html": {
+				"resources": [],
+				"refer": [
+					"offcanvas-drag-left-plus-menu.html",
+					"home-assortment-drag-left-menu.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-home-detail.html": {
+				"resources": [
+					"images/u367.png",
+					"images/logo.png",
+					"css/home-detail.css",
+					"images/xuexiicon.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index-subpage-wode-purse.html": {
+				"resources": [],
+				"refer": [
+					"index-subpage-wode-purse.html"
+				],
+				"priority": 0
+			},
+			"index-subpage-tianjia.html": {
+				"resources": [],
+				"refer": [
+					"index-subpage-tianjia.html"
 				],
 				"priority": 0
 			}

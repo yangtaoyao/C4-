@@ -32,30 +32,29 @@
 				<ul class="mui-table-view mui-table-view-chevron logined"  v-if="isLogin">
 					<li class="mui-table-view-cell mui-media">
 						<a @tap='goto_perPage' class="mui-navigate-right">
-							<img class="mui-media-object mui-pull-left 
-										head-img" src="images/touxiangboy.png">
+							<img class="mui-media-object mui-pull-left head-img" :src="userInfo.imgUrl"  onerror="this.onerror=null; this.src='images/touxiangboy.png'">
 							<div class="mui-media-body">
 								<h4>
-									<span>{{userInfo.data.name}}</span>
+									<span>{{userInfo.nickname}}</span>
 									<span @tap.stop="goto_perData" class="mui-icon mui-icon-compose" 
 									style="color: #0062CC;font-weight: bold;margin-left: 4px;<br />"></span>
 								</h4>
-								<p class='mui-ellipsis'>{{userInfo.data.signature}}</p>
+								<p class='mui-ellipsis'>{{userInfo.signature}}</p>
 							</div>
 						</a>
 					</li>
 					<div class="account">
 						<div>
 							<h5>信誉积分</h5>
-							<h4>100</h4>
+							<h4>0</h4>
 						</div>
 						<div style="border-left: 1px #EEE solid;border-right: 1px #EEE solid;">
 							<h5>获赞数</h5>
-							<h4>666</h4>
+							<h4>0</h4>
 						</div>
 						<div>
 							<h5>公益金额</h5>
-							<h4>99</h4>
+							<h4>0</h4>
 						</div>
 					</div>
 				</ul>
@@ -64,7 +63,7 @@
 					<li class="mui-table-view-cell">
 						<a @tap="goto_assigment" class="mui-navigate-right">
 							<i class="iconfont icon-renwu1 iconleft" style="color: #F4D03E;"></i>
-							<span class="mui-badge mui-badge-purple">5</span> 我的任务
+							我的任务
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
@@ -73,7 +72,7 @@
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right">
+						<a @tap="goto_bill" class="mui-navigate-right">
 							<i class="iconfont icon-zhangdan iconleft" style="color: #1a6bfe;"></i> 公益账单
 						</a>
 					</li>
@@ -81,14 +80,14 @@
 				</ul>
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell" style="margin-top: 8px;">
-						<a class="mui-navigate-right">
+						<a @tap="goto_shoucang" class="mui-navigate-right">
 							<i class="iconfont icon-pinglun1 iconleft" style="color: #dbab6c;"></i> 我的评论
 						</a>
 					</li>
 					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right">
+						<a @tap="goto_pinglun" class="mui-navigate-right">
 							<i class="iconfont icon-shoucang iconleft" style="color: #56cda5;"></i>
-							<span class="mui-badge mui-badge-purple">5</span> 我的收藏
+							我的收藏
 						</a>
 					</li>
 				</ul>
