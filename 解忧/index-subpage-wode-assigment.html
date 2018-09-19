@@ -26,13 +26,16 @@
 				<div id="page1_slider" class="mui-slider">
 					<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 						<a class="mui-control-item mui-active" href="#page1_item1">
-							正在进行
+							刚发布
 						</a>
 						<a class="mui-control-item" href="#page1_item2">
-							未接单
+							正在进行
 						</a>
 						<a class="mui-control-item" href="#page1_item3">
-							已完成
+							完成
+						</a>
+						<a class="mui-control-item" href="#page1_item4">
+							取消或失败
 						</a>
 					</div>
 					<!--div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4">
@@ -45,12 +48,12 @@
 										<h4>暂时没有任务</h4>
 									</div>
 									<li class="mui-table-view-cell mui-media" v-for="item in list0101" v-if="isL1_01HasConent">
-										<a class="mui-navigate-right card">
+										<a  @tap='open_detail(item)' class="mui-navigate-right card">
 											<h4 class="mui-ellipsis">{{item.content}}</h4>
 											<h6>截止至 {{item.expiretime}}</h6>
 											<div>
 												<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/touxiangdefault.png">
+										head-img" src="images/touxiangboy.png">
 												<div class="mui-media-body">
 													<h5>
 													{{item.uid}}
@@ -61,9 +64,6 @@
 												<div class="pay">
 													<span>赏金：</span>
 													<i>{{item.price}}金币</i>
-													<button @tap="" type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-														支付
-													</button>
 												</div>
 
 											</div>
@@ -82,12 +82,12 @@
 									</div>
 
 									<li class="mui-table-view-cell mui-media" v-for="item in list0102" v-if="isL1_02HasConent">
-										<a class="mui-navigate-right card">
+										<a @tap='open_detail(item)' class="mui-navigate-right card">
 											<h4 class="mui-ellipsis">{{item.content}}</h4>
 											<h6>截止至 {{item.expiretime}}</h6>
 											<div>
 												<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/touxiangdefault.png">
+										head-img" src="images/touxiangboy.png">
 												<div class="mui-media-body">
 													<h5>
 													{{item.uid}}
@@ -113,12 +113,43 @@
 										<h4>暂时没有任务</h4>
 									</div>
 									<li class="mui-table-view-cell mui-media" v-for="item in list0103" v-if="isL1_03HasConent">
-										<a class="mui-navigate-right card">
+										<a @tap='open_detail(item)' class="mui-navigate-right card">
 											<h4 class="mui-ellipsis">{{item.content}}</h4>
 											<h6>截止至 {{item.expiretime}}</h6>
 											<div>
 												<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/touxiangdefault.png">
+										head-img" src="images/touxiangboy.png">
+												<div class="mui-media-body">
+													<h5>
+													{{item.uid}}
+												</h5>
+													<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+												</div>
+
+												<div class="pay">
+													<span>赏金：</span>
+													<i>{{item.price}}金币</i>
+												</div>
+											</div>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+						<div id="page1_item4" class="mui-slider-item mui-control-content">
+							<div id="page1_scroll4" class="mui-scroll-wrapper">
+								<ul class="mui-table-view mui-table-view-chevron mui-scroll">
+									<div class="noConent" v-if="!isL1_04HasConent">
+										<h4>暂时没有任务</h4>
+									</div>
+									<li class="mui-table-view-cell mui-media" v-for="item in list0104" v-if="isL1_04HasConent">
+										<a @tap='open_detail(item)' class="mui-navigate-right card">
+											<h4 class="mui-ellipsis">{{item.content}}</h4>
+											<h6>截止至 {{item.expiretime}}</h6>
+											<div>
+												<img id="head-img" class="mui-media-object mui-pull-left 
+										head-img" src="images/touxiangboy.png">
 												<div class="mui-media-body">
 													<h5>
 													{{item.uid}}
@@ -164,12 +195,12 @@
 										<h4>暂时没有任务</h4>
 									</div>
 									<li class="mui-table-view-cell mui-media" v-for="item in list0201" v-if="isL2_01HasConent">
-										<a class="mui-navigate-right card">
+										<a @tap='open_detail(item)' class="mui-navigate-right card">
 											<h4 class="mui-ellipsis">{{item.content}}</h4>
 											<h6>截止至 {{item.expiretime}}</h6>
 											<div>
 												<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/touxiangdefault.png">
+										head-img" src="images/touxiangboy.png">
 												<div class="mui-media-body">
 													<h5>
 													{{item.uid}}
@@ -195,12 +226,12 @@
 										<h4>暂时没有任务</h4>
 									</div>
 									<li class="mui-table-view-cell mui-media" v-for="item in list0202" v-if="isL2_02HasConent">
-										<a class="mui-navigate-right card">
+										<a @tap='open_detail(item)' class="mui-navigate-right card">
 											<h4 class="mui-ellipsis">{{item.content}}</h4>
 											<h6>截止至 {{item.expiretime}}</h6>
 											<div>
 												<img id="head-img" class="mui-media-object mui-pull-left 
-										head-img" src="images/touxiangdefault.png">
+										head-img" src="images/touxiangboy.png">
 												<div class="mui-media-body">
 													<h5>
 													{{item.uid}}
@@ -231,7 +262,6 @@
 		<script src="js/wode-assigment.js"></script>
 		<script type="text/javascript">
 			mui.init({
-
 			});
 		</script>
 	</body>

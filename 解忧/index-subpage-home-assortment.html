@@ -10,75 +10,96 @@
 		<link href="css/iconfont.css" rel="stylesheet" />
 		<link href="css/app.css" rel="stylesheet" />
 		<link href="css/home-assortment.css" rel="stylesheet" />
+		<style>
+			/*无内容提示*/
+			
+			.noConent {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.noConent h4 {
+				height: 200px;
+				width: calc(100%-20px);
+				border-radius: 5px;
+				margin: 10px;
+				/*background: #F2F2F2;*/
+				line-height: 200px;
+				text-align: center;
+				font-weight: 600;
+				color: #666666;
+				font-size: 16px;
+			}
+		</style>
 	</head>
 
 	<body>
-			<!--主界面-->
-			<!--<div id="home-assortment">-->
-				<header class="mui-bar mui-bar-nav">
-					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-					<h1 class="mui-title">分类</h1>
-				</header>
-				<!--横向分类-->
-				<div id="assortment_list" class="assortment_list_scroll mui-scroll-wrapper mui-slider-indicator 
+		<!--主界面-->
+		<!--<div id="home-assortment">-->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">分类</h1>
+		</header>
+		<!--横向分类-->
+		<div id="assortment_list" class="assortment_list_scroll mui-scroll-wrapper mui-slider-indicator 
 					mui-segmented-control mui-segmented-control-inverted">
-					<div class="mui-scroll">
-						<a class="mui-control-item mui-active">
-							<h5>全部</h5>
-						</a>
-						<a class="mui-control-item" v-for="item in assortment_datalist">
-							<h5>{{item.title}}</h5>
-						</a>
-					</div>
-					<a id="more" @tap.stop.prevent='openMenu'>
-						<i class="mui-pull-right iconfont icon-shaixuan02" style=""></i>
-					</a>
+			<div class="mui-scroll">
+				<a class="mui-control-item mui-active" @tap="search('全部')">
+					<h5>全部</h5>
+				</a>
+				<a class="mui-control-item" v-for="item in assortment_datalist" @tap="search(item.title)">
+					<h5>{{item.title}}</h5>
+				</a>
+			</div>
+			<a id="more" @tap.stop.prevent='openMenu'>
+				<i class="mui-pull-right iconfont icon-shaixuan02" style=""></i>
+			</a>
+		</div>
+		<div id="pullRefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<p class="UIAlertView">
+					<span class="iconfont icon-wancheng1"></span>
+					<span>已为你加载完毕</span>
+				</p>
+				<div class="noConent" v-if="!isListHasConent">
+					<h4>暂时没有内容，换个关键词试试？</h4>
 				</div>
-				<div id="pullRefresh" class="mui-content mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<p class="UIAlertView">
-							<span class="iconfont icon-wancheng1"></span>
-							<span>已为你更新任务</span>
-						</p>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<div class="noConent" v-if="!isListHasConent">
-								<h4>暂时没有内容，刷新试试？</h4>
+				<ul class="mui-table-view mui-table-view-chevron"  v-if="isListHasConent">
+
+					<li class="mui-table-view-cell mui-media" v-for="item in list">
+						<a @tap='open_detail(item)' class="mui-navigate-right home-card">
+							<h4 class="mui-ellipsis">描述：{{item.content}}</h4>
+							<h6>截止至{{item.expiretime}}</h6>
+							<div>
+								<img class="mui-media-object mui-pull-left head-img" :src="item.imgurl" onerror="this.onerror=null; this.src='images/touxiangboy.png'">
+								<div class="mui-media-body">
+									<h5>
+											{{item.uid}}
+										</h5>
+									<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
+								</div>
+								<div class="pay">
+									<span>赏金：</span>
+									<i>{{item.price}}金币</i>
+
+								</div>
 							</div>
-							<li class="mui-table-view-cell mui-media" v-for="item in list" v-if="isListHasConent">
-								<a @tap='open_detail(item)' class="mui-navigate-right home-card">
-									<h4 class="mui-ellipsis">{{item.title}}</h4>
-									<h6>截止至 {{item.published_at}}</h6>
-									<div>
-										<img class="mui-media-object mui-pull-left head-img" src="images/u445.png">
-										<div class="mui-media-body">
-											<h5>
-												hello解忧
-											</h5>
-											<h6 class='mui-ellipsis'>1小时前</h6>
-										</div>
-										<div class="pay">
-											<span>赏金：</span>
-											<i>10￥</i>
+						</a>
+					</li>
+				</ul>
 
-										</div>
-									</div>
-								</a>
-							</li>
-						</ul>
+			</div>
+		</div>
 
-					</div>
-				</div>
-
-			<!--</div>-->
+		<!--</div>-->
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="js/vue.min.js"></script>
 		<script src="js/common.js"></script>
 		<script src="js/home-assortment.js"></script>
 		<script>
-			
 		</script>
-		
+
 	</body>
 
 </html>

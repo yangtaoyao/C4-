@@ -24,7 +24,7 @@ function receive_task() {
 	mui.confirm('确定接受该任务？', '接受该任务', btnArray, function(e) {
 		if(e.index == 0) {
 			var wt = plus.nativeUI.showWaiting();
-			mui.ajax(common.url + 'task?action=receive&tid=' + vm.tid, {
+			mui.ajax(common.url + 'task?action=recieve&tid=' + vm.tid, {
 				type: 'GET',
 				dataType: 'json', //服务器返回json格式数据
 				timeout: 15000, //15秒超时
@@ -33,10 +33,10 @@ function receive_task() {
 					console.log('接受任务res:' + JSON.stringify(rsp));
 					if(rsp.suc < 0) {
 						wt.close();
-						mui.toast('接受失败');
+						mui.toast(rsp.msg);
 					} else {
 						wt.close();
-						mui.toast('接受成功');
+						mui.toast(rsp.msg);
 					}
 				},
 				error: function(xhr, type, errorThrown) {
@@ -64,10 +64,10 @@ function getDefaultData() {
 		uid: '',
 		countAccess: '',
 		credit: '',
-		imgurl: ''
+		imgurl: []
 	}
 }
-//监听自定义事件，获取新闻详情
+//监听自定义事件，获取详情
 document.addEventListener('get_detail', function(event) {
 	var tid = event.detail.tid;
 	if(!tid) {
@@ -86,9 +86,11 @@ document.addEventListener('get_detail', function(event) {
 	vm.uid = event.detail.uid;
 	vm.countAccess = event.detail.countAccess;
 	vm.credit = event.detail.credit;
-	//vm.imgurl= event.detail.imgurl;
-	vm.imgurl = "http://59.110.241.117:12001/jieyou/resource/img/user/" + vm.uid + "/" + vm.imgurl;
-	console.log("vm.imgurl" + vm.imgurl)
+	vm.imgurl=event.detail.imgurl.split(';');
+	vm.imgurl=vm.imgurl.slice(0,-1);
+	console.log("vm.imgurl:"+vm.imgurl) 
+	//vm.imgurl = "http://59.110.241.117:12001/jieyou/resource/img/user/" + vm.uid + "/" + vm.imgurl;
+	//console.log("vm.imgurl" + vm.imgurl)
 	//向服务端请求文章详情内容
 
 	mui.ajax(common.url + 'user?action=getInfo&uid=' + vm.uid, {
@@ -119,3 +121,10 @@ mui.plusReady(function() {
 		vm.resetData();
 	}, false);
 })
+
+//var img= "http://59.110.241.117:12001/jieyou/resource/img/user;http://59.110.241.117:12001/jieyou/resource/img/user;"
+//var arr=img.split(';');
+//console.log(arr.length)
+//console.log(arr.toString());
+//
+//

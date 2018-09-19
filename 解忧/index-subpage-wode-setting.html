@@ -50,7 +50,7 @@
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">帮助与反馈</a>
 				</li>
-				
+
 			</ul>
 			<div class=" logout">
 				<button type="button" class="mui-table-view-cell mui-btn">{{isLoginOrLogout}}</button>
@@ -105,18 +105,47 @@
 					var loginFlag = myStorage.getItem("isLogin");
 					//console.log(typeof launchFlag)
 					if(loginFlag == "true") {
-						setTimeout(function() {
-							mui.toast('退出登录成功！');
-							this.innerText = "立即登录";
-						}, 500);
+						
+						mui.ajax(common.url + "user?action=logout", {
 
-						myStorage.setItem("launchFlag", "false");
-						myStorage.setItem("isLogin", "false");
-						setting.isLogin = "false";
+							type: 'get', //HTTP请求类型
+							timeout: 20000,
+							//contentType: 'charset=UTF-8',
+							success: function(data) {
+								//获得服务器响应
+								res = JSON.parse(data);
+								//console.log('res:' + data);
+								if(res.suc < 0) {
+									console.log('退出登录失败：' + data);
+									mui.toast('退出登录失败：' + data);
 
-						//传值到我的页面
-						var Webv_wode = plus.webview.getWebviewById("index-subpage-wode.html");
-						Webv_wode.evalJS('initInfo()');
+								} else {
+									console.log('退出登录成功：' + data);
+									mui.toast('退出登录成功：' + data);
+									myStorage.setItem("launchFlag", "false");
+									myStorage.setItem("isLogin", "false");
+									setting.isLogin = "false";
+
+									//传值到我的页面
+									var Webv_wode = plus.webview.getWebviewById("index-subpage-wode.html");
+									Webv_wode.evalJS('initInfo()');
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理；
+								console.log(type);
+								if(type == 'timeout') {
+									mui.toast('网络请求超时');
+								} else {
+									mui.toast('网络请求错误');
+								}
+							}
+						});
+						//						setTimeout(function() {
+						//							mui.toast('退出登录成功！');
+						//							this.innerText = "立即登录";
+						//						}, 500);
+
 					} else {
 						//打开登录页
 						mui.openWindow({
@@ -152,7 +181,8 @@
 			function band() {
 				mui.toast('该功能暂未开放')
 			}
-			function changePwd(){
+
+			function changePwd() {
 				mui.openWindow({
 					id: 'changePwd.html',
 					url: 'changePwd.html',
@@ -192,7 +222,6 @@
 				});
 			}
 
-			
 			var setting = new Vue({
 				el: '#setting',
 				data: {

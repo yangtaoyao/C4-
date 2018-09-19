@@ -195,11 +195,11 @@ var login = new Vue({
 	data: {
 		loginWPsw: {
 			//15219171826
-			phoneNumber: '13763369408',
-			password: '123'
+			phoneNumber: '',
+			password: ''
 		},
 		loginWIcode: {
-			phoneNumber: '13763369408',
+			phoneNumber: '',
 			identiCode: ''
 		},
 		qqlogin_show: false
@@ -209,8 +209,8 @@ var register = new Vue({
 	el: '#register',
 	data: {
 		registerWIcode: {
-			phoneNumber: '13763369408',
-			password: '123',
+			phoneNumber: '',
+			password: '',
 			identiCode: ''
 		}
 	}
@@ -255,13 +255,13 @@ function submit_login01(e) {
 		pwd = common.urlEncode(pwd);
 		console.log('pwd:' + pwd);
 		req = {
-			id: register.registerWIcode.phoneNumber,
+			id: login.loginWPsw.phoneNumber,
 			//id:'10001',
 			password: pwd,
 			_: timestamp1.substring(0, 9),
 			way: 'tel_pwd'
 		};
-
+		console.log(JSON.stringify(req))
 		mui(thisNode).button('loading');
 		mui.ajax(url + 'doLogin', {
 			data: JSON.stringify(req),
@@ -290,7 +290,6 @@ function submit_login01(e) {
 						console.log('密码登录失败：' + JSON.stringify(res));
 						mui(thisNode).button('reset');
 					}
-
 				} else {
 					console.log('密码登录成功：' + JSON.stringify(res));
 					mui.toast('密码登录成功!');
@@ -323,21 +322,24 @@ function submit_login01(e) {
 
 //登录成功设置信息
 function setUserInfo(data) {
-	if(data!=null||data!=undefined){
+	if(data != null || data != undefined) {
+		data.imgUrl = common.imgUrl + "user/" + data.uid + "/" + data.imgUrl;
+		data.imgUrl = data.imgUrl.split(";")[0];
+		console.log(data.imgUrl);
 		myStorage.setItem("userInfo", JSON.stringify(data));
 	}
-	
+
 	//传值到我的页面
 	var Webv_wode = plus.webview.getWebviewById("index-subpage-wode.html");
 	Webv_wode.evalJS('initInfo()');
-	
+
 	var Webv_setting = plus.webview.getWebviewById("index-subpage-wode-setting.html");
 	console.log('updateIslogin before')
 	if(Webv_setting != undefined) {
 		console.log('updateIslogin before')
 		Webv_setting.evalJS('updateIslogin("true")');
 	}
-	
+
 }
 
 //登录页获取验证码

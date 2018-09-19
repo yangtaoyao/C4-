@@ -33,37 +33,9 @@
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
 								<ul class="mui-table-view">
-									<li class="mui-table-view-cell">
-										<a class="messgae mui-navigate-right">
-											<img class="mui-media-object mui-pull-left" src="images/u442.png">
-											<div class="mui-media-body">
-												<h5>解忧</h5>
-												<h6>1小时</h6>
-											</div>
-											<span class="mui-badge mui-badge-success">2</span>
-										</a>
-									</li>
-									<li class="mui-table-view-cell">
-										<a class="messgae mui-navigate-right">
-											<img class="mui-media-object mui-pull-left" src="images/u454.png">
-											<div class="mui-media-body">
-												<h5>hello解忧</h5>
-												<h6>1小时</h6>
-											</div>
-											<span class="mui-badge mui-badge-success">1</span>
-										</a>
-									</li>
-									<li class="mui-table-view-cell">
-										<a class="messgae mui-navigate-right">
-											<img class="mui-media-object mui-pull-left" src="images/u445.png">
-											<div class="mui-media-body">
-												<h5>jiuyou</h5>
-												<h6>1小时</h6>
-											</div>
-											<span class="mui-badge mui-badge-success">4</span>
-										</a>
-									</li>
-
+									<div class="none_display">
+										<span>暂时还没有收到私信</span>
+									</div>
 								</ul>
 							</div>
 						</div>
@@ -150,7 +122,7 @@
 									var self = this;
 									setTimeout(function() {
 										var ul = self.element.querySelector('.mui-table-view');
-										ul.insertBefore(createFragment(ul, index, 1, true), ul.firstChild);
+										//ul.insertBefore(createFragment(ul, index, 1, true), ul.firstChild);
 										self.endPulldownToRefresh();
 									}, 1000);
 								}
@@ -160,7 +132,7 @@
 									var self = this;
 									setTimeout(function() {
 										var ul = self.element.querySelector('.mui-table-view');
-										ul.appendChild(createFragment(ul, index, 1));
+										//ul.appendChild(createFragment(ul, index, 1));
 										self.endPullupToRefresh();
 									}, 1000);
 								}

@@ -234,3 +234,11 @@
 	break-inside: avoid;
 	
 }
+.none_display{
+	width: 100%;
+	background: none;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 80px;
+	color: #999999;
+}

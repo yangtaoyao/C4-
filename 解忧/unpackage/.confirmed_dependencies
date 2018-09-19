@@ -183,5 +183,15 @@
 		"refer": [
 			"index-subpage-tianjia.html"
 		]
+	},
+	"index-subpage-home-searching.html": {
+		"resources": [
+			"js/search.js"
+		]
+	},
+	"index-subpage-wode-assigment.html": {
+		"refer": [
+			"assigment-detail.html"
+		]
 	}
 }

@@ -17,9 +17,7 @@ mui.plusReady(function() {
 	 */
 	var showGuide = myStorage.getItem("launchFlag");
 	var isLogin = myStorage.getItem("isLogin");
-	if(!isLogin) {
-		myStorage.setItem("isLogin", "false");
-	} else {
+	if(isLogin=="true") {
 		mui.ajax(common.url + 'doLogin', {
 			data: '',
 			type: 'post', //HTTP请求类型
@@ -35,6 +33,10 @@ mui.plusReady(function() {
 				} else {
 					console.log('自动登录成功：' + JSON.stringify(res));
 					mui.toast('自动登录成功!');
+					var user=res.data;
+					user.imgUrl=user.imgUrl.split(";")[0];
+					console.log(user.imgUrl);
+					myStorage.setItem("userInfo", JSON.stringify(user));
 					myStorage.setItem("isLogin", "true");
 				}
 			},
@@ -50,6 +52,8 @@ mui.plusReady(function() {
 				myStorage.setItem("isLogin", "false");
 			}
 		});
+	}else{
+		myStorage.setItem("isLogin", "false");
 	}
 
 	if(showGuide == undefined) {

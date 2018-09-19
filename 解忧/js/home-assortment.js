@@ -27,17 +27,19 @@ mui.init({
 			auto: true, //可选,默认false.首次加载自动上拉刷新一次
 			callback: pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 		},
-		up: {
-			height: 50, //可选.默认50.触发上拉加载拖动距离
-			auto: true, //可选,默认false.自动上拉加载一次
-			contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-			contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-			callback: pullupRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-		}
+		
 	},
 });
+//mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
 var webview_detail = null;
 mui.plusReady(function() {
+	//预加载详情页
+	webview_detail = mui.preload({
+		url: 'index-subpage-home-detail.html',
+		id: 'index-subpage-home-detail',
+
+	});
+
 	main = plus.webview.currentWebview();
 	//setTimeout的目的是等待窗体动画结束后，再执行create webview操作，避免资源竞争，导致窗口动画不流畅；
 	setTimeout(function() {
@@ -55,7 +57,173 @@ mui.plusReady(function() {
 	webview_detail = plus.webview.getWebviewById('index-subpage-home-detail');
 
 })
+//
+var assortment_list = new Vue({
+	el: '#assortment_list',
+	data: {
+		assortment_datalist: [{
+				title: '学习资料分享',
+				desc: '12个任务正在进行中'
+			},
+			{
+				title: '学霸来支招',
+				desc: '8个任务正在进行中'
+			},
+			{
+				title: '校园竞赛组队',
+				desc: '1个任务正在进行中'
+			},
+			{
+				title: '生活互助服务',
+				desc: '8个任务正在进行中'
+			},
+			{
+				title: '解题',
+				desc: '8个任务正在进行中'
+			}
+		]
+	}
+});
+//
+var assortment = new Vue({
+	el: '#pullRefresh',
+	data: {
+		list: [
+			//		{
+			//			"id": 67383,
+			//			"from_id": "36kr",
+			//			"title": "C语言指针溢出问题",
+			//			"published_at": "2018-08-19 15:16:04",
+			//
+			//			"created_at": "2018-08-19 15:21:05",
+			//			"updated_at": "2018-08-19 15:21:05"
+			//		}, {
+			//			"id": 67379,
+			//			"from_id": "36kr",
+			//			"title": "解个高数问题",
+			//			"published_at": "2018-08-19 14:45:33",
+			//			"store_at": "0000-00-00 00:00:00",
+			//			"type": "news",
+			//			"created_at": "2018-08-19 14:52:04",
+			//			"updated_at": "2018-08-19 14:52:04"
+			//		}, {
+			//			"id": 67380,
+			//			"from_id": "36kr",
+			//			"title": "请教一下学长如何为考研准备",
+			//			"published_at": "2018-08-19 14:41:22",
+			//			"store_at": "0000-00-00 00:00:00",
+			//			"type": "news",
+			//			"created_at": "2018-08-19 14:52:04",
+			//			"updated_at": "2018-08-19 14:52:04"
+			//		}
+		]
+	},
+	// 计算属性
+	computed: {
+		//判断是否有数据
+		isListHasConent: function() {
+			return(this.list == null || this.list.length == 0) ? false : true;
+		},
 
+	}
+});
+
+function open_detail(item) {
+	//触发子窗口变更新闻详情
+	mui.fire(webview_detail, 'get_detail', {
+		expiretime: item.expiretime,
+		crttime: item.crttime,
+		finisher: item.finisher,
+		label: item.label,
+		content: item.content,
+		price: item.price,
+		status: item.status,
+		tid: item.tid,
+		uid: item.uid,
+		countAccess: item.countAccess,
+		credit: item.credit,
+		imgurl: item.imgurl,
+	});
+	setTimeout(function() {
+		webview_detail.show("slide-in-right", 300);
+	}, 150);
+}
+//上拉刷新
+function pullupRefresh() {
+	setTimeout(function() {
+		search("全部");
+	}, 1500);
+}
+
+/**
+ * 下拉刷新具体业务实现
+ */
+function pulldownRefresh() {
+	setTimeout(function() {
+		search("全部");
+		mui('#pullRefresh').pullRefresh().endPulldownToRefresh();
+		//UIAlertViewShow();
+	}, 1500);
+}
+
+function search(str) {
+	if(str == "全部") {
+		str = ""
+	}
+	var url = common.url + "task?action=search&key=" + encodeURI(str);
+	console.log(url)
+	mui.ajax(url, {
+		async: true,
+		type: 'get', //HTTP请求类型
+		timeout: 20000,
+		//contentType: 'charset=UTF-8',
+		success: function(data) {
+			//获得服务器响应
+			res = JSON.parse(data);
+			//console.log('res:' + data);
+			if(res.suc < 0) {
+				console.log('加载失败：' + data);
+				mui.toast('加载失败：' + data);
+
+			} else {
+				if(res.data == undefined || res.data.length == 0) {
+					mui.toast('暂时还没有该类任务');
+					assortment.list = []
+				} else {
+					console.log('加载成功：' + data);
+					mui.toast('加载成功');
+					setTimeout(function() {
+						UIAlertViewShow();
+					}, 3000)
+					assortment.list = res.data;
+					for(var i = 0; i < assortment.list.length; i++) {
+						if(assortment.list[i].expiretime != '')
+							assortment.list[i].expiretime = new Date(parseInt(assortment.list[i].expiretime) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+						if(assortment.list[i].crttime != '')
+							assortment.list[i].crttime = new Date(parseInt(assortment.list[i].crttime) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+					}
+
+					console.log(assortment.isListHasConent)
+				}
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+			//异常处理；
+			console.log(type);
+			if(type == 'timeout') {
+				mui.toast('网络请求超时');
+			} else {
+				mui.toast('网络请求错误');
+			}
+		}
+	});
+
+}
+
+document.addEventListener('get_search', function(event) {
+	var str = event.detail.str;
+	search(str)
+});
 /*----------------------------*/
 /*
  * 显示菜单菜单
@@ -122,191 +290,9 @@ function _closeMenu() {
 	}
 }
 
- //menu页面向右滑动，关闭菜单；
+//menu页面向右滑动，关闭菜单；
 window.addEventListener("menu:swiperight", closeMenu);
 /*----------------------------*/
-var assortment_list = new Vue({
-	el: '#assortment_list',
-	data: {
-		assortment_datalist: [{
-				title: '学习资料分享',
-				desc: '12个任务正在进行中'
-			},
-			{
-				title: '学霸来支招',
-				desc: '8个任务正在进行中'
-			},
-			{
-				title: '校园竞赛组队',
-				desc: '1个任务正在进行中'
-			},
-			{
-				title: '生活互助服务',
-				desc: '8个任务正在进行中'
-			},
-			{
-				title: '生活互助服务',
-				desc: '8个任务正在进行中'
-			}
-		]
-	}
-});
-var assortment = new Vue({
-	el: '#pullRefresh',
-	data: {
-		list: [{
-			"id": 67383,
-			"from_id": "36kr",
-			"title": "C语言指针溢出问题",
-			"published_at": "2018-08-19 15:16:04",
-
-			"created_at": "2018-08-19 15:21:05",
-			"updated_at": "2018-08-19 15:21:05"
-		}, {
-			"id": 67379,
-			"from_id": "36kr",
-			"title": "解个高数问题",
-			"published_at": "2018-08-19 14:45:33",
-			"store_at": "0000-00-00 00:00:00",
-			"type": "news",
-			"created_at": "2018-08-19 14:52:04",
-			"updated_at": "2018-08-19 14:52:04"
-		}, {
-			"id": 67380,
-			"from_id": "36kr",
-			"title": "请教一下学长如何为考研准备",
-			"published_at": "2018-08-19 14:41:22",
-			"store_at": "0000-00-00 00:00:00",
-			"type": "news",
-			"created_at": "2018-08-19 14:52:04",
-			"updated_at": "2018-08-19 14:52:04"
-		}]
-	},
-	// 计算属性
-	computed: {
-		fullName: {
-			// getter
-			get: function() {
-
-			},
-			// setter
-			set: function(newValue) {
-
-			}
-		},
-		//判断是否有数据
-		isListHasConent: function() {
-			return(this.list === null) ? false : true;
-		},
-
-	}
-});
-
-function open_detail(item) {
-	//触发子窗口变更新闻详情
-	mui.fire(webview_detail, 'get_detail', {
-		guid: item.guid,
-		title: item.title,
-		author: item.author,
-		time: item.time,
-		cover: item.cover
-	});
-	setTimeout(function() {
-		webview_detail.show("slide-in-right", 300);
-	}, 150);
-}
-//上拉刷新
-function pullupRefresh() {
-	setTimeout(function() {
-		//		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 10)); //参数为true代表没有更多数据了。
-		//		var table = document.body.querySelector('.list02');
-		//		var cells = document.body.querySelectorAll('.home-table-view-cell');
-		//		var newCount = cells.length > 0 ? 5 : 20; //首次加载20条，满屏
-		//for(var i = cells.length, len = i + newCount; i < len; i++) {
-		//			var li = document.createElement('li');
-		//			li.className = 'home-table-view-cell';
-		//			li.innerHTML =
-		//				'<a href="#" class="home-card ">' +
-		//				'<div class="home-card-left ">' +
-		//				'<span>最急</span>' +
-		//				'<img src="images/kuaidiicon.png" />' +
-		//				'<p>学习</p>' +
-		//				'</div>' +
-		//				'<div class="home-card-right ">' +
-		//				'<h5>帮帮单' + Math.ceil(10 * Math.random()) + '</h5>' +
-		//				'<p class="deadline"><span>截止 </span><span >' + new Date() + '</span></p>' +
-		//				'<p ><span class="reward">¥8.00</span><span class="participants">' + Math.ceil(10 * Math.random()) + '人</span></p>' +
-		//				'</div>' +
-		//				'</a>';
-		//
-		//			var a = li.getElementsByTagName('a')[0];
-		//			var span = (a.children[0]).getElementsByTagName('span')[0];
-		//			var img = (a.children[0]).getElementsByTagName('img')[0];
-		//			var p = (a.children[0]).getElementsByTagName('p')[0];
-		//			//更新数据
-		//			a.src = 'index-subpage-wode.html';
-		//			span = '最新';
-		//			var imgs = ['images/xuexi.png', 'images/xuexiicon.png', 'images/xunwuicon.png', 'images/kuaidiicon.png', 'images/jietiicon.png']
-		//			img.src = imgs[parseInt(Math.random() * 5)];
-		//
-		//			table.appendChild(li);
-		//}
-		var datalist = assortment.list;
-		datalist.forEach(function(item) {
-			assortment.list.push(item);
-		})
-
-	}, 1500);
-}
-
-function addData() {
-	//	var table = document.body.querySelector('.mui-table-view');
-	//	var cells = document.body.querySelectorAll('.home-table-view-cell');
-	//	for(var i = cells.length, len = i + 5; i < len; i++) {
-	//		var li = document.createElement('li');
-	//		li.className = 'home-table-view-cell';
-	//		li.innerHTML = '<a href="# " class="home-card ">' +
-	//			'<div class="home-card-left ">' +
-	//			'<span>热门</span>' +
-	//			'<img src="images/xuexi.png " />' +
-	//			'<p>学习</p>' +
-	//			'</div>' +
-	//			'<div class="home-card-right ">' +
-	//			'<span>日新楼帮忙去快递</span>' +
-	//			'<p><span>截止时间:</span><span>' + +'</span></p>' +
-	//			'<p><span>赏金:</span><span>' + +'</span></p>' +
-	//			'<p><span>正在竞标：</span><span>' + +'人</span></p>' +
-	//			'</div>' +
-	//			'</a>';
-	//		//	
-	//		var a = li.getElementsByTagName('a')[0];
-	//		var span = (a.children[0]).getElementsByTagName('span')[0];
-	//		var img = (a.children[0]).getElementsByTagName('img')[0];
-	//		var p = (a.children[0]).getElementsByTagName('p')[0];
-	//		//更新数据
-	//		a.src = 'index-subpage-wode.html';
-	//		span = '最新';
-	//		var imgs = ['images/xuexi.png', 'images/xuexiicon.png', 'images/xunwuicon.png', 'images/kuaidiicon.png', 'images/jietiicon.png']
-	//		img.src = imgs[parseInt(Math.random() * 5)];
-	//
-	//		//下拉刷新，新纪录插到最前面；
-	//		table.insertBefore(li, table.firstChild);
-	//	}
-
-}
-/**
- * 下拉刷新具体业务实现
- */
-function pulldownRefresh() {
-	setTimeout(function() {
-		addData();
-
-		mui('#pullRefresh').pullRefresh().endPulldownToRefresh();
-		UIAlertViewShow();
-		mui.toast("为你更新了5个最新任务 ");
-
-	}, 1500);
-}
 
 function UIAlertViewShow() {
 	$('.UIAlertView').fadeIn(500);

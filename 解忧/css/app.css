@@ -110,6 +110,8 @@
 	position: absolute;
 	right:16px;
 	bottom: 8px;
+	width: 120px;
+	overflow: hidden
 }
 .pay span{
 	font-size: 15px;

@@ -39,9 +39,13 @@
 			.clear{
 				clear: both;
 			}
-			.content button{
+			.content a{
+				display: inline-block;
 				width: 40%;
-				margin: 10px;
+				margin: 5px;
+				height: 30px;
+				line-height: 20px;
+				padding: 5px;
 				float: left;
 			}
 		</style>
@@ -51,18 +55,21 @@
 		<div class="mui-content">
 			<div class="title">分类</div>
 			<div class="content">
-					<button type="button" class="mui-btn mui-btn-outlined">学习资料</button>
-					<button type="button" class="mui-btn mui-btn-outlined">解题</button>
-					<button type="button" class="mui-btn mui-btn-outlined">生活互助</button>
-					<button type="button" class="mui-btn mui-btn-outlined">竞赛组队</button>
+				<a  class="mui-btn mui-btn-outlined">学习资料</a>
+					<a class="mui-btn mui-btn-outlined">生活互助</a>
+					<a  class="mui-btn mui-btn-outlined">竞赛组队</a>
+					<a class="mui-btn mui-btn-outlined">解题</a>
+					<a  class="mui-btn mui-btn-outlined">快递</a>
+					<a  class="mui-btn mui-btn-outlined">租借</a>
 					<div class="clear"></div>
 			</div>
-			<div class="title" style="margin-bottom: 25px;">排序</div>
+			<!--<div class="title" style="margin-bottom: 25px;">排序</div>
 			<div class="content">
-					<button type="button" class="mui-btn mui-btn-outlined">时间</button>
-					<button type="button" class="mui-btn mui-btn-outlined">距离</button>
+					<a class="mui-btn mui-btn-outlined">时间</a>
+					<a  class="mui-btn mui-btn-outlined">距离</a>
+					
 					<div class="clear"></div>
-			</div>
+			</div>-->
 			<p style="margin: 10px 15px;position: absolute;bottom: 0;">
 				<button id="close-btn" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;width: 100%;">关闭</button>
 			</p>
@@ -86,6 +93,16 @@
 			}
 
 			document.getElementById("close-btn").addEventListener('tap', closeMenu);
+			mui('body').on('tap','.content a', function(e){
+				var thisNode=this;
+				
+				var str=thisNode.innerText;
+				/*自定义事件*/
+				mui.fire(main, 'get_search', {
+					str: str
+				});
+				closeMenu();
+			})
 		</script>
 	</body>
 

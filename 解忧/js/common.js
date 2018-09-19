@@ -553,59 +553,62 @@ var common =
 			icon: "../images/loading01.gif"
 		}
 	}
+	//服务器图片url
+	com.imgUrl = 'http://59.110.241.117:12001/jieyou/resource/img/';
+
 	
-	com.urlEncode=function (str) {
+	com.urlEncode = function(str) {
 		var s = "";
 		if(str.length == 0) return "";
 		s = str.replace(/\+/g, "%2B");
 		//s = str.replace(/\+/g, "");
 		//s = s.replace(/ /g, "%20");
-//      s = s.replace(/(^\s+)|(\s+$)/g,"");//去掉前后空格
-//      s = s.replace(/\s/g,"");//去除文章中间空格
-//		s = s.replace(/\//g, "%2F");
-//		s = s.replace(/\?/g, "%3F");
-//		s = s.replace(/\%/g, "%25");
-//		s = s.replace(/\#/g, "%23");
-//		s = s.replace(/\&/g, "%26");
-//		s = s.replace(/\=/g, "%3D");
+		//      s = s.replace(/(^\s+)|(\s+$)/g,"");//去掉前后空格
+		//      s = s.replace(/\s/g,"");//去除文章中间空格
+		//		s = s.replace(/\//g, "%2F");
+		//		s = s.replace(/\?/g, "%3F");
+		//		s = s.replace(/\%/g, "%25");
+		//		s = s.replace(/\#/g, "%23");
+		//		s = s.replace(/\&/g, "%26");
+		//		s = s.replace(/\=/g, "%3D");
 		return s;
 	}
-//	com.urlencode=function(str, charset, callback) { 
-//          //创建form通过accept-charset做encode 
-//          var form = document.createElement('form'); 
-//          form.method = 'get'; 
-//          form.style.display = 'none'; 
-//          form.acceptCharset = charset; 
-//          var input = document.createElement('input'); 
-//          input.type = 'hidden'; 
-//          input.name = 'str'; 
-//          input.value = str; 
-//          form.appendChild(input); 
-//          form.target = '_urlEncode_iframe_'; 
-//          document.body.appendChild(form); 
-//          //隐藏iframe截获提交的字符串 
-//          if (!window['_urlEncode_iframe_']) { 
-//              var iframe = document.createElement('iframe'); 
-//              //iframe.name = '_urlEncode_iframe_'; 
-//              iframe.setAttribute('name', '_urlEncode_iframe_'); 
-//              iframe.style.display = 'none'; 
-//              iframe.width = "0"; 
-//              iframe.height = "0"; 
-//              iframe.scrolling = "no"; 
-//              iframe.allowtransparency = "true"; 
-//              iframe.frameborder = "0"; 
-//              iframe.src = 'about:blank'; 
-//              document.body.appendChild(iframe); 
-//          } 
-//          // 
-//          window._urlEncode_iframe_callback = callback; 
-//          //设置回调编码页面的地址，这里需要用户修改 
-//          form.action = 'getEncodeStr.html'; 
-//          form.submit(); 
-//          setTimeout(function() { 
-//              form.parentNode.removeChild(form); 
-//              iframe.parentNode.removeChild(iframe); 
-//          }, 500)
-//
-//      }
+	//	com.urlencode=function(str, charset, callback) { 
+	//          //创建form通过accept-charset做encode 
+	//          var form = document.createElement('form'); 
+	//          form.method = 'get'; 
+	//          form.style.display = 'none'; 
+	//          form.acceptCharset = charset; 
+	//          var input = document.createElement('input'); 
+	//          input.type = 'hidden'; 
+	//          input.name = 'str'; 
+	//          input.value = str; 
+	//          form.appendChild(input); 
+	//          form.target = '_urlEncode_iframe_'; 
+	//          document.body.appendChild(form); 
+	//          //隐藏iframe截获提交的字符串 
+	//          if (!window['_urlEncode_iframe_']) { 
+	//              var iframe = document.createElement('iframe'); 
+	//              //iframe.name = '_urlEncode_iframe_'; 
+	//              iframe.setAttribute('name', '_urlEncode_iframe_'); 
+	//              iframe.style.display = 'none'; 
+	//              iframe.width = "0"; 
+	//              iframe.height = "0"; 
+	//              iframe.scrolling = "no"; 
+	//              iframe.allowtransparency = "true"; 
+	//              iframe.frameborder = "0"; 
+	//              iframe.src = 'about:blank'; 
+	//              document.body.appendChild(iframe); 
+	//          } 
+	//          // 
+	//          window._urlEncode_iframe_callback = callback; 
+	//          //设置回调编码页面的地址，这里需要用户修改 
+	//          form.action = 'getEncodeStr.html'; 
+	//          form.submit(); 
+	//          setTimeout(function() { 
+	//              form.parentNode.removeChild(form); 
+	//              iframe.parentNode.removeChild(iframe); 
+	//          }, 500)
+	//
+	//      }
 })(window, common, mui);

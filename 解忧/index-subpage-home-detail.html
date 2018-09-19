@@ -22,9 +22,9 @@
 						<span id="doingspan">
 						正在进行
 					</span>
-						<img id="typeicon" :src="labelicon" src="images/kuaidiicon.png"/>
+						<img id="typeicon" :src="labelicon" />
 						<div class="detail_box_top">
-							<img  src="images/logo.png" style="border-radius: 50%;"/>
+							<img src='images/touxiangboy.png' onerror="this.onerror=null; this.src='images/touxiangboy.png'" style="border-radius: 50%;" />
 							<div>
 								<p>{{uid}}</p>
 								<p>{{crttime}}</p>
@@ -32,8 +32,8 @@
 						</div>
 						<h4>描述：{{content}}</h4>
 						<ul id="conent_img_list" class="mui-table-view mui-table-view-chevron">
-							<li class="home-table-view-cell">
-								<img :src="imgurl" src=""/>
+							<li class="home-table-view-cell" v-for="item in imgurl">
+								<img :src="common.imgUrl+'task/'+vm.tid + '/' + item" />
 							</li>
 						</ul>
 
@@ -49,11 +49,11 @@
 							<span id="reward">{{price}}</span>
 							<span>金币</span>
 						</p>
-						<p class="bottom_box_p3">
+						<!--<p class="bottom_box_p3">
 							<span>正在竞标人数：</span>
 							<span id="participants">3</span>
-						</p>
-						<ul class="participants_icon mui-table-view">
+						</p>-->
+						<!--<ul class="participants_icon mui-table-view">
 							<li>
 								<img src="images/u442.png" />
 							</li>
@@ -63,7 +63,7 @@
 							<li>
 								<img src="images/u442.png" />
 							</li>
-						</ul>
+						</ul>-->
 					</div>
 
 				</div>
@@ -101,7 +101,7 @@
 			</div>
 		</div>
 		<script src="js/mui.min.js "></script>
-			<script src="js/common.js"></script>
+		<script src="js/common.js"></script>
 		<script src="js/vue.min.js"></script>
 		<script src="js/detail.js"></script>
 		<script type="text/javascript ">
@@ -142,7 +142,7 @@
 					indicators: false, //是否显示滚动条,默认是true
 				});
 			})(mui);
-			
+
 			var change = 0;
 			mui.plusReady(function() {
 				//收藏按钮效果
@@ -215,22 +215,21 @@
 					});
 				}
 
-				//				var images = [].slice.call(document.querySelectorAll('#conent_img_list img'));
-				//				var urls = [];
-				//				images.forEach(function(item) {
-				//					urls.push(item.src);
-				//				});
-				//				mui('.mui-content-padded').on('tap', 'img', function() {
-				//					var index = images.indexOf(this);
-				//					plus.nativeUI.previewImage(urls, {
-				//						current: index,
-				//						loop: false,
-				//						indicator: 'number'
-				//					});
-				//				});
+				var images = [].slice.call(document.querySelectorAll('#conent_img_list img'));
+				var urls = [];
+				images.forEach(function(item) {
+					urls.push(item.src);
+				});
+				mui('.mui-content-padded').on('tap', 'img', function() {
+					var index = images.indexOf(this);
+					plus.nativeUI.previewImage(urls, {
+						current: index,
+						loop: false,
+						indicator: 'number'
+					});
+				});
 
 			})
-			
 		</script>
 	</body>
 

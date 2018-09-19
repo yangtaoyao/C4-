@@ -242,7 +242,7 @@ function initInfo() {
 	} else {
 		wode.isLogin = false;
 	}
-	console.log(wode.isLogin)
+	//console.log(wode.isLogin)
 	console.log('wode:initInfo');
 }
 initInfo();

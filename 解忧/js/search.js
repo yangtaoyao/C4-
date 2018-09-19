@@ -31,16 +31,13 @@ function open_detail(item) {
 }
 
 function search_submit() {
-	if(search_vm.input_str == '') {
-		return;
-	}
+//	if(search_vm.input_str == '') {
+//		return;
+//	}
 	localStorage_addItem("input_str", search_vm.input_str);
-	var req =  encodeURIComponent((search_vm.input_str).trim());
-	
-	//req=common.urlencode(JSON.stringify(req), 'base64', function(){});
-	var url = common.url+"task?action=search&key=" + encodeURI(encodeURI(search_vm.input_str).trim());
-	//url = convertURL(url);
-	console.log(req)
+	//url编码
+	var url = common.url+"task?action=search&key=" + encodeURI(search_vm.input_str.trim());
+	console.log(url)
 	mui.ajax(url, {
 		//data: req,
 		async: false,

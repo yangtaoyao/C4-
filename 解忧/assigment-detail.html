@@ -1,0 +1,241 @@
+<!doctype html>
+<html style="touch-action: none">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/home-detail.css" rel="stylesheet" />
+		<style>
+			.bottom_box{
+				height: auto;
+			}
+			.bottom_box_p1 span{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">详情</h1>
+		</header>
+		<div id="webview_detail">
+			<div id="scroll" class="mui-content mui-scroll-wrapper detail-content">
+				<div class="mui-scroll">
+					<div class="detail_box">
+						<span id="doingspan">
+						正在进行
+					</span>
+						<img id="typeicon" :src="labelicon" />
+						<div class="detail_box_top">
+							<img src='images/touxiangboy.png' onerror="this.onerror=null; this.src='images/touxiangboy.png'" style="border-radius: 50%;" />
+							<div>
+								<p>{{uid}}</p>
+								<p>{{crttime}}</p>
+							</div>
+						</div>
+						<h4>描述：{{content}}</h4>
+						<ul id="conent_img_list" class="mui-table-view mui-table-view-chevron">
+							<li class="home-table-view-cell" v-for="item in imgurl">
+								<img :src="common.imgUrl+'task/'+vm.tid + '/' + item" />
+							</li>
+						</ul>
+
+					</div>
+
+					<div class="bottom_box">
+						<p class="bottom_box_p1">
+							<span>截止时间:</span>
+							<span id="deadline">{{expiretime}}</span>
+						</p>
+						<p class="bottom_box_p2">
+							<span>赏金:</span>
+							<span id="reward">{{price}}</span>
+							<span>金币</span>
+						</p>
+						<a @tap='showRec' style="display: block;margin: 20px 0;">
+							查看接单人
+						</a>
+						<ul class="mui-table-view">
+							<li class="" v-for="item in recList" style="margin: 16px 0;">
+								<a @tap='addRec(item)' >
+									<h4>
+									用户{{item.uid}}
+									</h4>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<!--<nav class="mui-bar mui-bar-tab">
+				<a id="item-star" class="mui-tab-item" href="#">
+					<span id="star" class="iconfont icon-favorite"></span>
+					<span>收藏</span>
+				</a>
+				<a @tap="receive_task" class="mui-tab-item" href="#">
+					<span class="iconfont icon-jiedan1"></span>
+					<span>接单</span>
+				</a>
+				<a class="mui-tab-item" href="#forward">
+					<span class="iconfont icon-zhuanfa"></span>
+					<span>转发</span>
+				</a>
+			</nav>-->
+
+			<div id="forward" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view ">
+					<li class="mui-table-view-cell">
+						<a href="# ">回复</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="# ">转发</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view ">
+					<li class="mui-table-view-cell">
+						<a href="#">取消</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="js/mui.min.js "></script>
+		<script src="js/common.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/assigment-detail.js"></script>
+		<script type="text/javascript ">
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+
+			});
+			/**
+			 * 通过随机数模拟业务进度，真实业务中需根据实际进度修改
+			 * @param {Object} container
+			 * @param {Object} progress
+			 */
+			function simulateLoading(container, progress) {
+				if(typeof container === 'number') {
+					progress = container;
+					container = 'body';
+				}
+				setTimeout(function() {
+					progress += Math.random() * 20;
+					mui(container).progressbar().setProgress(progress);
+					if(progress < 100) {
+						simulateLoading(container, progress);
+					} else {
+						mui(container).progressbar().hide();
+					}
+				}, Math.random() * 200 + 200);
+			}
+			//初始化scroll区域
+			(function($) {
+				//顶部进度条
+				mui('body').progressbar({
+					progress: 0
+				}).show();
+				simulateLoading(0);
+
+				$(".mui-scroll-wrapper").scroll({
+					//bounce: false,//滚动条是否有弹力默认是true
+					indicators: false, //是否显示滚动条,默认是true
+				});
+			})(mui);
+
+			var change = 0;
+			mui.plusReady(function() {
+				//收藏按钮效果
+//				document.getElementById('item-star').addEventListener('tap', function() {
+//					var changebtn_span = document.getElementById('star');
+//					if(change == 0) {
+//						changebtn_span.classList.remove('icon-favorite');
+//						changebtn_span.classList.add('icon-favorite2');
+//						change = 1;
+//						mui.toast('收藏成功')
+//					} else if(change == 1) {
+//						changebtn_span.classList.remove('icon-favorite2');
+//						changebtn_span.classList.add('icon-favorite');
+//						change = 0;
+//						mui.toast('取消收藏')
+//					};
+//					//console.log('1111');
+//				});
+
+				mui('body').on('shown', '.mui-popover', function(e) {
+					//console.log('shown', e.detail.id); //detail为当前popover元素
+				});
+				mui('body').on('hidden', '.mui-popover', function(e) {
+					//console.log('hidden', e.detail.id); //detail为当前popover元素
+				});
+//				mui('body').on('tap', '.mui-popover-action li>a', function() {
+//					var a = this,
+//						parent;
+//
+//					//根据点击按钮，反推当前是哪个actionsheet
+//					for(parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
+//						if(parent.classList.contains('mui-popover-action')) {
+//							break;
+//						}
+//					};
+//					//关闭actionsheet
+//					mui('#' + parent.id).popover('toggle');
+//					var a_str = a.innerHTML;
+//					console.log(a_str);
+//					switch(a_str) {
+//						case "取消":
+//							mui.toast("取消 ");
+//							break;
+//						case "回复":
+//							mui.toast("回复 ");
+//							break;
+//						case "转发":
+//							mui.toast("转发 ");
+//							break;
+//						default:
+//							break;
+//					}
+//				});
+
+				showImageview('#conent_img_list', '#conent_img_list img');
+				/*点击图片预览*/
+				function showImageview(fatherId, classStr) {
+					var images = [].slice.call(document.querySelectorAll(classStr));
+					var urls = [];
+					images.forEach(function(item) {
+						urls.push(item.src);
+					});
+					mui(fatherId).on('tap', classStr, function() {
+						var index = images.indexOf(this);
+						plus.nativeUI.previewImage(urls, {
+							current: index,
+							loop: false,
+							indicator: 'number'
+						});
+					});
+				}
+
+				var images = [].slice.call(document.querySelectorAll('#conent_img_list img'));
+				var urls = [];
+				images.forEach(function(item) {
+					urls.push(item.src);
+				});
+				mui('.mui-content-padded').on('tap', 'img', function() {
+					var index = images.indexOf(this);
+					plus.nativeUI.previewImage(urls, {
+						current: index,
+						loop: false,
+						indicator: 'number'
+					});
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

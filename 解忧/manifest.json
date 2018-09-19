@@ -368,6 +368,20 @@
 					"index-subpage-tianjia.html"
 				],
 				"priority": 0
+			},
+			"index-subpage-home-searching.html": {
+				"resources": [
+					"js/search.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index-subpage-wode-assigment.html": {
+				"resources": [],
+				"refer": [
+					"assigment-detail.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

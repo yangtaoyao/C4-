@@ -17,7 +17,8 @@ var tianjia = new Vue({
 			value: "lj",
 			text: "寻物"
 		}],
-		tags: []
+		tags: [],
+		tid:""
 	},
 	computed: {
 		label: function() {
@@ -42,35 +43,26 @@ document.getElementById('submit').addEventListener('tap', function() {
 		expiretime: tianjia.timestamp
 	};
 	console.log("req" + JSON.stringify(req));
-
 	mui.ajax(common.url + "task?action=publish", {
 		//data: req,
 		data: JSON.stringify(req),
-		//processData: false,
 		headers: {
 			'Content-Type': 'application/json;charset=UTF-8'
 		},
-		//async:false,
-		//headers:{'Content-Type':'application/x-www-form-urlencoded'},
-		//		headers: {
-		//			//'Accept': 'application/json',
-		//			//'Content-Type': 'application/json'
-		//			'Content-Type': 'application/json;charset=UTF-8'
-		//		},
-
-		//scriptCharset: 'GBK',
+		async: false,
 		type: 'post', //HTTP请求类型
 		timeout: 20000,
 		success: function(data) {
 			//获得服务器响应
 			res = JSON.parse(data);
-			console.log(res + '' + data);
 			if(res.suc < 0) {
 				mui.toast('发布失败：' + data);
 				console.log('发布失败：' + data);
 			} else {
 				console.log('发布成功：' + data);
 				mui.toast('发布成功!');
+				
+				tianjia.tid=res.data.tid;
 			}
 		},
 		error: function(xhr, type, errorThrown) {
@@ -83,8 +75,10 @@ document.getElementById('submit').addEventListener('tap', function() {
 			}
 		}
 	});
-
-	//
+	if(tianjia.tid==""){
+		return;	
+	}
+	createUpload();
 
 })
 
@@ -125,9 +119,9 @@ btns.each(function(i, btn) {
 				result.innerText = rs.text;
 
 				tianjia.expiretime = rs.text;
-				var date = new Date(Date.parse(rs.text.replace(/-/g, "/")));;
+				var date = new Date((rs.text.replace(/-/g, "/")));;
 				var timestamp = date.getTime() + "";
-				tianjia.timestamp = timestamp.substring(0, 9);
+				tianjia.timestamp = timestamp.substring(0, 10);
 				console.log('截止时间' + tianjia.timestamp);
 				/* 
 				 * 返回 false 可以阻止选择框的关闭
@@ -162,129 +156,176 @@ document.getElementById('niming').addEventListener('toggle', function(event) {
 	mui.toast(str);
 });
 
+//开始上传
+function createUpload() {
+	console.log("开始上传")
+	console.log("index:" + index);
+	var wt = plus.nativeUI.showWaiting();
+
+	var task = plus.uploader.createUpload(common.url + "file?type=task&id="+tianjia.tid, {
+			method: "POST",
+			blocksize: 204800,
+			priority: 100
+		},
+		function(t, status) {
+			// 上传完成
+			if(status == 200) {
+				res = JSON.parse(t.responseText);
+				console.log(res.suc);
+				if(res.suc < 0) {
+					console.log("上传失败: " + t.url + t.responseText);
+					mui.toast('上传失败');
+				} else {
+					//console.log(setting.imgUrl)
+					console.log("上传成功: " + t.url + t.responseText);
+					mui.toast('上传成功');
+					//
+					var currentWebview = plus.webview.currentWebview();
+					plus.webview.close(currentWebview, "zoom-fade-in", 200);
+				}
+				wt.close();
+			} else {
+				console.log("上传失败: " + status);
+				mui.toast('上传失败');
+				wt.close();
+			}
+		}
+	);
+	console.log("feedback.files.length" + feedback.files.length);
+	console.log("文件"+JSON.stringify(feedback.files))
+	for(var i = 0; i < feedback.files.length; i++) {
+		
+		task.addFile(feedback.files[i].path, {
+			key: feedback.files[i].name
+		});
+	}
+	//task.addData("upload", new Date());
+	//task.addEventListener( "statechanged", onStateChanged, false );
+	task.start();
+}
+/*------------------------------------------------*/
 //选取相册图片
-//var index = 1;
-//var size = null;
-//var imageIndexIdNum = 0;
-//var starIndex = 0;
-//var feedback = {
-//	question: document.getElementById('question'),
-//	contact: document.getElementById('contact'),
-//	//imageList: document.getElementById('image-list'),
-//	submitBtn: document.getElementById('submit')
-//};
-//var url = 'https://service.dcloud.net.cn/feedback';
-//feedback.files = [];
-//feedback.uploader = null;
-//feedback.deviceInfo = null;
-//mui.plusReady(function() {
-//	//设备信息，无需修改
-//	feedback.deviceInfo = {
-//		appid: plus.runtime.appid,
-//		imei: plus.device.imei, //设备标识
-//		images: feedback.files, //图片文件
-//		p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
-//		md: plus.device.model, //设备型号
-//		app_version: plus.runtime.version,
-//		plus_version: plus.runtime.innerVersion, //基座版本号
-//		os: mui.os.version,
-//		net: '' + plus.networkinfo.getCurrentType()
-//	}
-//});
-//feedback.getFileInputArray = function() {
-//	return [].slice.call(feedback.imageList.querySelectorAll('.file'));
-//};
-//feedback.addFile = function(path) {
-//	feedback.files.push({
-//		name: "images" + index,
-//		path: path,
-//		id: "img-" + index
-//	});
-//	index++;
-//};
+var index = 1;
+var size = null;
+var imageIndexIdNum = 0;
+var starIndex = 0;
+var feedback = {
+	imageList: document.getElementById('image-list')
+};
+var url = 'https://service.dcloud.net.cn/feedback';
+feedback.files = [];
+feedback.uploader = null;
+feedback.deviceInfo = null;
+mui.plusReady(function() {
+	//设备信息，无需修改
+	feedback.deviceInfo = {
+		appid: plus.runtime.appid,
+		imei: plus.device.imei, //设备标识
+		images: feedback.files, //图片文件
+		p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
+		md: plus.device.model, //设备型号
+		app_version: plus.runtime.version,
+		plus_version: plus.runtime.innerVersion, //基座版本号
+		os: mui.os.version,
+		net: '' + plus.networkinfo.getCurrentType()
+	}
+});
+feedback.getFileInputArray = function() {
+	return [].slice.call(feedback.imageList.querySelectorAll('.file'));
+};
+feedback.addFile = function(path) {
+	feedback.files.push({
+		name: "images" + index,
+		path: path,
+		id: "img-" + index
+	});
+	index++;
+};
 /**
  * 初始化图片域占位
  */
-//feedback.newPlaceholder = function() {
-//	var fileInputArray = feedback.getFileInputArray();
-//	if(fileInputArray &&
-//		fileInputArray.length > 0 &&
-//		fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
-//		return;
-//	};
-//	imageIndexIdNum++;
-//	var placeholder = document.createElement('div');
-//	placeholder.setAttribute('class', 'image-item space');
-//	var up = document.createElement("div");
-//	up.setAttribute('class', 'image-up')
-//	//删除图片
-//	var closeButton = document.createElement('div');
-//	closeButton.setAttribute('class', 'image-close');
-//	closeButton.innerHTML = 'X';
-//	closeButton.id = "img-" + index;
-//	//小X的点击事件
-//	closeButton.addEventListener('tap', function(event) {
-//		setTimeout(function() {
-//			for(var temp = 0; temp < feedback.files.length; temp++) {
-//				if(feedback.files[temp].id == closeButton.id) {
-//					feedback.files.splice(temp, 1);
-//				}
-//			}
-//			feedback.imageList.removeChild(placeholder);
-//		}, 0);
-//		return false;
-//	}, false);
-//
-//	//
-//	var fileInput = document.createElement('div');
-//	fileInput.setAttribute('class', 'file');
-//	fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
-//	fileInput.addEventListener('tap', function(event) {
-//		var self = this;
-//		var index = (this.id).substr(-1);
-//
-//		plus.gallery.pick(function(e) {
-//			//				console.log("event:"+e);
-//			var name = e.substr(e.lastIndexOf('/') + 1);
-//			console.log("name:" + name);
-//
-//			plus.zip.compressImage({
-//				src: e,
-//				dst: '_doc/' + name,
-//				overwrite: true,
-//				quality: 50
-//			}, function(zip) {
-//				size += zip.size
-//				console.log("filesize:" + zip.size + ",totalsize:" + size);
-//				if(size > (10 * 1024 * 1024)) {
-//					return mui.toast('文件超大,请重新选择~');
-//				}
-//				if(!self.parentNode.classList.contains('space')) { //已有图片
-//					feedback.files.splice(index - 1, 1, {
-//						name: "images" + index,
-//						path: e
-//					});
-//				} else { //加号
-//					placeholder.classList.remove('space');
-//					feedback.addFile(zip.target);
-//					feedback.newPlaceholder();
-//				}
-//				up.classList.remove('image-up');
-//				placeholder.style.backgroundImage = 'url(' + zip.target + ')';
-//			}, function(zipe) {
-//				mui.toast('压缩失败！')
-//			});
-//
-//		}, function(e) {
-//			mui.toast(e.message);
-//		}, {});
-//	}, false);
-//	placeholder.appendChild(closeButton);
-//	placeholder.appendChild(up);
-//	placeholder.appendChild(fileInput);
-//	feedback.imageList.appendChild(placeholder);
-//};
-//feedback.newPlaceholder();
+feedback.newPlaceholder = function() {
+	var fileInputArray = feedback.getFileInputArray();
+	if(fileInputArray &&
+		fileInputArray.length > 0 &&
+		fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
+		return;
+	};
+	imageIndexIdNum++;
+	var placeholder = document.createElement('div');
+	placeholder.setAttribute('class', 'image-item space');
+	var up = document.createElement("div");
+	up.setAttribute('class', 'image-up')
+	//删除图片
+	var closeButton = document.createElement('div');
+	closeButton.setAttribute('class', 'image-close');
+	closeButton.innerHTML = 'X';
+	closeButton.id = "img-" + index;
+	//小X的点击事件
+	closeButton.addEventListener('tap', function(event) {
+		setTimeout(function() {
+			for(var temp = 0; temp < feedback.files.length; temp++) {
+				if(feedback.files[temp].id == closeButton.id) {
+					feedback.files.splice(temp, 1);
+				}
+			}
+			feedback.imageList.removeChild(placeholder);
+		}, 0);
+		return false;
+	}, false);
+
+	//
+	var fileInput = document.createElement('div');
+	fileInput.setAttribute('class', 'file');
+	fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
+	fileInput.addEventListener('tap', function(event) {
+		var self = this;
+		var index = (this.id).substr(-1);
+
+		plus.gallery.pick(function(e) {
+			//				console.log("event:"+e);
+			var name = e.substr(e.lastIndexOf('/') + 1);
+			console.log("name:" + name);
+
+			plus.zip.compressImage({
+				src: e,
+				dst: '_doc/' + name,
+				overwrite: true,
+				quality: 50
+			}, function(zip) {
+				size += zip.size
+				console.log("filesize:" + zip.size + ",totalsize:" + size);
+				if(size > (10 * 1024 * 1024)) {
+					return mui.toast('文件超大,请重新选择~');
+				}
+				if(!self.parentNode.classList.contains('space')) { //已有图片
+					feedback.files.splice(index - 1, 1, {
+						name: "images" + index,
+						path: e
+					});
+				} else { //加号
+					placeholder.classList.remove('space');
+					feedback.addFile(zip.target);
+					feedback.newPlaceholder();
+				}
+				up.classList.remove('image-up');
+				placeholder.style.backgroundImage = 'url(' + zip.target + ')';
+			}, function(zipe) {
+				mui.toast('压缩失败！')
+			});
+
+		}, function(e) {
+			mui.toast(e.message);
+		}, {});
+	}, false);
+	placeholder.appendChild(closeButton);
+	placeholder.appendChild(up);
+	placeholder.appendChild(fileInput);
+	feedback.imageList.appendChild(placeholder);
+};
+feedback.newPlaceholder();
+
+/*------------------------------------------------*/
 
 //获取定位信息
 var location_state = 0;

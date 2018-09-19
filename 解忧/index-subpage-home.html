@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/app.css" />
 		<link rel="stylesheet" type="text/css" href="css/home.css" />
-		
+
 	</head>
 
 	<body>
@@ -32,7 +32,7 @@
 							<span class="label">搜索</span>
 						</div>
 					</button>
-					<button  @tap='ranking_btn' class="mui-tab-item btn-item">
+					<button @tap='ranking_btn' class="mui-tab-item btn-item">
 						<div>
 							<div class="icon">
 								<span class="mui-icon iconfont icon-paihang">
@@ -41,7 +41,7 @@
 							<span class="label">排行</span>
 						</div>
 					</button>
-					<button  @tap='assortment_btn' class="mui-tab-item btn-item">
+					<button @tap='assortment_btn' class="mui-tab-item btn-item">
 						<div>
 							<div class="icon">
 								<span class="mui-icon iconfont icon-fenlei-c">
@@ -50,7 +50,7 @@
 							<span class="label">分类</span>
 						</div>
 					</button>
-					
+
 				</nav>
 
 				<!--轮播图 list01-->
@@ -66,13 +66,13 @@
 						<!--1-->
 						<div class="mui-slider-item">
 							<a href="# " class="home-card slider_img">
-								<img src="images/slider01.png"/>
+								<img src="images/slider01.png" />
 							</a>
 						</div>
 						<!--2-->
 						<div class="mui-slider-item">
 							<a href="# " class="home-card slider_img">
-								<img src="images/slider02.png"/>
+								<img src="images/slider02.png" />
 							</a>
 						</div>
 						<!--3-->
@@ -104,7 +104,7 @@
 						<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
 						float: left;"></div>
 						<span style="margin-left: 5px;font-size: 16px;color: #333333;font-weight: bold;">最急任务</span>
-						<a href="#about" class="mui-navigate-right">
+						<a @tap="assortment_btn" href="#about" class="mui-navigate-right">
 							<i class="mui-pull-right" style="
 						font-style: normal;
 						color: #999999;
@@ -118,33 +118,28 @@
 					</div>
 					<li class="mui-table-view-cell mui-media" v-for="item in list02" v-if="isL2HasConent">
 						<a @tap='open_detail(item)' class="mui-navigate-right home-card">
-							<h4 class="mui-ellipsis">{{item.title}}</h4>
-							<h5>截止至{{item.published_at}}</h5>
+							<h4 class="mui-ellipsis">描述：{{item.content}}</h4>
+							<h6>截止至{{item.expiretime}}</h6>
 							<div>
-								<img class="mui-media-object mui-pull-left head-img" src="images/u445.png">
+								<img class="mui-media-object mui-pull-left head-img" :src="item.imgurl" onerror="this.onerror=null; this.src='images/touxiangboy.png'">
 								<div class="mui-media-body">
 									<h5>
-										hello解忧
+											{{item.uid}}
 									</h5>
-									<h6 class='mui-ellipsis'>1小时前</h6>
+									<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
 								</div>
 								<div class="pay">
-									<span>赏金:</span>
-									<i>10￥</i>
-									<!--<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">
-										支付
-									</button>-->
+									<span>赏金：</span>
+									<i>{{item.price}}金币</i>
 								</div>
 							</div>
 						</a>
 					</li>
-					
 
 				</ul>
 				<!--热门分类-->
 				<div class="assortment_scroll mui-scroll-wrapper 
-					mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" 
-					style="margin-bottom: 10px;">
+					mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="margin-bottom: 10px;">
 					<div style="height:auto;width: 100%;padding:16px 8px; padding-left: 16px;position: relative;text-align: left;">
 						<!--<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
 							float: left;">
@@ -152,7 +147,7 @@
 						<span style="margin-left: 5px;font-size: 16px;color: #333333;font-weight: bold;">
 							热门分类
 						</span>
-						<a href="#about" class="mui-navigate-right">
+						<a @tap="assortment_btn" href="#about" class="mui-navigate-right">
 							<i class="mui-pull-right" style="
 								font-style: normal;
 								color: #999999;
@@ -163,11 +158,11 @@
 						</a>
 					</div>
 					<div class="mui-scroll">
-						<a class="mui-control-item" v-for="item in assortment">
+						<a @tap="assortment_btn" class="mui-control-item" v-for="item in assortment">
 							<h5>{{item.title}}</h5>
 							<h6>{{item.desc}}</h6>
 						</a>
-			
+
 					</div>
 				</div>
 				<!--最新任务 list03-->
@@ -176,7 +171,7 @@
 						<div style="display:block;background: #FFAA3D;height: 20px;width: 4px;
 						float: left;"></div>
 						<span style="margin-left: 5px;font-size: 16px;color: #333333;font-weight: bold;">最新任务</span>
-						<a href="#about" class="mui-navigate-right">
+						<a @tap="assortment_btn" href="#about" class="mui-navigate-right">
 							<i class="mui-pull-right" style="
 						font-style: normal;
 						color: #999999;
@@ -188,22 +183,22 @@
 					<div class="noConent" v-if="!isL3HasConent">
 						<h4>暂时没有内容，刷新试试？</h4>
 					</div>
+
 					<li class="mui-table-view-cell mui-media" v-for="item in list03" v-if="isL3HasConent">
 						<a @tap='open_detail(item)' class="mui-navigate-right home-card">
-							<h4 class="mui-ellipsis">{{item.title}}</h4>
-							<h6>截止至 {{item.published_at}}</h6>
+							<h4 class="mui-ellipsis">描述：{{item.content}}</h4>
+							<h6>截止至{{item.expiretime}}</h6>
 							<div>
-								<img class="mui-media-object mui-pull-left head-img" src="images/u445.png">
+								<img class="mui-media-object mui-pull-left head-img" src="images/touxiangboy.png" onerror="this.onerror=null; this.src='images/touxiangboy.png'">
 								<div class="mui-media-body">
 									<h5>
-										hello解忧
-									</h5>
-									<h6 class='mui-ellipsis'>1小时前</h6>
+											{{item.uid}}
+										</h5>
+									<h6 class='mui-ellipsis'>发布于{{item.crttime}}</h6>
 								</div>
 								<div class="pay">
 									<span>赏金：</span>
-									<i>10￥</i>
-									
+									<i>{{item.price}}金币</i>
 								</div>
 							</div>
 						</a>
