@@ -1,5 +1,7 @@
 # C4-
-C4解忧APP 混合APP开发
+C4解忧APP
 
-高亮文字#007aff
-左右间隔16px
+HybirdApp（MUI配合H5+开发）
+原生js，
+少量jQuery，
+Vue数据渲染
